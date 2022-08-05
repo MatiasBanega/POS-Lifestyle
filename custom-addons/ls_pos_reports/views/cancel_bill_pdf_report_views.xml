@@ -1,0 +1,95 @@
+<odoo>
+	<data>
+		<record id="report_cancel_paperformat"
+			model="report.paperformat">
+			<field name="name">Itemwise Cancelled Bill PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="itemwise_detailed_cancel_report"
+			model="item.wise.cancel.screen.wzd" string="Itemwise Cancelled Bill PDF Report"
+			report_type="qweb-pdf" name="ls_pos_reports.report_cancelled"
+			file="lifestyle_reports.report_terminal" menu="False" />
+		<template id="report_cancelled">
+			<t t-call="web.html_container">
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center">Itemwise Cancelled Bill PDF Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								<t t-if="start_date">
+								Date From:
+										<t t-esc="start_date" />
+										</t>
+							     <t t-if="end_date">
+								Date To:
+										<t t-esc="end_date" />
+										</t>
+							</div>
+							</div> 
+						<br />
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_sales_open_order_wise" />
+								<tr style="border: 1px solid black;"> 
+ 									<th style="border: 1px solid black; text-align:center">Bill Date</th>
+									<th style="border: 1px solid black; text-align:center">Bill Number</th>
+									<th style="border: 1px solid black; text-align:center">User Name</th>
+									<th style="border: 1px solid black; text-align:center">Product Code</th>
+									<th style="border: 1px solid black; text-align:center">Product Name</th>
+									<th style="border: 1px solid black; text-align:center">Total Amount</th>
+							
+								
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>  
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['bill_date']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['bill_number']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['uname']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['pcode']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['pname']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['total_amt']" />
+										</td> 
+										
+									</tr>
+								</t>
+							</tbody> 
+						</table>
+					</div>
+				 <div class="footer"> <div class="text-center" style="border-top: 
+					1px solid black;"> <ul class="list-inline"> <li>This is a computer generated 
+					statement on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d 
+					%H:%M')"/>. No signature needed.</li> </ul> </div> </div> 
+			</div>
+			</t>
+		</template>
+		<record id="ls_pos_reports.itemwise_detailed_cancel_report"
+			model="ir.actions.report" >
+			
+			<field name="paperformat_id"
+				ref="ls_pos_reports.report_cancel_paperformat" />
+		</record>
+	</data>
+</odoo>

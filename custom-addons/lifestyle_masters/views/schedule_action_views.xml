@@ -1,0 +1,22 @@
+<odoo>
+<data>
+
+
+      <record id="action_function_call" model="ir.cron">
+        <field name="name">Master Call</field>
+        <field name="model_id" ref="model_schedule_actions"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.master_call()
+        </field>
+    </record>
+
+
+
+</data>
+
+
+
+</odoo>

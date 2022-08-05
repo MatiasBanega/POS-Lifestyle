@@ -1,0 +1,88 @@
+<odoo>
+  <record id="report_action" model="ir.actions.act_window">
+    <field name="name">Lifestyle Report</field>
+    <field name="res_model">lifestyle.reports</field>
+    <field name="view_mode">form,tree</field> 
+    <field name="target">inline</field>
+    <!-- <field name="view_id" ref="report_tree"/> -->
+    </record>
+    
+  
+   
+    
+    <menuitem 
+    action="report_action"
+            id="menu_ls_main_report"
+            name="Reports"
+            sequence="50"
+            groups="base.group_user"
+           />
+            
+            <menuitem
+            id="menu_ls_sale_report"
+            name="Sales"
+            parent="menu_ls_main_report"
+            sequence = "1"
+            action="report_action" />  
+            
+            <menuitem
+            id="menu_ls_purchase_report"
+            name="Purchase"
+            parent="menu_ls_main_report"
+            sequence = "2"
+            action="report_action"/>
+            
+            <menuitem
+            id="menu_ls_inventory_report"
+            name="Inventory"
+            parent="menu_ls_main_report"
+            sequence = "3"
+            action="report_action"/>
+           
+           <menuitem
+           
+            id="menu_ls_pos_report"
+            name="POS"
+            parent="menu_ls_main_report"
+            sequence = "4"
+            action="report_action"/>
+            
+            <menuitem
+            id="menu_ls_root_configuration"
+            name="Configuration"
+            parent="menu_ls_main_report"
+            sequence = "5"
+            action="report_action"/>
+            
+   
+
+             
+
+ 
+  <record id="report_form" model="ir.ui.view">
+   <field name="name">report.details.form</field>
+   <field name="model">lifestyle.reports</field>
+   <field name ="arch" type="xml">
+       <form>
+          
+             <group>
+            <!--  <field name="name"/> -->
+             
+             </group>
+            
+             </form>
+       </field>
+    </record>
+    
+    <record id="report_tree" model="ir.ui.view">
+   <field name="name">report.details.tree</field>
+   <field name="model">lifestyle.reports</field>
+   <field name ="arch" type="xml">
+          <tree>
+            <!--  <field name="name"/> -->
+           </tree>
+       </field>
+    </record>
+        
+    </odoo>
+    

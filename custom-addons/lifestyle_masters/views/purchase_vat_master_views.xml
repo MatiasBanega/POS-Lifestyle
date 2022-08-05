@@ -1,0 +1,77 @@
+<odoo>
+	<data>
+		<record id="purchase_vat_wizard" model="ir.ui.view">
+			<field name="name">purchase.Vat.view</field>
+			<field name="model">purchase.vat.view</field>
+			<field name="arch" type="xml">
+				<form string="Purchase Vat">
+					<group> 
+						<group>
+							<field name="start_date" required="1"/>					
+						</group>
+						<group>
+							<field name="end_date" required="1"/>							
+						</group>
+						<group>
+							<field name="company" required="1"/>							
+						</group>
+						<footer>
+							<button name="get_purchase_vat" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_purchase_vat"
+			model="ir.actions.act_window">
+			<field name="name">Purchase Vat</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">purchase.vat.view</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+		
+		
+		
+		<record id="view_purchase_vat" model="ir.ui.view">
+			<field name="name">Purchase Vat</field>
+			<field name="model">purchase.vat.wzd</field>
+			<field name="arch" type="xml">
+				<form string="Purchase Vat" version="7.0"
+					create="false" edit="false">
+					
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Purchase Vat Master</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<!-- <p>
+									AS ON DATE :
+									<field name="end_date" class="oe_inline" />
+									CUSTOMER :
+									<field name="partner_id" class="oe_inline" />
+								</p> -->
+							</h4>
+						</div>
+						<group>
+							 <field name="purchase_vat_line" nolabel="1">
+								<tree create="false" edit="false" delete="false">
+								<field name="name"></field>
+        						
+								</tree> 
+							 </field> 
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- <menuitem action="action_purchase_vat"
+			id="menu_action_purchase_vat" 
+			parent="point_of_sale.menu_point_rep"
+			sequence="3" 
+			name="Purchase Vat Master" /> -->
+	</data>
+</odoo>

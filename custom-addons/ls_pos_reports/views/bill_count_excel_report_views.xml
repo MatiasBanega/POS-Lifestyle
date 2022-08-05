@@ -1,0 +1,115 @@
+<odoo>
+	<data>
+		<record id="view_bill_count_report" model="ir.ui.view">
+			<field name="name">bill.count.report</field>
+			<field name="model">billcount.report</field>
+			<field name="arch" type="xml">
+				<form string="Bill No Count Report">
+					<group>
+						<group>
+							<field name="start_date" required="1"/>					
+						</group>
+						<group>
+							<field name="end_date" required="1"/>							
+						</group>
+						<group>
+							<field name="company_id" options="{'no_create': True, 'no_create_edit':True}" required="1"/>							
+						</group>
+						<footer>
+							<button name="print_billcount_report" string="Show" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_billcount_report"
+			model="ir.actions.act_window">
+			<field name="name">Bill No Count Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">billcount.report</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		<!-- xml excel -->
+		<record id="view_billno_excel_form_extended7" model="ir.ui.view">
+			<field name="name">excel.extended.billcount.rep.form</field>
+			<field name="model">excel.extended.billcount.rep</field>
+			<field name="arch" type="xml">
+				<form string="BillCount Excel Report" create="false" edit="false">
+					<group>
+						<field name='name'/>
+						<field name="excel_file" readonly="1" filename="file_name" />
+						<field name="file_name" invisible="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_billno_excel_form7" model="ir.actions.act_window">
+			<field name="name">Report Excel</field>
+			<field name="view_id" ref="view_billno_excel_form_extended7" />
+			<field name="view_mode">form</field>
+			<field name="res_model">excel.extended.billcount.rep</field>
+			<field name="target">new</field>
+		</record>
+		<record id="view_bill_screen_report" model="ir.ui.view">
+			<field name="name">bill_screens</field>
+			<field name="model">bill.count.report.wzd</field>
+			<field name="arch" type="xml">
+				<form string="BillCount Excel Report" version="7.0"
+					create="false" edit="false">
+					<header>
+						<button name="print_bill_count_excel_report" type="object"
+							string="Print Excel" />
+						<button name="print_bill_count_pdf_report" type="object"
+							string="Print PDF" />
+					</header>
+					<sheet>
+					<div class="oe_bold">
+							<h1 class="oe_text_center">Bill No Count Report</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								 <p>
+									DATE FROM :
+									<field name="start_date" class="oe_inline" />
+									DATE TO :
+									<field name="end_date" class="oe_inline" />
+									Company :
+									<field name="company_id" class="oe_inline" />
+								</p> 
+								
+							</h4>
+						</div>
+						
+						<group>
+							<field name="billno_count_line" nolabel="1">
+							<field name='name'/>
+								<tree create="false" edit="false" delete="false">
+								<field name="terminal" />
+									<field name="startno" />
+									<field name="endno" />
+									<field name="totalbillcount" />
+									<field name="onlinecnt" />
+									<field name="oflinecnt" />
+									<field name="cancelcount" />
+									
+									
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		
+		
+		
+		<menuitem action="action_billcount_report"
+			id="menu_action_bill_report" 
+			parent="ls_pos_reports.menu_ls_pos_report"
+			sequence="4" 
+			name="Bill No Count Report" /> 
+	</data>
+</odoo>

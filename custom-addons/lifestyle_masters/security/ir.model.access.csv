@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lifestyle_masters,LifeStyle Masters,model_lifestyle_masters,,1,1,1,1
+access_cashier_view,Cashier View,model_cashier_view,,1,1,1,1
+access_cashier_wzd,Cashier Wizard,model_cashier_wzd,,1,1,1,1
+access_cashier_master,Cashier Master,model_cashier_master,,1,1,1,1
+access_vendor_view,vendor View,model_vendor_view,,1,1,1,1
+access_vendor_wzd,Vendor Wizard,model_vendor_wzd,,1,1,1,1
+access_vendor_master,Vendor Master,model_vendor_master,,1,1,1,1
+access_organization_view,Organization View,model_organization_view,,1,1,1,1
+access_organization_wzd,Organization Wizard,model_organization_wzd,,1,1,1,1
+access_organization_master,Organization Master,model_organization_master,,1,1,1,1
+access_company_view,Company View,model_company_view,,1,1,1,1
+access_company_wzd,company Wizard,model_company_wzd,,1,1,1,1
+access_company_masters,company Master,model_company_masters,,1,1,1,1

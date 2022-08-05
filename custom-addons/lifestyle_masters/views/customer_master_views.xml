@@ -1,0 +1,88 @@
+<odoo>
+	<data>
+		<record id="customer_wizard" model="ir.ui.view">
+			<field name="name">customer.view</field>
+			<field name="model">customer.view</field>
+			<field name="arch" type="xml">
+				<form string="customer">
+					<group> 
+						<group>
+							<field name="start_date" required="1"/>					
+						</group>
+						<group>
+							<field name="end_date" required="1"/>							
+						</group>
+						<group>
+							<field name="company" required="1"/>							
+						</group>
+						<footer>
+							<button name="get_customer" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_customer"
+			model="ir.actions.act_window">
+			<field name="name">customer</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">customer.view</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+		
+		
+		
+		<record id="view_customer" model="ir.ui.view">
+			<field name="name">customer</field>
+			<field name="model">customer.wzd</field>
+			<field name="arch" type="xml">
+				<form string="customer" version="7.0"
+					create="false" edit="false">
+					
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Customer Master</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<!-- <p>
+									AS ON DATE :
+									<field name="end_date" class="oe_inline" />
+									CUSTOMER :
+									<field name="partner_id" class="oe_inline" />
+								</p> -->
+							</h4>
+						</div>
+						<group>
+							 <field name="customer_line" nolabel="1">
+								<tree create="false" edit="false" delete="false">
+								<field name="name"></field>
+								<field name="org_id"></field>
+        						
+								</tree> 
+							 </field> 
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_customer_master" model="ir.actions.server">
+        <field name="name">Function Calll</field>
+        <field name="model_id" ref="model_customer_view"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.get_customer()
+        </field>
+        </record>
+		<menuitem action="action_customer_master"
+			id="menu_action_customer" 
+			parent="menu_ls_masters"
+			sequence="5" 
+			name="Customer Master" />
+	</data>
+</odoo>

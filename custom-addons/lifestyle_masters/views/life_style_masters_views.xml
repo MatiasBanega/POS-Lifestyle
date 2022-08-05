@@ -1,0 +1,105 @@
+<odoo>
+  <record id="lifestyle_master_action" model="ir.actions.act_window">
+    <field name="name">Lifestyle Masters</field>
+   <field name="res_model">lifestyle.masters</field>
+   <!--  <field name="view_mode">form,tree</field> 
+    <field name="target">inline</field> -->
+    <!-- <field name="view_id" ref="report_tree"/> -->
+    </record>
+    
+    <menuitem action="lifestyle_master_action"
+            id="menu_ls_masters"
+            name="Masters"
+            parent="ls_pos_reports.menu_ls_root_configuration"
+            sequence = "7" />
+           
+    <!-- <menuitem action="action_brand"
+			id="menu_action_brand" 
+			parent="menu_ls_masters"
+			sequence="1" 
+			name="Brand Master" />  -->
+			
+	<!-- <menuitem action="action_cashier_master"
+			id="menu_action_cashier" 
+			parent="menu_ls_masters"
+			sequence="2" 
+			name="Cashier Master" /> -->
+			
+	<!-- <menuitem action="action_category"
+			id="menu_action_category" 
+			parent="menu_ls_masters"
+			sequence="3" 
+			name="Category Master" /> -->
+	
+	<!-- <menuitem action="action_company"
+			id="menu_action_company" 
+			parent="menu_ls_masters"
+			sequence="4" 
+			name="Company Master" /> -->
+			
+	<!-- <menuitem action="action_customer"
+			id="menu_action_customer" 
+			parent="menu_ls_masters"
+			sequence="5" 
+			name="Customer Master" /> -->
+			
+	<!-- <menuitem action="action_department"
+			id="menu_action_department" 
+			parent="menu_ls_masters"
+			sequence="6" 
+			name="Department Master" /> -->
+			
+	<!-- <menuitem action="action_item_type"
+			id="menu_action_item_type" 
+			parent="menu_ls_masters"
+			sequence="7" 
+			name="Item Type Master" /> -->
+			
+	<!-- <menuitem action="action_locator"
+			id="menu_action_locator" 
+			parent="menu_ls_masters"
+			sequence="8" 
+			name="Locator Master" /> -->
+			
+	<!-- <menuitem action="action_product_color"
+			id="menu_action_product_color" 
+			parent="menu_ls_masters"
+			sequence="9" 
+			name="Product Color Master" />
+			
+	<menuitem action="action_product_design"
+			id="menu_action_product_design" 
+			parent="menu_ls_masters"
+			sequence="10" 
+			name="Product Design Master" />
+			
+	<menuitem action="action_product"
+			id="menu_action_product" 
+			parent="menu_ls_masters"
+			sequence="11" 
+			name="Product Master" />
+			
+	<menuitem action="action_product_size"
+			id="menu_action_product_size" 
+			parent="menu_ls_masters"
+			sequence="12" 
+			name="Product Size Master" />
+			
+	<menuitem action="action_purchase_vat"
+			id="menu_action_purchase_vat" 
+			parent="menu_ls_masters"
+			sequence="13" 
+			name="Purchase Vat Master" />
+			
+	<menuitem action="action_sub_category"
+			id="menu_action_sub_category" 
+			parent="menu_ls_masters"
+			sequence="14" 
+			name="Sub Category Master" />
+			 -->
+	<!--  <menuitem action="action_vendor"
+			id="menu_action_vendor" 
+			parent="menu_ls_masters"
+			sequence="15" 
+			name="Vendor Master" />	 --> 
+</odoo>

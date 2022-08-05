@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'LifeStyle Masters',
+    'version': '1.0',
+    'author': "TenthPlanet",
+    'website': "http://tenthplanet.in",
+    'company': 'Master',
+    'summary': 'LifeStyle Masters',
+    'description': """
+        
+""",
+    'depends': ['base'],
+    'data': [   
+        'views/life_style_masters_views.xml',
+#         'views/brand_master_views.xml',
+        'views/cashier_master_views.xml',
+#         'views/category_master_views.xml',
+        'views/company_master_views.xml',
+#         'views/customer_master_views.xml',
+#         'views/department_master_views.xml',
+#         'views/item_type_master_views.xml',
+#         'views/locator_master_views.xml',
+#         'views/product_color_master_views.xml',
+#         'views/Product_design_master_views.xml',
+#         'views/product_master_views.xml',
+#         'views/product_size_master_views.xml',
+#         'views/purchase_vat_master_views.xml',
+#         'views/sub_category_master_views.xml',
+        'views/vendor_master_views.xml',
+        'views/organization_master_views.xml',
+         'views/schedule_action_views.xml',
+         'views/res_company_views.xml',
+        'security/ir.model.access.csv',
+     ],
+    'installable': True,
+    'auto_install': False,
+}

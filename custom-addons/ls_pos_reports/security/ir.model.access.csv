@@ -1,0 +1,45 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lifestyle_reports,access.lifestyle.reports,model_lifestyle_reports,,1,1,1,1
+,,,,,,,
+access_itemwise_cancelled_report,access.itemwise.cancelled.report,model_itemwise_cancelled_report,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_item_wise_cancel_screen_wzd,access.item.wise.cancel.screen.wzd,model_item_wise_cancel_screen_wzd,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_bill_cancel_line,access.bill.cancel.line,model_bill_cancel_line,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_excel_extended_itemwise_cancel_rpt,access.excel.extended.itemwise.cancel.rpt,model_excel_extended_itemwise_cancel_rpt,ls_pos_reports.group_access_pos_reports,1,1,1,1
+,,,,,,,
+access_billcount_report,access.billcount.report,model_billcount_report,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_bill_count_report_wzd,access.bill.count.report.wzd,model_bill_count_report_wzd,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_billno_count_line,access.billno.count.line,model_billno_count_line,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_excel_extended_billcount_rep,access_excel_extended_billcount_rep,model_excel_extended_billcount_rep,ls_pos_reports.group_access_pos_reports,1,1,1,1
+,,,,,,,
+access_dept_wise_sales_report,access.dept.wise.sales.report,model_dept_wise_sales_report,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_dept_screen_wzd,access.dept.screen.wzd,model_dept_screen_wzd,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_dept_wise_sales_line,Access.dept.wise.sales.line,model_dept_wise_sales_line,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_excel_extended_dept_rep,access.excel.extended.dept.rep,model_excel_extended_dept_rep,ls_pos_reports.group_access_sale_reports,1,1,1,1
+,,,,,,,
+access_purchase_detail_report,access.purchase.detail.report,model_purchase_detail_report,ls_pos_reports.group_access_purchase_reports,1,1,1,1
+access_purchase_detail_report_screen_wzd,access.purchase.detail.report.screen.wzd,model_purchase_detail_report_screen_wzd,ls_pos_reports.group_access_purchase_reports,1,1,1,1
+access_purchase_detail_report_screen_line,access.purchase.detail.report.screen.line,model_purchase_detail_report_screen_line,ls_pos_reports.group_access_purchase_reports,1,1,1,1
+access_excel_extended_purchase_detail_rep,access.excel.extended.purchase.detail.rep,model_excel_extended_purchase_detail_rep,ls_pos_reports.group_access_purchase_reports,1,1,1,1
+,,,,,,,
+access_pos_product_exchange_report,access.pos.product.exchange.report,model_pos_product_exchange_report,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_pos_product_screen_wzd,access.pos.product.screen.wzd,model_pos_product_screen_wzd,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_pos_exchange_product_screen_line,Access.pos.exchange.product.screen.line,model_pos_exchange_product_screen_line,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_excel_extended_pos_rep,access.excel.extended.pos.rep,model_excel_extended_pos_rep,ls_pos_reports.group_access_pos_reports,1,1,1,1
+,,,,,,,
+,,,,,,,
+access_total_sales_report,access.total.sales.report,model_total_sales_report,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_total_screen_wzd,access.total.screen.wzd,model_total_screen_wzd,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_total_sales_line,access.total.sales.line,model_total_sales_line,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_excel_extended_total_rep,access.excel.extended.total.rep,model_excel_extended_total_rep,ls_pos_reports.group_access_sale_reports,1,1,1,1
+,,,,,,,
+,,,,,,,
+access_sales_summary_report,access.sales.summary.report,model_sales_summary_report,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_sales_summary_screen_wzd,access.sales.summary.screen.wzd,model_sales_summary_screen_wzd,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_sales_summary_screen_line,Access.sales.summary.screen.line,model_sales_summary_screen_line,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_excel_extended_summary_rep,access.excel.extended.summary.rep,model_excel_extended_summary_rep,ls_pos_reports.group_access_sale_reports,1,1,1,1
+,,,,,,,
+,,,,,,,
+access_view1,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_pos_reports,1,0,0,0
+access_view2,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_sale_reports,1,0,0,0
+access_view3,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_purchase_reports,1,0,0,0
+access_view4,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_inventory_reports,1,0,0,0

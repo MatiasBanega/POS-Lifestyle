@@ -1,0 +1,169 @@
+<odoo>
+	<data>
+		<record id="view_purchase_detail_wzd_report" model="ir.ui.view">
+			<field name="name">purchase.detail.report</field>
+			<field name="model">purchase.detail.report</field>
+			<field name="arch" type="xml">
+				<form string="Purchase Detail Report">
+					<group>
+						<group>
+							<field name="start_date" required="1"/> 
+							<field name="end_date" required="1"/>
+							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+							<field name="partner_id" options="{'no_create': True, 'no_create_edit':True}" domain="company_id_domain"/>
+							
+							<field name="company_id_domain" invisible="1"/>					
+						
+							<!-- <field name="product_category" /> -->
+														
+						</group>
+						<!-- <group>
+						</group> -->
+						<footer>
+							<button name="print_purchase_detail_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_purchae_detail_report"
+			model="ir.actions.act_window">
+			<field name="name">Purchase Detail Report Forms</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">purchase.detail.report</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+			
+		</record>
+		<!-- xml excel -->
+		<record id="view_purchase_detail_excel_form_extended" model="ir.ui.view">
+			<field name="name">excel.extended.sale.form</field>
+			<field name="model">excel.extended.purchase.detail.rep</field>
+			<field name="arch" type="xml">
+				<form string="Purchase Deatil Report" create="false" edit="false">
+					<group>
+						<field name="name"/>
+						<field name="excel_file" readonly="1" filename="file_name" />
+						<field name="file_name" invisible="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_putrchase_form" model="ir.actions.act_window">
+			<field name="name">Report Excel</field>
+			<field name="view_id" ref="view_purchase_detail_excel_form_extended" />
+			<field name="view_mode">form</field>
+			<field name="res_model">excel.extended.purchase.detail.rep</field>
+			<field name="target">new</field>
+		</record>
+		<record id="view_purchase_deatil_screen_report" model="ir.ui.view">
+			<field name="name">Purchase Deatil Screen</field>
+			<field name="model">purchase.detail.report.screen.wzd</field>
+			<field name="arch" type="xml">
+				<form string="Purchase Deatil Excel Report" version="7.0"
+					create="false" edit="false">
+					<header>
+						<button name="print_purchase_excel_report" type="object"
+							string="Print Excel" />
+						<button name="print_purchase_detail_pdf_report" type="object"
+							string="Print PDF" />
+					</header>
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Purchase Detail Report</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<p>
+									DATE From :
+									<field name="start_date" class="start_date" />
+									Date To :
+									<field name="end_date" class="oe_inline" />
+									Vendor :
+									<field name="partner_id" class="oe_inline" />
+									Company :
+									<field name="company_id" class="oe_inline" />
+									<!-- Organization :
+									<field name="org_id" class="oe_inline" /> -->
+									
+								</p>
+							</h4>
+						</div>
+						<group>
+							<field name="purchase_detail_line" nolabel="1">
+								<field name="name"/>
+								<tree create="false" edit="false" delete="false">
+								<field name="grn_no"/>
+									<field name="bill_no" />
+									<field name="bill_date" /> 
+									<field name="grn_date" />
+									<field name="partner_id" />
+									<field name="ware_house" /> 
+									<!-- <field name="tender_type" /> -->
+									<field name="sub_total" />
+									<field name="tax_amt" />
+									<field name="cess" />
+									<field name="total_val" />
+									<field name="add_ded" />
+									<field name="tcs_amt" />
+									<field name="net_amt" />
+									<field name="freight_charges" />
+									<field name="pcode" />
+									<field name="product_id" />
+									<field name="brand" />
+									<field name="item_type" />
+									<field name="prod_design" />
+									<field name="prod_color" />
+									<field name="prod_size" />
+									<field name="qty" />
+									<field name="mrp" />
+									<field name="gkm" />
+									<field name="sp_margin_mrp" />
+									<field name="m_down" />
+									<field name="diff_margin" />
+									<field name="diff_amt" />
+									<field name="lcost" />
+									<field name="line_subtot" />
+									<field name="dept" />
+									<field name="categ" />
+									<field name="manuftr" />
+									<field name="tax" />
+									<field name="igst" />
+									<field name="cgst" />
+									<field name="sgst" />
+									<field name="line_taxtot" />
+									<field name="cess_tot" />
+									<field name="created" />
+									<field name="reversal_no" />
+									<field name="reversed_date" />
+									
+									
+									
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- <record id="action_ven_func_call" model="ir.actions.server">
+        <field name="name">Function Calll</field>
+        <field name="model_id" ref="model_purchase_detail_report"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.vendor_master_call()
+        </field>
+    </record> -->
+		
+		<menuitem action="action_purchae_detail_report"
+			id="menu_action_purchae_detail_report" 
+			parent="ls_pos_reports.menu_ls_purchase_report"
+			sequence="3" 
+			name="Purchase Detail Report with GST" />
+	</data>
+</odoo>
+

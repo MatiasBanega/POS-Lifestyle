@@ -1,0 +1,125 @@
+<odoo>
+	<data>
+
+		<record id="view_total_sales_screen_wzd_report"
+			model="ir.ui.view">
+			<field name="name">total.sales.report</field>
+			<field name="model">total.sales.report</field>
+			<field name="arch" type="xml">
+				<form string="Total Sales Report">
+					<group>
+						<group>
+							<field name="start_date" required="1" />
+						</group>
+						<group>
+							<field name="end_date" required="1" />
+						</group>
+						<group>
+							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+						</group>
+						<group>
+							<field name="online_sales" required="0" />
+						</group>
+						<footer>
+							<button name="print_totalsales_report" string="Show"
+								type="object" class="oe_highlight"
+								context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_total_sales_report"
+			model="ir.actions.act_window">
+			<field name="name">Total Sales Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">total.sales.report</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<record id="view_total_excel_form_extended7" model="ir.ui.view">
+			<field name="name">excel.extended.total.form</field>
+			<field name="model">excel.extended.total.rep</field>
+			<field name="arch" type="xml">
+				<form string="Total Sales Excel Report" create="false"
+					edit="false">
+					<group>
+						<field name="name" />
+						<field name="excel_file" readonly="1" filename="file_name" />
+						<field name="file_name" invisible="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_excel_total_form7"
+			model="ir.actions.act_window">
+			<field name="name">Report Excel</field>
+			<field name="view_id" ref="view_total_excel_form_extended7" />
+			<field name="view_mode">form</field>
+			<field name="res_model">excel.extended.total.rep</field>
+			<field name="target">new</field>
+		</record>
+
+		<record id="view_total_screen_report" model="ir.ui.view">
+			<field name="name">Total Sales Report</field>
+			<field name="model">total.screen.wzd</field>
+			<field name="arch" type="xml">
+				<form string="Total Sales Excel Report" version="7.0"
+					create="false" edit="false">
+					<header>
+						<button name="print_total_orders_excel_report"
+							type="object" string="Print Excel" />
+						<button name="print_total_pdf_report" type="object"
+							string="Print PDF" />
+					</header>
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Total Sales Report</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<h4>
+									<p>
+										Date From :
+										<field name="start_date" />
+										Date To :
+										<field name="end_date" />
+										Company :
+										<field name="company_id" />
+										Online Sales Only :
+										<field name="online_sales" />
+										 <span class="o_online_sales_False" name="online_sales"
+ 									attrs="{'invisible': [('online_sales', '!=', False)]}">False</span>
+									</p>
+								</h4>
+							</h4>
+						</div>
+						<group>
+							<field name="total_sales_line" nolabel="1">
+								<field name="name" />
+								<tree create="false" edit="false" delete="false">
+									<field name="datetrx" style="width:30%%" />
+									<field name="total_sales_amt" style="width:30%%" />
+									<field name="dis_amt" style="width:30%%" />
+									<field name="round_off" style="width:30%%" />
+									<field name="tot_net_amt" style="width:30%%" />
+									<field name="bill_count" style="width:30%%" />
+									<field name="avg_bill" style="width:30%%" />
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<menuitem action="action_total_sales_report"
+			id="menu_action_total_sales_report"
+			parent="ls_pos_reports.menu_ls_sale_report" sequence="13"
+			name="Total Sales Report " />
+	</data>
+</odoo>

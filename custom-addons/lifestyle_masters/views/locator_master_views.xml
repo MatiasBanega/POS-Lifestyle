@@ -1,0 +1,88 @@
+<odoo>
+	<data>
+		<record id="locator_wizard" model="ir.ui.view">
+			<field name="name">locator.view</field>
+			<field name="model">locator.view</field>
+			<field name="arch" type="xml">
+				<form string="locator">
+					<group> 
+						<group>
+							<field name="start_date" required="1"/>					
+						</group>
+						<group>
+							<field name="end_date" required="1"/>							
+						</group>
+						<group>
+							<field name="company" required="1"/>							
+						</group>
+						<footer>
+							<button name="get_locator" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_locator"
+			model="ir.actions.act_window">
+			<field name="name">locator</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">locator.view</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+		
+		
+		
+		<record id="view_locator" model="ir.ui.view">
+			<field name="name">locator</field>
+			<field name="model">locator.wzd</field>
+			<field name="arch" type="xml">
+				<form string="locator" version="7.0"
+					create="false" edit="false">
+					
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Locator Master</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<!-- <p>
+									AS ON DATE :
+									<field name="end_date" class="oe_inline" />
+									CUSTOMER :
+									<field name="partner_id" class="oe_inline" />
+								</p> -->
+							</h4>
+						</div>
+						<group>
+							 <field name="locator_line" nolabel="1">
+								<tree create="false" edit="false" delete="false">
+								<field name="name"></field>
+								<field name="org_id"></field>
+        						
+								</tree> 
+							 </field> 
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_locator_master" model="ir.actions.server">
+        <field name="name">Function Calll</field>
+        <field name="model_id" ref="model_category_view"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.get_category()
+        </field>
+        </record>
+		<menuitem action="action_locator_master"
+			id="menu_action_locator" 
+			parent="menu_ls_masters"
+			sequence="8" 
+			name="Locator Master" />
+	</data>
+</odoo>
