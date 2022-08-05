@@ -1,0 +1,65 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="cancel_bill_form" model="ir.ui.view">
+			<field name="name">cancel.bill.view.form</field>
+			<field name="model">cancel.bill.view</field>
+			<field name="arch" type="xml">
+				<form string="" edit="false" create="false" delete="false">
+					<sheet>
+						<group>
+							<group>
+								<field name="bill_number" />
+									<field name="uname" />
+									<field name="pcode" />
+									<field name="pname" />
+									<field name="total_amt" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="cancel_bill_tree">
+			<field name="name">cancel.bill.view</field>
+			<field name="model">cancel.bill.view</field>
+			<field name="arch" type="xml">
+				<tree string="Cancel Bill Form" edit="false" create="false" delete="false">
+							<field name="bill_number" optional="show"/>
+									<field name="uname" optional="show"/>
+									<field name="pcode" optional="show"/>
+									<field name="pname" optional="show"/>
+									<field name="total_amt" optional="show"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_cancel_bill_view" model="ir.actions.act_window">
+			<field name="name">Cancel Bill View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cancel.bill.view</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		<record id="action_cancel_bill" model="ir.actions.server">
+        <field name="name">Function Call</field>
+        <field name="model_id" ref="model_cancel_bill_view"/> 
+        <field name="state">code</field> 
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record>
+		
+		<menuitem action="action_cancel_bill" 
+		id="menu_cancel_bill" name="Cancel Bill View"
+			parent="menu_ls_report_forms" sequence="6" />
+	</data>
+</odoo>
+

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lifestyle_report_forms,LifeStyle Report Forms,model_lifestyle_report_forms,,1,1,1,1
+access_dept_wise_sales_view,access.dept.wise.sales.view,model_dept_wise_sales_view,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_pos_product_wise_exchange_view,access.pos.product.wise.exchange.view,model_pos_product_wise_exchange_view,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_purchase_detail_report_gst_view,access.purchase.detail.report.gst.view,model_purchase_detail_report_gst_view,ls_pos_reports.group_access_purchase_reports,1,1,1,1
+access_total_sales_view,access.total.sales.view,model_total_sales_view,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_summary_sales_view,access.summary.sales.view,model_summary_sales_view,ls_pos_reports.group_access_sale_reports,1,1,1,1
+access_bill_count_view,Access.bill.count.view,model_bill_count_view,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_cancel_bill_view,Access.cancel.bill.view,model_cancel_bill_view,ls_pos_reports.group_access_pos_reports,1,1,1,1

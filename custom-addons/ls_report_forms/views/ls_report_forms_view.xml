@@ -1,0 +1,13 @@
+<odoo>
+	<record id="lifestyle_report_forms_action"
+		model="ir.actions.act_window">
+		<field name="name">Lifestyle Report Forms</field>
+		<field name="res_model">lifestyle.report.forms</field>
+		<!-- <field name="view_mode">form,tree</field> <field name="target">inline</field> -->
+<!-- <field name="view_id" ref="report_tree"/> -->
+	</record>
+	<menuitem action="lifestyle_report_forms_action"
+		id="menu_ls_report_forms" name="Report Forms"
+		parent="ls_pos_reports.menu_ls_main_report" sequence="7" />
+
+</odoo>
