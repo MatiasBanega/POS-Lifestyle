@@ -1,3 +1,5 @@
+
+
 odoo.define('base.settings_tests', function (require) {
 "use strict";
 
