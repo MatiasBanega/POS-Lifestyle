@@ -153,6 +153,8 @@ class bill_count_report_wzd(models.Model):
                 cursor.execute(sql)
                 #print(sql)
                 billno_data = cursor.fetchall()
+                if not billno_data:
+                    raise UserError(_('No data available for the input specified search criteria'))
                 #print('billno_data',billno_data)
                 for row in billno_data:                
                     dict = {'terminal':row[0],'startno':row[1] , 'endno':row[2],'INT_totalbillcount':row[3] ,'INT_onlinecount':row[4] ,'INT_offlinecount':row[5] ,'INT_cancelcount':row[6] ,}

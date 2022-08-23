@@ -4,7 +4,7 @@
 			<field name="name">sub.category.view</field>
 			<field name="model">sub.category.view</field>
 			<field name="arch" type="xml">
-				<form string="Sub Category">
+				<form string="sub category">
 					<group> 
 						<group>
 							<field name="start_date" required="1"/>					
@@ -25,7 +25,7 @@
 		</record>
 		<record id="action_sub_category"
 			model="ir.actions.act_window">
-			<field name="name">Sub Category</field>
+			<field name="name">sub category</field>
 			<field name="type">ir.actions.act_window</field>
 			<field name="res_model">sub.category.view</field>
 			<field name="view_mode">form</field>
@@ -36,10 +36,10 @@
 		
 		
 		<record id="view_sub_category" model="ir.ui.view">
-			<field name="name">Sub Category</field>
+			<field name="name">sub category</field>
 			<field name="model">sub.category.wzd</field>
 			<field name="arch" type="xml">
-				<form string="Sub Category" version="7.0"
+				<form string="sub category" version="7.0"
 					create="false" edit="false">
 					
 					<sheet>
@@ -60,6 +60,11 @@
 							 <field name="sub_category_line" nolabel="1">
 								<tree create="false" edit="false" delete="false">
 								<field name="name"></field>
+								<field name="org_id"></field>
+								<field name="dpartment_id"></field>
+								<field name="cate_gory_id"></field>
+								
+								
         						
 								</tree> 
 							 </field> 
@@ -68,10 +73,20 @@
 				</form>
 			</field>
 		</record>
-		<!-- <menuitem action="action_sub_category"
+		<record id="action_sub_category_master" model="ir.actions.server">
+        <field name="name">Function Calll</field>
+        <field name="model_id" ref="model_sub_category_view"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.get_sub_category()
+        </field>
+        </record>
+		<menuitem action="action_sub_category_master"
 			id="menu_action_sub_category" 
-			parent="point_of_sale.menu_point_rep"
+			parent="menu_ls_masters"
 			sequence="3" 
-			name="Sub Category Master" /> -->
+			name="Sub Category Master" />
 	</data>
 </odoo>

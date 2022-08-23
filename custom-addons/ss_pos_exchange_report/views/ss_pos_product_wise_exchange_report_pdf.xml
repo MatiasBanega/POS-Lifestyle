@@ -1,0 +1,123 @@
+<odoo>
+	<data>
+		<record id="ss_report_pos_paperformat"
+			model="report.paperformat">
+			<field name="name">POS Product Exchange Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="ss_pos_wise_exchange_product_report"
+			model="ss.pos.product.screen.wzd" string="POS Product Exchange Report"
+			report_type="qweb-pdf" name="ss_pos_exchange_report.ss_pos_exchange_report_temp"
+			file="ss_pos_exchange_report.ss_pos_exchange_report_temp" menu="False" />
+		<template id="ss_pos_exchange_report_temp">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.external_layout"> -->
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center">POS Product Exchange Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								<t t-if="start_date">
+								Invoice From Date: 
+										<t t-esc="start_date" t-options='{"widget": "date","format": "dd-MM-YYYY"}'/>
+										</t>
+									<t t-if="end_date">
+										<b>Invoice To Date</b>
+										<t t-esc="end_date" t-options='{"widget": "date","format": "dd-MM-YYYY"}'/>
+									</t>
+								</div>
+								<div><t t-if="cashier_id">
+										<b>Cashier :</b>
+										<t t-esc="cashier_id" />
+									</t>
+								</div>
+							</div> 
+						<br />
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_pos_wise" />
+								<tr style="border: 1px solid black;"> 
+ 									<th style="border: 1px solid black; text-align:left">Exchangebill</th>
+									<th style="border: 1px solid black; text-align:center">Originalbill</th>
+									<th style="border: 1px solid black; text-align:center">Invoicedate</th>
+									<th style="border: 1px solid black; text-align:left">Productcode</th>
+									<th style="border: 1px solid black; text-align:center">Productname</th>
+								
+									<th style="border: 1px solid black; text-align:center">Returnqty</th>
+									<th style="border: 1px solid black; text-align:center">OriginalInvoiceSP</th>
+									<th style="border: 1px solid black; text-align:left">Linetotal</th>
+									<!-- <th style="border: 1px solid black; text-align:center">Balanceamt</th> -->
+									<th style="border: 1px solid black; text-align:center">Cashier</th>
+									<th style="border: 1px solid black; text-align:left">Terminal</th>
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>  
+										 <td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['exchange_bill']" />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['original_bill']" />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['invoice_date']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['product_code']" />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['product_name']" />
+										</td>
+										
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['return_qty']" />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['original_invoicesp']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['line_total']" />
+										</td>
+										<!-- <td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['balance_amt']" />
+										</td> -->
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cashier']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['terminal']" />
+										</td>
+										
+										
+										
+									</tr>
+								</t>
+							</tbody> 
+						</table>
+					</div>
+				 <!-- <div class="footer"> <div class="text-center" style="border-top: 
+					1px solid black;"> <ul class="list-inline"> <li>This is a computer generated 
+					statement on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d 
+					%H:%M')"/>. No signature needed.</li> </ul> </div> </div>  -->
+			</div>
+			</t>
+		</template>
+		<record id="ss_pos_exchange_report.ss_pos_wise_exchange_product_report"
+			model="ir.actions.report">
+			<field name="paperformat_id"
+				ref="ss_pos_exchange_report.ss_report_pos_paperformat" />
+		</record>
+		
+	</data>
+</odoo>

@@ -169,7 +169,7 @@ class OrganizationMaster(models.Model):
     
     attribute_id = fields.Many2one('organization.wzd',string='attribute_id',ondelete='cascade')
     name = fields.Char(string="Organization")
-    org_id=fields.Char(string="ID")
+    org_id=fields.Char(string="Org ID")
     
      
            

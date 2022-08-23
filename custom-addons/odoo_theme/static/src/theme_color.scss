@@ -1,0 +1,21 @@
+$o-community-color: #0ebe06; 
+$o-brand-odoo: #0aad1b;
+$o-brand-primary: #0aad1b; 
+
+.o_MessagingMenu_icon {
+display: none !important;
+}
+.o_MessagingMenu_notificationList.o-mobile{
+display: none !important;
+}
+ 
+.o_MessagingMenu_counter{
+display: none !important;
+}
+.o_mail_systray_item{
+  display: none !important;
+}
+
+.o_MessagingMenu{
+  display: none !important;
+}

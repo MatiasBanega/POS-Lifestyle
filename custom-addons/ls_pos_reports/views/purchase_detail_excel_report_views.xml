@@ -9,8 +9,8 @@
 						<group>
 							<field name="start_date" required="1"/> 
 							<field name="end_date" required="1"/>
-							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
-							<field name="partner_id" options="{'no_create': True, 'no_create_edit':True}" domain="company_id_domain"/>
+							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}" />
+							<field name="partner_id" options="{'no_create': True, 'no_create_edit':True}" domain="company_id_domain" />
 							
 							<field name="company_id_domain" invisible="1"/>					
 						

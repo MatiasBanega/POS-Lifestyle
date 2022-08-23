@@ -1,0 +1,266 @@
+<odoo>
+	<data>
+		<record id="report_ss_purchase_detail_paperformat"
+			model="report.paperformat">
+			<field name="name">SuperStore Purchase Detail PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Landscape</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="ss_gst_purchase_details_report"
+			model="ss.purchase.detail.report.screen.wzd" string="SuperStore Purchase Detail PDF Report"
+			report_type="qweb-pdf" name="ss_pos_reports.sspurchase_detail_wise"
+			file="ss_pos_reports.sspurchase_detail_wise" menu="False" />
+		<template id="sspurchase_detail_wise">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.external_layout"> -->
+				<div class="page" style="page-break-before:auto;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center"> Purchase Detail PDF Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								 <div>
+									<t t-if="start_date">
+										DATE From:
+										<t t-esc="start_date" t-options='{"widget": "date","format": "dd MMM Y"}' />
+									</t>
+								</div> 
+								 <div>
+									<t t-if="end_date">
+										Date To :
+										<t t-esc="end_date" t-options='{"widget": "date","format": "dd MMM Y"}' />
+									</t>
+								</div> 
+								<div>
+									<t t-if="partner_id">
+										Vendor :
+										<t t-esc="partner_id"/>
+									</t>
+								</div> 
+								 <div>
+									<t t-if="company_id">
+										Company :
+										<t t-esc="company_id"/>
+									</t>
+								</div> 
+								<div>
+									<t t-if="organization_id">
+										Organization :
+										<t t-esc="organization_id"/>
+									</t>
+								</div> 
+								
+							</div>
+						</div>
+						<br />
+						<table class="table table-sm" style="width:100%; serif;height: auto;margin: auto;">
+							<thead>
+								<span t-esc="sspurchase_detail_wise"/>
+								<tr style="border: 1px solid black;margin: padding:0px;auto;width: auto;">
+									<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">GRN No</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Bill No</th>
+<!-- <th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Bill Date</th> -->
+<th style="border: 1px solid black;padding:0px;font-size:45%;text-align:center">GRN Date </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Vendor </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Warehouse</th>
+<!--<th style="border: 1px solid black; text-align:center">Tender Type </th>-->
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">SubTotal </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Tax Amount</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">CESS </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Total Value </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Add Ded</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Tcs Amount </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Net Amount </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Freight Charges</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Pcode </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Product Name </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%;text-align:center">Brand</th>
+<!-- <th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Item Type </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Product Design </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Product Color</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Product Size </th> -->
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Quantity </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">MRP</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">GKM </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Selling Margin MRP </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Mark Down</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Different Margin </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Different Amount </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Landed Cost</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Line SubTotal </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Department </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Category</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Manufacturer </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Tax </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">IGST</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">CGST </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">SGST </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Line Taxtotal</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">CESS Total </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Created </th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Reversal No</th>
+<th style="border: 1px solid black;padding:0px;font-size:45%; text-align:center">Reversed Date </th>
+									
+									
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr style="height: auto;margin: auto;width: auto;">
+										<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['grn_no']"/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['bill_no']"/>
+</td>
+<!-- <td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['bill_date']"/>
+</td> -->
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['grn_date']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['partner_id']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['ware_house']"/>
+</td>
+
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['sub_total']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['tax_amt']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['cess']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['total_val']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['add_ded']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['tcs_amt']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['net_amt']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['freight_charges']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['pcode']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['product_id']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['brand']"/>
+</td>
+<!-- <td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['item_type']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['prod_design']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['prod_color']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['prod_size']"/>
+</td> -->
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['qty']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['mrp']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['gkm']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['sp_margin_mrp']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['m_down']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['diff_margin']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['diff_amt']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['lcost']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['line_subtot']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['dept']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['categ']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['manuftr']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['tax']"/>
+</td>
+<td style="text-align: left;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['igst']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['cgst']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['sgst']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['line_taxtot']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['cess_tot']" t-options='{"widget": "float", "precision": 2}'/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['created']"/>
+</td> 
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['reversal_no']"/>
+</td>
+<td style="text-align: center;font-size:45%;border: 1px solid black;">
+<span t-esc="doc['reversed_date']"/>
+										</td>
+										
+																				  
+									</tr>
+								</t>
+							</tbody>				
+						</table>
+					</div>
+				</div>
+				<!-- <div class="footer"> <div class="text-center" style="border-top: 
+					1px solid black;"> <ul class="list-inline"> <li>This is a computer generated 
+					statement on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d 
+					%H:%M')"/>. No signature needed.</li> </ul> </div> </div> -->
+			</t>
+
+		</template>
+		<record id="ss_pos_reports.ss_gst_purchase_details_report"
+			model="ir.actions.report">
+			<field name="paperformat_id"
+				ref="ss_pos_reports.report_ss_purchase_detail_paperformat" />
+		</record>
+	</data>
+</odoo>

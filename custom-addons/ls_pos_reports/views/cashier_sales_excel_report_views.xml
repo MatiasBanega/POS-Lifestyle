@@ -1,0 +1,107 @@
+<odoo>
+	<data>
+		<record id="view_cashier_order_wzd_report" model="ir.ui.view">
+			<field name="name">cashier.sales.report</field>
+			<field name="model">cashier.sales.report</field>
+			<field name="arch" type="xml">
+				<form string="Cashier Wise Sales Report">
+					<group>
+						<group>
+							<field name="start_date" required="1"/>
+							<field name="end_date" required="1"/>
+							<field name="company_id" options="{'no_create': True, 'no_create_edit':True}" required="1"/>
+							<!-- <field name="product_category" /> -->
+														
+						</group>
+						<!-- <group>
+						</group> -->
+						<footer>
+							<button name="print_cashier_sales_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_cashier_sales_report"
+			model="ir.actions.act_window">
+			<field name="name">Cashier Sales Report Forms</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">cashier.sales.report</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		<!-- xml excel -->
+		<record id="view_cashier_sales_excel_form_extended" model="ir.ui.view">
+			<field name="name">excel.extended.sale.form</field>
+			<field name="model">excel.extended.cashier.sales.rep</field>
+			<field name="arch" type="xml">
+				<form string="Cashier Sales Report" create="false" edit="false">
+					<group>
+						<field name="name"/>
+						<field name="excel_file" readonly="1" filename="file_name" />
+						<field name="file_name" invisible="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_cashier_form" model="ir.actions.act_window">
+			<field name="name">Report Excel</field>
+			<field name="view_id" ref="view_cashier_sales_excel_form_extended" />
+			<field name="view_mode">form</field>
+			<field name="res_model">excel.extended.cashier.sales.rep</field>
+			<field name="target">new</field>
+		</record>
+		<record id="view_cashier_sales_screen_report" model="ir.ui.view">
+			<field name="name">Cashier Sales Screen</field>
+			<field name="model">cashier.sales.report.screen.wzd</field>
+			<field name="arch" type="xml">
+				<form string="Cashier Sales Excel Report" version="7.0"
+					create="false" edit="false">
+					<header>
+						<button name="print_cashier_excel_report" type="object"
+							string="Print Excel" />
+						<button name="print_cashier_sales_pdf_report" type="object"
+							string="Print PDF" />
+					</header>
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Cashier Sales Report</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<p>
+									DATE From :
+									<field name="start_date" class="start_date" />
+									Date To :
+									<field name="end_date" class="oe_inline" />
+									Company :
+									<field name="company_id" class="oe_inline" />
+									
+								</p>
+							</h4>
+						</div>
+						<group>
+							<field name="cashier_sale_line" nolabel="1">
+								<field name="name"/>
+								<tree create="false" edit="false" delete="false">
+								<field name="date"/>
+									<field name="name" />
+									<field name="tender_type" />
+									<field name="amt" />
+									
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<menuitem action="action_cashier_sales_report"
+			id="menu_action_cashier_sales_report" 
+			parent="ls_pos_reports.menu_ls_pos_report"
+			sequence="3" 
+			name="Cashier Wise Sales Report" />
+	</data>
+</odoo>

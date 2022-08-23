@@ -60,7 +60,10 @@ class Category(models.Model):
                     
                     sql='''
          
-                      select name,ad_org_id as org_id from m_product_category
+                      
+                      select name,ad_org_id as org_id,um_product_department_id as department_id,
+                      m_product_category_id as category_id   from m_product_category
+                     where um_product_department_id IS NOT NULL; 
     
                        '''
                          
@@ -74,11 +77,11 @@ class Category(models.Model):
                     sale_data = cursor.fetchall()
                     print('sale_data',sale_data)
                     for row in sale_data:                
-                        dict = {'name':row[0],'org_id':row[1],}
+                        dict = {'name':row[0],'org_id':row[1],'department_id':row[2],'category_id':row[3],}
                         print('dictionary',dict)
                         lis.append(dict)
                     print('list',lis)
-                    return lis
+                return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
                 print("Error while fetching data from PostgreSQL", error)
@@ -104,6 +107,8 @@ class Category(models.Model):
             category_line.append((0,0,{
                                 'name' : line['name'],
                                 'org_id' : line['org_id'],
+                                'depart' : line['department_id'],
+                                'cate' : line['category_id']
 #                                 'Date Invoiced' : line['Date Invoiced'],
 #                                 'Process Instance' : line['Process Instance'],
 #                                 'Sales Attribute' : line['Sales Attribute'], 
@@ -141,7 +146,7 @@ class Category(models.Model):
                     'domain': [],
                     'type': 'ir.actions.act_window',
                     'target': 'current',
-                     'res_id': category_id.id,
+                    'res_id': category_id.id,
             }
        
 class category_wzd(models.Model):
@@ -155,6 +160,7 @@ class category_wzd(models.Model):
     end_date = fields.Date(string="Date To")
     company = fields.Char('Company')
     
+    
 
 category_wzd()
  
@@ -165,7 +171,8 @@ class CategoryMaster(models.Model):
     attribute_id = fields.Many2one('category.wzd',string='attribute_id',ondelete='cascade')
     name = fields.Char(string="Category")
     org_id=fields.Char(string="Organization")
-    
+    depart=fields.Char(string="Department Id")
+    cate=fields.Char(string="Category Id")
      
            
 CategoryMaster()

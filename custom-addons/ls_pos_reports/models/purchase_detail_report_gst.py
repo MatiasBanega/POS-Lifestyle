@@ -391,44 +391,8 @@ class purchase_details_report_wzd(models.Model):
                     print(sql)
                     purchase_data = cursor.fetchall()
                     print('purchase_data',purchase_data)
-#                 for row in purchase_data:      
-#                     #print('aaaaaaaa')          
-#                     dict = {'GRP_grn_no':row[0],'STR_billno':row[1] , 'bill_date':row[2] ,'grn_date':row[3] ,
-#                         'STR_vendor':row[4],
-#                         'STR_Warehouse':row[5], 'SUM_sub_total':row[6],'SUM_taxamount':row[7],
-#                         'SUM_Cess':row[8],'SUM_total_value':row[9] , 'SUM_add_ded':row[10],'SUM_TCS_Amount':row[11],
-#                         'SUM_net_amount':row[12],'SUM_FrieghtCharges':row[13] , 'STR_pcode':row[14],'STR_productname':row[15],
-#                         'STR_Brand':row[16],'STR_Itemtype':row[17],'STR_ProductDesign':row[18],'STR_ProductColor':row[19],'STR_ProductSize':row[20],
-#                         'NUM_QTY':row[21],'SUM_mrp':row[22] , 'SUM_GKM':row[23],'SUM_sellingmarginmrp':row[24],
-#                         'SUM_markdown':row[25],'SUM_Diff_margin':row[26] , 'SUM_Diff_Amount':row[27],'SUM_lcost':row[28],
-#                         'SUM_linesubtotal':row[29], 'STR_Department':row[30],'STR_Category':row[31],
-#                         'STR_Manufacturer':row[32],'STR_tax':row[33] , 'NUM_igst':row[34],'NUM_cgst':row[35],
-#                         'NUM_sgst':row[36],
-#                         'NUM_linetaxtotal':row[37] ,
-#                          'NUM_Cesstotal':row[38],'STR_created':row[39],
-#                         'STR_ReversalNo':row[40],
-#                         'ReversedDate':row[41],
-#     #                 
-#                         }
-#                     #print('dictionary',dict)
-#                     lis.append(dict)
-#                 #print('list',lis)
-#                 return lis
-#             except (Exception, psycopg2.Error) as error:
-#                 raise UserError(_("Error while fetching data from PostgreSQL "))
-#                 #print("Error while fetching data from PostgreSQL", error)
-#     
-#             finally:
-#     # closing database connection.
-#                 if db_conn:
-#                     cursor.close()
-#                     #print('db_connect',db_connect)
-#                     #print('close',db_connect.close)
-#                     db_connect.close()
-#                     #print('db_connect1',db_connect)
-#                     #print('close1',db_connect.close)
-#                     #print("PostgreSQL connection is closed")
-        
+                    
+#                 
                 
                 else:
                     sql='''
@@ -765,8 +729,13 @@ class purchase_details_report_wzd(models.Model):
                     print('dictionary',dict)
                     lis.append(dict)
                 print('list',lis)
+                
                 return lis
+            
+                    
+               
             except (Exception, psycopg2.Error) as error:
+                
                 raise UserError(_("Error while fetching data from PostgreSQL "))
                 #print("Error while fetching data from PostgreSQL", error)
     

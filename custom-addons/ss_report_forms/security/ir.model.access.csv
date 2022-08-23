@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_superstore_report_forms_new,SuperStore Report Forms,model_superstore_report_forms,ss_pos_reports.ss_group_access_sale_reports,1,1,1,1
+access_ss_dept_wise_sales_view,access.ss.dept.wise.sales.view,model_ss_dept_wise_sales_view,ss_pos_reports.ss_group_access_sale_reports,1,1,1,1
+access_ss_purchase_detail_report_gst_view,access.ss.purchase.detail.report.gst.view,model_ss_purchase_detail_report_gst_view,ss_pos_reports.ss_group_access_purchase_reports,1,1,1,1
+access_ss_total_sales_view,access.ss.total.sales.view,model_ss_total_sales_view,ss_pos_reports.ss_group_access_sale_reports,1,1,1,1
+access_ss_inter_branch_view,access.ss.inter.branch.view,model_ss_inter_branch_view,ss_pos_reports.ss_group_access_inventory_reports,1,1,1,1
+access_ss_cashier_wise_sales_view,access.ss.cashier.wise.sales.view,model_ss_cashier_wise_sales_view,ss_pos_reports.ss_group_access_pos_reports,1,1,1,1
+access_ss_summary_sales_view,access.ss.summary.sales.view,model_ss_summary_sales_view,ss_pos_reports.ss_group_access_sale_reports,1,1,1,1
+access_ss_cancel_bill_view,Access.ss.cancel.bill.view,model_ss_cancel_bill_view,ss_pos_reports.ss_group_access_pos_reports,1,1,1,1
+access_ss_stock_adjustment_form_view,Access.ss.stock.adjustment.form.view,model_ss_stock_adjustment_form_view,ss_pos_reports.ss_group_access_inventory_reports,1,1,1,1
+access_ss_pos_product_wise_exchange_view,access.ss.pos.product.wise.exchange.view,model_ss_pos_product_wise_exchange_view,ss_pos_reports.ss_group_access_pos_reports,1,1,1,1
+access_bill_count_view_ss,access.bill.count.view.ss,model_bill_count_view_ss,ss_pos_reports.ss_group_access_pos_reports,1,1,1,1

@@ -1,14 +1,36 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_lifestyle_masters,LifeStyle Masters,model_lifestyle_masters,,1,1,1,1
+
 access_cashier_view,Cashier View,model_cashier_view,,1,1,1,1
 access_cashier_wzd,Cashier Wizard,model_cashier_wzd,,1,1,1,1
 access_cashier_master,Cashier Master,model_cashier_master,,1,1,1,1
+
 access_vendor_view,vendor View,model_vendor_view,,1,1,1,1
 access_vendor_wzd,Vendor Wizard,model_vendor_wzd,,1,1,1,1
 access_vendor_master,Vendor Master,model_vendor_master,,1,1,1,1
+
 access_organization_view,Organization View,model_organization_view,,1,1,1,1
 access_organization_wzd,Organization Wizard,model_organization_wzd,,1,1,1,1
 access_organization_master,Organization Master,model_organization_master,,1,1,1,1
+
 access_company_view,Company View,model_company_view,,1,1,1,1
 access_company_wzd,company Wizard,model_company_wzd,,1,1,1,1
 access_company_masters,company Master,model_company_masters,,1,1,1,1
+
+access_department_view,department View,model_department_view,,1,1,1,1
+access_department_wzd,department Wizard,model_department_wzd,,1,1,1,1
+access_department_master,department Master,model_department_master,,1,1,1,1
+
+access_category_view,category View,model_category_view,,1,1,1,1
+access_category_wzd,category Wizard,model_category_wzd,,1,1,1,1
+access_category_masters,category Masters,model_category_masters,,1,1,1,1
+
+access_sub_category_view,sub category View,model_sub_category_view,,1,1,1,1
+access_sub_category_wzd,sub category Wizard,model_sub_category_wzd,,1,1,1,1
+access_sub_category_master,sub category Masters,model_sub_category_master,,1,1,1,1
+
+
+access_brand_view,brand View,model_brand_view,,1,1,1,1
+access_brand_wzd,brand Wizard,model_brand_wzd,,1,1,1,1
+access_brand_master,brand Masters,model_brand_master,,1,1,1,1
+

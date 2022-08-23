@@ -10,7 +10,7 @@
     <menuitem action="lifestyle_master_action"
             id="menu_ls_masters"
             name="Masters"
-            parent="ls_pos_reports.menu_ls_root_configuration"
+           
             sequence = "7" />
            
     <!-- <menuitem action="action_brand"

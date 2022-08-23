@@ -16,7 +16,7 @@
 		<report id="itemwise_detailed_cancel_report"
 			model="item.wise.cancel.screen.wzd" string="Itemwise Cancelled Bill PDF Report"
 			report_type="qweb-pdf" name="ls_pos_reports.report_cancelled"
-			file="lifestyle_reports.report_terminal" menu="False" />
+			file="ls_pos_reports.report_terminal" menu="False" />
 		<template id="report_cancelled">
 			<t t-call="web.html_container">
 				<div class="page" style="border:1px solid red;">
@@ -27,12 +27,16 @@
 						<div style="margin-top:10px;">
 							<div style="width:50%;float:left;">
 								<t t-if="start_date">
-								Date From:
+								Date From :
 										<t t-esc="start_date" />
 										</t>
 							     <t t-if="end_date">
-								Date To:
+								Date To :
 										<t t-esc="end_date" />
+										</t>
+								<t t-if="company_id">
+								Company :
+										<t t-esc="company_id" />
 										</t>
 							</div>
 							</div> 
@@ -78,11 +82,8 @@
 							</tbody> 
 						</table>
 					</div>
-				 <div class="footer"> <div class="text-center" style="border-top: 
-					1px solid black;"> <ul class="list-inline"> <li>This is a computer generated 
-					statement on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d 
-					%H:%M')"/>. No signature needed.</li> </ul> </div> </div> 
-			</div>
+				 </div> 
+			
 			</t>
 		</template>
 		<record id="ls_pos_reports.itemwise_detailed_cancel_report"

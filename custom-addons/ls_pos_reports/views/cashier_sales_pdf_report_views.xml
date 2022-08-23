@@ -1,0 +1,92 @@
+<odoo>
+	<data>
+		<record id="report_cashier_sales_paperformat"
+			model="report.paperformat">
+			<field name="name">Cashier Sales PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="sales_cashier_details_report"
+			model="cashier.sales.report.screen.wzd" string="Cashier Wise Sales PDF Report"
+			report_type="qweb-pdf" name="ls_pos_reports.report_sales_cashier_wise"
+			file="ls_pos_reports.report_sales_cashier_wise" menu="False" />
+		<template id="report_sales_cashier_wise">
+			<t t-call="web.html_container"> 
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center">Cashier Wise Sales PDF Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								 <div>
+									<t t-if="start_date">
+										DATE From:
+										<t t-esc="start_date" t-options='{"widget": "date","format": "dd MMM Y"}' />
+									</t>
+								</div> 
+								 <div>
+									<t t-if="end_date">
+										Date To :
+										<t t-esc="end_date" t-options='{"widget": "date","format": "dd MMM Y"}' />
+									</t>
+								</div> 
+								 <div>
+									<t t-if="company_id">
+										<b>Company :</b>
+										<t t-esc="company_id"/>
+									</t>
+								</div> 
+								
+							</div>
+						</div>
+						<br />
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_sales_cashier_wise" />
+								<tr style="border: 1px solid black;">
+									<th style="border: 1px solid black; text-align:center">Date Trx</th>
+									<th style="border: 1px solid black; text-align:center">Name</th>
+									<th style="border: 1px solid black; text-align:center">Tender Type</th>
+									<th style="border: 1px solid black; text-align:center">Quantity </th>
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>
+									<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['date']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['name']" />
+										</td>
+								
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['tender_type']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="'%.2f'%(doc['amt'])" />
+										</td>
+																				  
+									</tr>
+								</t>
+							</tbody>				
+						</table>
+					</div>
+				</div> 
+			</t>
+		</template>
+		<record id="ls_pos_reports.sales_cashier_details_report"
+			model="ir.actions.report">
+			<field name="paperformat_id"
+				ref="ls_pos_reports.report_cashier_sales_paperformat" />
+		</record>
+	</data>
+</odoo>

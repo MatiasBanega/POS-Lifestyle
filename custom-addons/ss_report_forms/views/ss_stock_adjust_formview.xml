@@ -1,0 +1,98 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="ss_stock_adjust_bill_form" model="ir.ui.view">
+			<field name="name">ss.stock.bill.view.form</field>
+			<field name="model">ss.stock.adjustment.form.view</field>
+			<field name="arch" type="xml">
+				<form string="" edit="false" create="false" delete="false">
+					<sheet>
+						<group>
+							<group>
+								<field name="branch_ss" />
+								  <field name="description_ss" />  
+									<field name="doc_number_ss" />
+									<field name="date_ss"/>
+									<field name="code_ss"/>
+									<field name="pdt_name_ss"/>
+									<field name="adjustment_qty_ss"/>
+									<field name="mrp_rate_ss"/>
+									<field name="l_cost_ss"/>
+									<field name="l_cost_total_ss"/>
+									<field name="fgc_ss"/>
+									<field name="fgc_total_ss"/>
+									<field name="tax_total_ss"/> 
+									<field name="depart_ment_ss"/>
+									<field name="category_ss"/>
+									<field name="sub_category_ss"/>
+									<field name="brand_ss"/>
+									<field name="vendor_ss"/>  
+									<field name="doc_type_ss"/>
+									<field name="sub_doc_type_ss"/>
+									<field name="inv_sub_type_ss"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="ss_stock_adjust_bill_tree">
+			<field name="name">ss.stock.bill.view.tree</field>
+			<field name="model">ss.stock.adjustment.form.view</field>
+			<field name="arch" type="xml">
+				<tree string="Stock Adjustment Form" edit="false" create="false" delete="false">
+							<field name="branch_ss" />
+								  <field name="description_ss" optional="hide"/>  
+									<field name="doc_number_ss" optional="show"/>
+									<field name="date_ss" optional="show"/>
+									<field name="code_ss" optional="show"/>
+									<field name="pdt_name_ss" optional="show"/>
+									<field name="adjustment_qty_ss" optional="show"/>
+									<field name="mrp_rate_ss" optional="show"/>
+									<field name="l_cost_ss" optional="show"/>
+									<field name="l_cost_total_ss" optional="show"/>
+									<field name="fgc_ss" optional="show"/>
+									<field name="fgc_total_ss" optional="show"/>
+									<field name="tax_total_ss" optional="show"/> 
+									<field name="depart_ment_ss" optional="show"/>
+									<field name="category_ss" optional="show"/>
+									<field name="sub_category_ss" optional="show"/>
+									<field name="brand_ss" optional="show"/>
+									<field name="vendor_ss" optional="show"/>  
+									<field name="doc_type_ss" optional="hide"/>
+									<field name="sub_doc_type_ss" optional="hide"/>
+									<field name="inv_sub_type_ss" optional="hide"/>
+									
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_ss_stock_adjust_view" model="ir.actions.act_window">
+			<field name="name">Stock Adjustment View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">ss.stock.adjustment.form.view</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		<record id="ss_action_stock_adjustment" model="ir.actions.server">
+        <field name="name">Function Call</field>
+        <field name="model_id" ref="model_ss_stock_adjustment_form_view"/> 
+        <field name="state">code</field> 
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record>
+		
+		<menuitem action="ss_action_stock_adjustment" 
+		id="menu_ss_stock" name="Stock Adjustment View"
+			parent="menu_ss_report_forms" sequence="7" />
+	</data>
+</odoo>
+

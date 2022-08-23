@@ -1,0 +1,186 @@
+<odoo>
+	<data>
+		<record id="ss_stock_report_paperformat"
+			model="report.paperformat">
+			<field name="name">Stock Adjustment PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Landscape</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="ss_stock_adjustment_detailed_report"
+			model="super.stock.adjustment.screen.wizard" string="Stock Adjustment PDF Report"
+			report_type="qweb-pdf" name="ss_pos_reports.ss_report_stock_adjustment"
+			file="ss_pos_reports.report_terminal" menu="False" />
+		<template id="ss_report_stock_adjustment">
+			<t t-call="web.html_container">
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center">Stock Adjustment Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								<t t-if="start_date">
+								Date From:
+										<t t-esc="start_date" />
+										</t>
+							     <t t-if="end_date">
+								Date To:
+										<t t-esc="end_date" />
+										</t>
+								<t t-if="company_id">
+								Company :
+										<t t-esc="company_id" />
+										</t>
+								<t t-if="organization_id">
+								Organization :
+								<t t-esc="organization_id"/>
+							</t>
+								<t t-if="ss_department">
+								Department:
+										<t t-esc="ss_department" />
+										</t>
+								<t t-if="ss_product_category">
+								Category:
+										<t t-esc="ss_product_category" />
+										</t>
+							    <t t-if="ss_product_sub_category">
+								Sub Category:
+										<t t-esc="ss_product_sub_category" />
+										</t>
+								<t t-if="ss_product_brand">
+								Brand :
+										<t t-esc="ss_product_brand" />
+										</t>
+								<t t-if="ss_vendors">
+								Vendor :
+										<t t-esc="ss_vendors" />
+										</t>
+										
+							</div>
+							</div> 
+						<br />
+						
+					
+           
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_stock_open_order_wise" />
+								<tr style="border: 1px solid black;"> 
+ 									<th style="border: 1px solid black; text-align:center">Branch</th>
+								    <th style="border: 1px solid black; text-align:center">Description</th> 
+									<th style="border: 1px solid black; text-align:center">Document Number</th>
+									<th style="border: 1px solid black; text-align:center">Start Date</th>
+									<th style="border: 1px solid black; text-align:center">Code</th>
+									<th style="border: 1px solid black; text-align:center">Product Name</th>
+								    <th style="border: 1px solid black; text-align:center">Adjustment Qty</th>
+									<th style="border: 1px solid black; text-align:center">MRP</th>
+									<th style="border: 1px solid black; text-align:center">L Cost</th>
+									<th style="border: 1px solid black; text-align:center">L Cost Total</th>
+									<th style="border: 1px solid black; text-align:center">FGC</th>
+									<th style="border: 1px solid black; text-align:center">FGC Total</th>
+									<th style="border: 1px solid black; text-align:center">Tax Total</th>
+									<th style="border: 1px solid black; text-align:center">Department</th>
+									<th style="border: 1px solid black; text-align:center">Category</th>
+									<th style="border: 1px solid black; text-align:center">Sub Category</th>
+									<th style="border: 1px solid black; text-align:center">Brand</th>
+									<th style="border: 1px solid black; text-align:center">Vendor</th> 
+									<th style="border: 1px solid black; text-align:center">Document Type</th>
+									<th style="border: 1px solid black; text-align:center">Sub Document Type</th>
+									<th style="border: 1px solid black; text-align:center">Inv Sub Type</th>
+							
+								</tr>
+								
+								
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>  
+										 <td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_branch']" />
+										</td>
+										 <td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_description']" />
+										</td>  
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_doc_number']" />
+										</td> 
+										 <td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_date']" />
+										</td>  
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_code']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_pdt_name']" />
+										</td> 
+										
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_adjustment_qty']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_mrp_rate']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_l_cost']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_l_cost_total']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_fgc']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_fgc_total']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_tax_total']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_depart_ment']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_category']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_sub_category']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_brand']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_vendor']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_doc_type']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_sub_doc_type']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_inv_sub_type']" />
+										</td> 
+										 
+									</tr>
+								</t>
+							</tbody> 
+						</table>
+					</div>
+				  </div> 
+			
+			</t>
+		</template>
+		<record id="ss_pos_reports.ss_stock_adjustment_detailed_report"
+			model="ir.actions.report" >
+			
+			<field name="paperformat_id"
+				ref="ss_pos_reports.ss_stock_report_paperformat"/>
+		</record>
+	</data>
+</odoo> 

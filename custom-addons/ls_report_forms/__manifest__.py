@@ -9,7 +9,7 @@
     'description': """
         
 """,
-    'depends': ['base',],
+    'depends': ['base','ls_pos_reports'],
     'data': [   
         'views/ls_report_forms_view.xml',
         'views/dept_wise_sales_view.xml',
@@ -19,7 +19,11 @@
         'views/bill_count_view.xml',
         'views/cancel_bill_view.xml',
         'views/summary_sales_view.xml',
+        'views/cashier_wise_sales_view.xml',
+        'views/stock_adjust_form_view.xml',
+         'views/inter_branch_form_view.xml',
         'security/ir.model.access.csv',
+        'security/security.xml',
      ],
     'installable': True,
     'auto_install': False,

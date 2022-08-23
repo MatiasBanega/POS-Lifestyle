@@ -16,7 +16,7 @@
 							<field name="company_id" options="{'no_create': True, 'no_create_edit':True}" required="1"/>							
 						</group>
 						<footer>
-							<button name="print_billcount_report" string="Show" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button name="print_billcount_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
 							<button string="Cancel" class="oe_link" special="cancel" />
 						</footer>
 					</group>

@@ -16,7 +16,7 @@
 							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}"></field>
 						</group>
 						<footer>
-							<button name="print_sales_report" string="Show" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button name="print_sales_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
 							<button string="Cancel" class="oe_link" special="cancel" />
 						</footer>
 					</group>
@@ -73,11 +73,13 @@
 								<p>
 									Date From :
 									<field name="start_date" /> 
-								</p> 
-								<p>
+								
 									Date To :
 									<field name="end_date" /> 
-								</p> 
+								
+									Company :
+									<field name="company_id" /> 
+								</p>
 							</h4>
 							</h4>
 						</div>

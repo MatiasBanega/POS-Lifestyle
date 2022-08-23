@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ss_pos_product_exchange_report,access.ss.pos.product.exchange.report,model_ss_pos_product_exchange_report,point_of_sale.group_pos_manager,1,1,1,0
+access_ss_pos_product_screen_wzd,access.ss.pos.product.screen.wzd,model_ss_pos_product_screen_wzd,point_of_sale.group_pos_manager,1,1,1,0
+access_ss_pos_exchange_product_screen_line,Access.ss.pos.exchange.product.screen.line,model_ss_pos_exchange_product_screen_line,point_of_sale.group_pos_manager,1,1,1,0
+access_ss_excel_extended_pos_rep,access.ss.excel.extended.pos.rep,model_ss_excel_extended_pos_rep,point_of_sale.group_pos_manager,1,1,1,0

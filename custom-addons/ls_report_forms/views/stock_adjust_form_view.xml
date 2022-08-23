@@ -1,0 +1,114 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="stock_adjust_bill_form" model="ir.ui.view">
+			<field name="name">stock.bill.view.form</field>
+			<field name="model">stock.adjustment.form.view</field>
+			<field name="arch" type="xml">
+				<form string="" edit="false" create="false" delete="false">
+					<sheet>
+						<group>
+							<group>
+							
+					
+                        		
+							
+							
+								<field name="ls_branch" />
+								  <field name="ls_description" />  
+									<field name="ls_doc_number" />
+									<field name="ls_s_date"/>
+									<field name="ls_code"/>
+									<field name="ls_pdt_name"/>
+									<field name="ls_brand"/>
+									<field name="ls_itemtype"/>
+									<field name="ls_pdt_design"/>
+									<field name="ls_pdt_color"/>
+							
+									<field name="ls_pdt_size"/>
+									<field name="ls_adjustment_qty"/>
+									<field name="ls_mrp_rate"/> 
+									<field name="ls_l_cost"/>
+									<field name="ls_l_cost_total"/>
+									<field name="ls_fgc"/>
+									<field name="ls_fgc_total"/>
+									<field name="ls_tax_total"/>  
+									<field name="ls_depart_ment"/>
+									<field name="ls_category"/>
+									<field name="ls_sub_category"/>
+									<field name="ls_vendor"/>
+									<field name="ls_doc_type"/>
+									<field name="ls_sub_doc_type"/>
+									<field name="ls_inv_sub_type"/>
+																
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="stock_adjust_bill_tree">
+			<field name="name">stock.bill.view.tree</field>
+			<field name="model">stock.adjustment.form.view</field>
+			<field name="arch" type="xml">
+				<tree string="Stock Adjustment Form" edit="false" create="false" delete="false">
+							<field name="ls_branch" optional="show"/>
+								  <field name="ls_description" optional="hide" />  
+									<field name="ls_doc_number" optional="show"/>
+									<field name="ls_s_date" optional="show"/>
+									<field name="ls_code" optional="show"/>
+									<field name="ls_pdt_name" optional="show"/>
+									<field name="ls_brand" optional="show"/>
+									<field name="ls_itemtype" optional="show"/>
+									<field name="ls_pdt_design" optional="show"/>
+									<field name="ls_pdt_color" optional="show"/>
+							
+									<field name="ls_pdt_size" optional="show"/>
+									<field name="ls_adjustment_qty" optional="show"/>
+									<field name="ls_mrp_rate" optional="hide"/> 
+									<field name="ls_l_cost" optional="hide"/>
+									<field name="ls_l_cost_total" optional="show"/>
+									<field name="ls_fgc" optional="hide"/>
+									<field name="ls_fgc_total" optional="hide"/>
+									<field name="ls_tax_total" optional="show"/>  
+									<field name="ls_depart_ment" optional="show"/>
+									<field name="ls_category" optional="show"/>
+									<field name="ls_sub_category" optional="show"/>
+									<field name="ls_vendor" optional="show"/>
+									<field name="ls_doc_type" optional="hide"/>
+									<field name="ls_sub_doc_type" optional="hide"/>
+									<field name="ls_inv_sub_type" optional="hide"/>
+									
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_stock_adjust_view" model="ir.actions.act_window">
+			<field name="name">Stock Adjustment View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.adjustment.form.view</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		<record id="action_stock_adjustment" model="ir.actions.server">
+        <field name="name">Function Call</field>
+        <field name="model_id" ref="model_stock_adjustment_form_view"/> 
+        <field name="state">code</field> 
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record>
+		
+		<menuitem action="action_stock_adjustment" 
+		id="menu_stock_adj" name="Stock Adjustment View"
+			parent="menu_ls_report_forms" sequence="8" />
+	</data>
+</odoo>
+

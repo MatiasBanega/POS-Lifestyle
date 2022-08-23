@@ -1,0 +1,181 @@
+<odoo>
+	<data>
+		<record id="report_summary_paperformat"
+			model="report.paperformat">
+			<field name="name">Summary of Sales PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Landscape</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="sales_summary_details_report_ss"
+			model="summary.sales.report.screen.wzd.ss" string="Summary Sales PDF Report"
+			report_type="qweb-pdf" name="ss_pos_reports.report_summary"
+			file="ss_pos_reports.report_summary" menu="False" />
+		<template id="report_summary">
+			<t t-call="web.html_container"> 
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center">Summary of Sales PDF Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								 <div>
+									<t t-if="start_date">
+										DATE From:
+										<t t-esc="start_date" t-options='{"widget": "date","format": "dd MMM Y"}' />
+									</t>
+								</div> 
+								 <div>
+									<t t-if="end_date">
+										Date To :
+										<t t-esc="end_date" t-options='{"widget": "date","format": "dd MMM Y"}' />
+									</t>
+								</div> 
+								 <div>
+									<t t-if="company_id">
+										Company :
+										<t t-esc="company_id"/>
+									</t>
+								</div> 
+								
+							</div>
+						</div>
+						<br />
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_summary_wise" />
+								<tr style="border: 1px solid black;">
+										   <th style="border: 1px solid black; text-align:left"> date</th>
+                                   <th style="border: 1px solid black; text-align:left"> pos</th>
+                                   <th style="border: 1px solid black; text-align:left"> sale_amount</th>
+                                  <th style="border: 1px solid black; text-align:left">  cash</th>
+                                  <th style="border: 1px solid black; text-align:left">  ccard</th>
+                                  <th style="border: 1px solid black; text-align:left">  voucher</th>
+                                  <th style="border: 1px solid black; text-align:left">  sodexo</th>
+                                 <th style="border: 1px solid black; text-align:left">   gift</th>
+                                  <th style="border: 1px solid black; text-align:left">  lrvvoc</th>
+                                  <th style="border: 1px solid black; text-align:left">  phonepe</th>
+                                  <th style="border: 1px solid black; text-align:left">  googlepay</th>
+                                   <th style="border: 1px solid black; text-align:left"> loycoupon</th>
+                                  <th style="border: 1px solid black; text-align:left">  parkingtkn</th>
+                                   <th style="border: 1px solid black; text-align:left"> giftpass</th>
+                                  <th style="border: 1px solid black; text-align:left">  Paytm</th>
+                                  <th style="border: 1px solid black; text-align:left">  othercpn</th>
+                                 <th style="border: 1px solid black; text-align:left">   ticket</th>
+                                   <th style="border: 1px solid black; text-align:left"> txpress</th>
+                                   <th style="border: 1px solid black; text-align:left"> upipayment</th>
+                                   <th style="border: 1px solid black; text-align:left"> razorpay</th>
+                                   <th style="border: 1px solid black; text-align:left"> cashdisc</th>
+                                  <th style="border: 1px solid black; text-align:left">  cr_sal</th>
+                                  <th style="border: 1px solid black; text-align:left">  cr_disc</th>
+                                  <th style="border: 1px solid black; text-align:left">  cashinhand</th>
+                                 <th style="border: 1px solid black; text-align:left">   ex_sh</th>
+                                   <th style="border: 1px solid black; text-align:left"> bills</th>
+ 										</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>
+ 									<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['date']"  t-field-options='{"format": "dd/MM/yyyy"}'/>
+										</td>  
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['pos']" />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['sale_amount']"  t-options='{"widget": "float", "precision": 2}' />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											  
+                                         <t t-esc="doc['cash']"  t-options='{"widget": "float", "precision": 2}' />  
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											  
+                                         <t t-esc="doc['ccard']"  t-options='{"widget": "float", "precision": 2}' />  
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['voucher']"  t-options='{"widget": "float", "precision": 2}' />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['sodexo']"  t-options='{"widget": "float", "precision": 2}' />
+										</td>  
+										<td style="text-align: center;border: 1px solid black;">
+											 <span t-esc="doc['gift']"  t-options='{"widget": "float", "precision": 2}' />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['lrvvoc']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['phonepe']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['googlepay']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['loycoupon']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['parkingtkn']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['giftpass']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['paytm']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['othercpn']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['ticket']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['txpress']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['upipayment']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['razorpay']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td>  
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cashdisc']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cr_sal']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cr_disc']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cashinhand']" />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['ex_sh']" />
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['bills']"  t-options='{"widget": "float", "precision": 2}'  />
+										</td>   								  
+									</tr>
+								</t>
+							</tbody>				
+						</table>
+					</div>
+				</div> 
+			</t>
+		</template>
+		<record id="ss_pos_reports.sales_summary_details_report_ss"
+			model="ir.actions.report">
+			<field name="paperformat_id"
+				ref="ss_pos_reports.report_summary_paperformat" />
+		</record>
+	</data>
+</odoo>

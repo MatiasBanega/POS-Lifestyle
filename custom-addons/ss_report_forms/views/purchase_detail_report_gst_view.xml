@@ -1,0 +1,142 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="ss_purchase_detail_form" model="ir.ui.view">
+			<field name="name">ss.purchase.detail.report.gst.view.form</field>
+			<field name="model">ss.purchase.detail.report.gst.view</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<group>
+								<field name="grn_no"/>
+									<field name="bill_no" />
+									<!-- <field name="bill_date" />  -->
+									<field name="grn_date" />
+									<field name="partner_id" />
+									<field name="ware_house" /> 
+									<!-- <field name="tender_type" /> -->
+									<field name="sub_total" />
+									<field name="tax_amt" />
+									<field name="cess" />
+									<field name="total_val" />
+									<field name="add_ded" />
+									<field name="tcs_amt" />
+									<field name="net_amt" />
+									<field name="freight_charges" />
+									<field name="pcode" />
+									<field name="product_id" />
+									<field name="brand" />
+									<!-- <field name="item_type" />
+									<field name="prod_design" />
+									<field name="prod_color" />
+									<field name="prod_size" /> -->
+									<field name="qty" />
+									<field name="mrp" />
+									<field name="gkm" />
+									<field name="sp_margin_mrp" />
+									<field name="m_down" />
+									<field name="diff_margin" />
+									<field name="diff_amt" />
+									<field name="lcost" />
+									<field name="line_subtot" />
+									<field name="dept" />
+									<field name="categ" />
+									<field name="manuftr" />
+									<field name="tax" />
+									<field name="igst" />
+									<field name="cgst" />
+									<field name="sgst" />
+									<field name="line_taxtot" />
+									<field name="cess_tot" />
+									<field name="created" />
+									<field name="reversal_no" />
+									<field name="reversed_date" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="ss_purchase_detail_tree">
+			<field name="name">ss.purchase.detail.report.gst.view</field>
+			<field name="model">ss.purchase.detail.report.gst.view</field>
+			<field name="arch" type="xml">
+				<tree string="Superstore Purchase Detail Report Form" >
+							   <field name="grn_no"  optional="show"/>
+									<field name="bill_no" optional="show"/>
+									<!-- <field name="bill_date" optional="hide" />  -->
+									<field name="grn_date" optional="show"/>
+									<field name="partner_id" optional="show"/>
+									<field name="ware_house" optional="hide" /> 
+									<!-- <field name="tender_type" /> -->
+									<field name="sub_total" optional="show" />
+									<field name="tax_amt" optional="show" />
+									<field name="cess" optional="hide"/>
+									<field name="total_val" optional="hide" />
+									<field name="add_ded" optional="hide"/>
+									<field name="tcs_amt" optional="hide" />
+									<field name="net_amt" optional="hide"/>
+									<field name="freight_charges" optional="hide" />
+									<field name="pcode" optional="hide"/>
+									<field name="product_id" optional="hide"/>
+									<field name="brand" optional="hide"/>
+									<!-- <field name="item_type" optional="hide"/>
+									<field name="prod_design" optional="hide"/>
+									<field name="prod_color" optional="hide"/>
+									<field name="prod_size" optional="hide"/> -->
+									<field name="qty" optional="hide"/>
+									<field name="mrp" optional="hide"/>
+									<field name="gkm" optional="hide"/>
+									<field name="sp_margin_mrp" optional="hide"/>
+									<field name="m_down"  optional="hide"/>
+									<field name="diff_margin" optional="hide" />
+									<field name="diff_amt" optional="hide"/>
+									<field name="lcost" optional="hide"/>
+									<field name="line_subtot" optional="hide"/>
+									<field name="dept" optional="hide"/>
+									<field name="categ" optional="hide"/>
+									<field name="manuftr" optional="hide"/>
+									<field name="tax" optional="hide"/>
+									<field name="igst" optional="hide"/>
+									<field name="cgst" optional="hide"/>
+									<field name="sgst" optional="hide"/>
+									<field name="line_taxtot" optional="hide"/>
+									<field name="cess_tot" optional="hide"/>
+									<field name="created" optional="hide"/>
+									<field name="reversal_no" optional="hide"/>
+									<field name="reversed_date" optional="hide"/>
+									
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_ss_purchase_detail_form_view" model="ir.actions.act_window">
+			<field name="name">Form View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">ss.purchase.detail.report.gst.view</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" />
+			<!-- <field name="view_id" eval="False" /> -->
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		<!-- <record id="action_ss_purchase_detail_report_gst" model="ir.actions.server">
+        <field name="name">Function Call</field>
+        <field name="model_id" ref="model_ss_purchase_detail_report_gst_view"/> 
+        <field name="state">code</field> 
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record> -->
+		
+		<menuitem action="action_ss_purchase_detail_form_view" 
+		id="menu_ss_purchase_detail_report_gst" name="Purchase Detail Report GST View"
+			parent="menu_ss_report_forms" sequence="3" />
+	</data>
+</odoo>
+

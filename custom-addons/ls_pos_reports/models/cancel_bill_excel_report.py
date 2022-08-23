@@ -174,7 +174,7 @@ class bill_screen_wizd_excel(models.Model):
     _name = "item.wise.cancel.screen.wzd"
     _description = "Cancelled Bill Summary Reports"
      
-    name = fields.Char(string="Name", default="Cancelled Bill  Report")
+    name = fields.Char(string="Name", default="Cancelled Bill Report Itemwise")
     cancel_order_line = fields.One2many('bill.cancel.line','cancel_id',string='Open Order Line')
     start_date = fields.Date('Date From')
     end_date = fields.Date(string="Date To") 
@@ -182,7 +182,7 @@ class bill_screen_wizd_excel(models.Model):
  
      
     def print_cancel_bill_excel_report(self):
-        filename= 'Itemwise Cancelled Bill Report.xls'
+        filename= 'Cancelled Bill Report Itemwise .xls'
         workbook= xlwt.Workbook(encoding="UTF-8")
         
         style_header = xlwt.easyxf('pattern: pattern solid, fore_colour light_orange;'
@@ -281,8 +281,8 @@ cancelled_bill_screen_line()
 class excel_extended_itemwise_cancel_bill_rpt(models.Model):
     _name= "excel.extended.itemwise.cancel.rpt"
     
-    name = fields.Char(default="Itemwise Cancelled Report")
-    excel_file = fields.Binary('Download report Excel')
+    name = fields.Char(default="Download Excel Report")
+    excel_file = fields.Binary('Download Report Excel')
     file_name = fields.Char('Excel File', size=64) 
     
     

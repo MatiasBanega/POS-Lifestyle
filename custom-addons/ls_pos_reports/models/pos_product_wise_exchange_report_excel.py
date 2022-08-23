@@ -47,26 +47,6 @@ class pos_product_wise_sales_details_wzd(models.Model):
             )
     
     
-#     @api.onchange('company_id')
-#     def onchange_cashier(self):
-#         print('onchange')
-#         if self.company_id:
-#             domain = {'cashier_id': [('org_id', '=',self.company_id.organization_id.org_id)]}
-#         else:
-#             domain = {'cashier_id': []}
-#         if domain:
-#             res = {}
-#             res['domain'] = domain        
-#         return res
-#     
-    
-    
-    
-    
-    
-    
-    
-        
     def print_pos_report(self):
 
         def get_poslines(self):
@@ -89,8 +69,8 @@ class pos_product_wise_sales_details_wzd(models.Model):
                 if cashier_id:
                     sql='''
                                  select i.documentno as str_ExchangeBill,
-                (select documentno from c_invoice where 
-                c_invoice_id=(select c_invoice_id from c_invoice where c_order_id=o.ref_order_id)) as str_Originalbill,
+                (select string_agg(documentno::character varying,',') from c_invoice where 
+                            c_invoice_id in (select c_invoice_id from c_invoice where c_order_id=o.ref_order_id)) as str_Originalbill,
                  i.dateinvoiced as dt_InvoiceDate,
                  p.value as str_productcode,
                 p.name as  str_productname,
@@ -129,8 +109,8 @@ class pos_product_wise_sales_details_wzd(models.Model):
                 else:
                     sqls='''
                                  select i.documentno as str_ExchangeBill,
-                (select documentno from c_invoice where 
-                c_invoice_id=(select c_invoice_id from c_invoice where c_order_id=o.ref_order_id)) as str_Originalbill,
+                (select string_agg(documentno::character varying,',') from c_invoice where 
+                            c_invoice_id in (select c_invoice_id from c_invoice where c_order_id=o.ref_order_id)) as str_Originalbill,
                  i.dateinvoiced as dt_InvoiceDate,
                  p.value as str_productcode,
                 p.name as  str_productname,

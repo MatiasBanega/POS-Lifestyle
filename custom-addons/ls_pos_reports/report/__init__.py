@@ -12,4 +12,10 @@ from . import total_sales_pdf_report
 from . import total_sales_report
 from . import summary_report
 from . import sales_summary_pdf_report
+from . import cashier_sales_pdf_report
+from . import cashier_sales_report_wise
+from . import inter_branch_report
+from . import inter_branch_transfer_pdf_report
+from . import stock_adjustment_pdf_report
+from . import stock_adjustment_report
 

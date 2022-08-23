@@ -17,6 +17,7 @@ class SalesOpenOrdersDetailsReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         start_date = data['form']['start_date'] 
         end_date = data['form']['end_date']
+        company_id = data['form']['company_id']
         
         sql='''
           select to_char(date,'dd/mm/yyyy') as date,pos,cashier,sale_amount,cash,

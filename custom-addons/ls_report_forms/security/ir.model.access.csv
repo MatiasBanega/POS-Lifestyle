@@ -7,3 +7,6 @@ access_total_sales_view,access.total.sales.view,model_total_sales_view,ls_pos_re
 access_summary_sales_view,access.summary.sales.view,model_summary_sales_view,ls_pos_reports.group_access_sale_reports,1,1,1,1
 access_bill_count_view,Access.bill.count.view,model_bill_count_view,ls_pos_reports.group_access_pos_reports,1,1,1,1
 access_cancel_bill_view,Access.cancel.bill.view,model_cancel_bill_view,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_stock_adjustment_form_view,Access.stock.adjustment.form.view,model_stock_adjustment_form_view,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_cashier_wise_sales_view,access.cashier.wise.sales.view,model_cashier_wise_sales_view,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_inter_branch_report_form_view,Access.inter.branch.report.form.view,model_inter_branch_report_form_view,ls_pos_reports.group_access_inventory_reports,1,1,1,1

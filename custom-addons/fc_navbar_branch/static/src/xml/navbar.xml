@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t t-inherit ="web.NavBar" t-inherit-mode="extension">
+  <t t-name="web.NavBar" owl="1">
+    <header>
+      <nav
+        class="o_main_navbar"
+        t-on-dropdown-item-selected="onNavBarDropdownItemSelection"
+        data-command-category="navbar"
+      >
+        <!-- Apps Menu -->
+        <t t-call="web.NavBar.AppsMenu">
+          <t t-set="apps" t-value="menuService.getApps()" />
+        </t>
+
+        <!-- App Brand -->
+        <MenuItem
+          t-if="currentApp"
+          href="getMenuItemHref(currentApp)"
+          payload="currentApp"
+          t-esc="currentApp.name"
+          class="o_menu_brand"
+          t-ref="menuBrand"
+        />
+
+        <!-- Current App Sections -->
+        <t t-if="currentAppSections.length" t-call="web.NavBar.SectionsMenu">
+          <t t-set="sections" t-value="currentAppSections" />
+        </t>
+
+        <!-- Systray -->
+        <div class="o_menu_systray" role="menu">
+       			<t t-set="availableCompanies" t-value="env.services.company.availableCompanies"/> 
+       		    <t t-if='Object.keys(availableCompanies).length != 2'> 
+		           <div class="header-button close_button">
+		           <t t-esc="env.services.company.currentCompany.name"></t> 
+		           </div>
+	            </t> 
+	      	   <t t-foreach="systrayItems" t-as="item" t-key="item_index">
+		           <NotUpdatable>
+			               <ErrorHandler onError="error => handleItemError(error, item)">
+			                  	 <t t-component="item.Component" t-props="item.props" />
+			               </ErrorHandler>
+		           </NotUpdatable>
+	         </t>
+        </div>
+      </nav>
+    </header>
+  </t>
+  </t>
+</templates>

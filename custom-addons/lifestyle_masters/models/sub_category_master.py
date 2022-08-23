@@ -31,6 +31,7 @@ class SubCategory(models.Model):
             res = {}
             dict={}
             lis=[]
+            list=[]
             start_date = self.start_date
             end_date = self.end_date
             company=self.company.name
@@ -38,27 +39,31 @@ class SubCategory(models.Model):
             try:
                 db_conn = self.env['db.connection'].search([])
 #                 db_conn = self.env['db.connection'].search([('company_id','=',self.company.id)], limit=1)
-                print('db_conn',db_conn.company_id,self.company)         
-                db_connect=db_conn.database_connect()
-                print('function',db_connect)
-                cursor = db_connect.cursor() 
+                #print('db_conn',db_conn.company_id,self.company)
+                for rec in db_conn:          
+                    db_connect=rec.database_connect()
+                    print('function',db_connect)
+                    list.append(db_connect)
+                    cursor = db_connect.cursor() 
             
-                sqls='''
+                    sqls='''
      
-                  delete  from sub_category_master
-                   '''
-                     
-                                  
-    #             if start_date and end_date:
-    #                 sql += "where pos.date_order between '%s' and '%s'" % (start_date, end_date)
-    #             if product_id:
-    #                 sql +=" and pt.name ='%s'"%(product_id)                  
-                self.env.cr.execute(sqls)
-                print('sqls',sqls)
-                
-                sql='''
-     
-                  select name from um_product_subcategory
+                       delete  from sub_category_master
+                       '''
+                         
+                                      
+        #             if start_date and end_date:
+        #                 sql += "where pos.date_order between '%s' and '%s'" % (start_date, end_date)
+        #             if product_id:
+        #                 sql +=" and pt.name ='%s'"%(product_id)                  
+                    self.env.cr.execute(sqls)
+                    print('sqls',sqls)
+                    
+                    sql='''
+         
+                      select name,ad_org_id as org_id, um_product_department_id as department_id ,
+                      m_product_category_id as category_id 
+                      from um_product_subcategory
 
                    '''
                      
@@ -67,16 +72,17 @@ class SubCategory(models.Model):
     #                 sql += "where pos.date_order between '%s' and '%s'" % (start_date, end_date)
     #             if product_id:
     #                 sql +=" and pt.name ='%s'"%(product_id)                  
-                cursor.execute(sql)
-                print(sql)
-                sale_data = cursor.fetchall()
-                print('sale_data',sale_data)
-                for row in sale_data:                
-                    dict = {'name':row[0],}
-                    print('dictionary',dict)
-                    lis.append(dict)
-                print('list',lis)
+                    cursor.execute(sql)
+                    print(sql)
+                    sale_data = cursor.fetchall()
+                    print('sale_data',sale_data)
+                    for row in sale_data:                
+                        dict = {'name':row[0],'org_id':row[1],'department_id':row[2],'category_id':row[3],}
+                        print('dictionary',dict)
+                        lis.append(dict)
+                    print('list',lis)
                 return lis
+                return list
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
                 print("Error while fetching data from PostgreSQL", error)
@@ -101,6 +107,9 @@ class SubCategory(models.Model):
                          
             sub_category_line.append((0,0,{
                                 'name' : line['name'],
+                                'org_id' : line['org_id'],
+                                'dpartment_id' : line['department_id'],
+                                'cate_gory_id' : line['category_id'],
 #                                 'Date Invoiced' : line['Date Invoiced'],
 #                                 'Process Instance' : line['Process Instance'],
 #                                 'Sales Attribute' : line['Sales Attribute'], 
@@ -161,8 +170,9 @@ class subCategoryMaster(models.Model):
     
     attribute_id = fields.Many2one('sub.category.wzd',string='attribute_id',ondelete='cascade')
     name = fields.Char(string="Sub Category")
-    
-     
+    org_id=fields.Char(string="Organization")
+    dpartment_id=fields.Char(string="Department Id")
+    cate_gory_id=fields.Char(string="Category Id")
            
 subCategoryMaster()
     

@@ -61,6 +61,7 @@
 								<tree create="false" edit="false" delete="false">
 								<field name="name"></field>
 								<field name="org_id"></field>
+								<field name="depart_ment_id"></field>
         						
 								</tree> 
 							 </field> 

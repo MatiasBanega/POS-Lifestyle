@@ -60,7 +60,7 @@ class Department(models.Model):
                     
                     sql='''
          
-                      select name,ad_org_id as org_id from um_product_department
+                      select name,ad_org_id as org_id,um_product_department_id as dep_id from um_product_department
     
                        '''
                          
@@ -74,11 +74,11 @@ class Department(models.Model):
                     sale_data = cursor.fetchall()
                     print('sale_data',sale_data)
                     for row in sale_data:                
-                        dict = {'name':row[0],'org_id':row[1],}
+                        dict = {'name':row[0],'org_id':row[1],'dep_id':row[2],}
                         print('dictionary',dict)
                         lis.append(dict)
                     print('list',lis)
-                    return lis
+                return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
                 print("Error while fetching data from PostgreSQL", error)
@@ -104,6 +104,7 @@ class Department(models.Model):
             department_line.append((0,0,{
                                 'name' : line['name'],
                                 'org_id' : line['org_id'],
+                                'depart_ment_id' : line['dep_id']
 #                                 'Date Invoiced' : line['Date Invoiced'],
 #                                 'Process Instance' : line['Process Instance'],
 #                                 'Sales Attribute' : line['Sales Attribute'], 
@@ -165,6 +166,7 @@ class DepartmentMaster(models.Model):
     attribute_id = fields.Many2one('department.wzd',string='attribute_id',ondelete='cascade')
     name = fields.Char(string="Department")
     org_id=fields.Char(string="Organization")
+    depart_ment_id=fields.Char(string='Department Id')
     
      
            

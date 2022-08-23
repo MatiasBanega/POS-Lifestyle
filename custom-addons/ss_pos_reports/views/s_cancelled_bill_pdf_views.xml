@@ -1,0 +1,97 @@
+<odoo>
+	<data>
+		<record id="report_super_cancel_paperformat"
+			model="report.paperformat">
+			<field name="name">Cancelled Bill Itemwise PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="super_itemwise_detailed_cancel_report"
+			model="ss.item.wise.cancel.screen.wzd" string="Cancelled Bill Itemwise PDF Report"
+			report_type="qweb-pdf" name="ss_pos_reports.super_report_cancelled"
+			file="superstore_reports.report_terminal" menu="False" />
+		<template id="super_report_cancelled">
+			<t t-call="web.html_container">
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center">Cancelled Bill Report Itemwise</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								<t t-if="start_date">
+								Date From :
+										<t t-esc="start_date" />
+										</t>
+							     <t t-if="end_date">
+								Date To :
+										<t t-esc="end_date" />
+										</t>
+								<t t-if="company_id">
+								Company :
+										<t t-esc="company_id" />
+										</t>
+										
+							</div>
+							</div> 
+						<br />
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_sales_open_order_wise" />
+								<tr style="border: 1px solid black;"> 
+ 									<th style="border: 1px solid black; text-align:center">Bill Date</th>
+									<th style="border: 1px solid black; text-align:center">Bill Number</th>
+									<th style="border: 1px solid black; text-align:center">User Name</th>
+									<th style="border: 1px solid black; text-align:center">Product Code</th>
+									<th style="border: 1px solid black; text-align:center">Product Name</th>
+									<th style="border: 1px solid black; text-align:center">Total Amount</th>
+							
+								
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>  
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_bill_date']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_bill_number']" />
+										</td>
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_uname']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_pcode']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_pname']" />
+										</td> 
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['ss_total_amt']" />
+										</td> 
+										
+									</tr>
+								</t>
+							</tbody> 
+						</table>
+					</div>
+				 </div> 
+			
+			</t>
+		</template>
+		<record id="ss_pos_reports.super_itemwise_detailed_cancel_report"
+			model="ir.actions.report" >
+			
+			<field name="paperformat_id"
+				ref="ss_pos_reports.report_super_cancel_paperformat" />
+		</record>
+	</data>
+</odoo>

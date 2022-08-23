@@ -13,7 +13,7 @@
     <menuitem 
     action="report_action"
             id="menu_ls_main_report"
-            name="Reports"
+            name="Lifestyle Reports"
             sequence="50"
             groups="base.group_user"
            />

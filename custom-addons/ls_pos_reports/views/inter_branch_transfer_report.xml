@@ -1,0 +1,126 @@
+<odoo>
+	<data>
+		<record id="view_item_branch_transfer_wzd_report" model="ir.ui.view">
+			<field name="name">inter.branch.transfer.report</field>
+			<field name="model">inter.branch.transfer.report</field>
+			<field name="arch" type="xml">
+				<form string="Inter Branch Transfer Report">
+					<group>
+						<group>
+							<field name="start_date" string=" Movement Date From" required="1"/>					
+						</group>
+						   <group>
+							<field name="end_date" string="Date To" required="1" />							
+						</group>
+						<group>
+							<field name="company" string="Company" required="1" options="{'no_create': True, 'no_create_edit':True}" />							
+						</group>  
+						<footer>
+							<button name="print_inter_branch_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_item_transfer_report"
+			model="ir.actions.act_window">
+			<field name="name">Inter Branch Transfer Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">inter.branch.transfer.report</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record> 
+		<record id="view_item_excel_form_extended" model="ir.ui.view">
+			<field name="name">excel.extended.sale.form</field>
+			<field name="model">inter.branch.transfer.rep.excel</field>
+			<field name="arch" type="xml">
+				<form string="Department Excel Report" create="false" edit="false">
+					<group>
+						<field name="name"/>
+						<field name="excel_file" readonly="1" filename="file_name" />
+						<field name="file_name" invisible="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="item_transfer_action_excel_form" model="ir.actions.act_window">
+			<field name="name">Report Excel</field>
+			<field name="view_id" ref="view_item_excel_form_extended" />
+			<field name="view_mode">form</field>
+			<field name="res_model">inter.branch.transfer.rep.excel</field>
+			<field name="target">new</field>
+		</record>
+		<record id="view_item_transfer_screen_report" model="ir.ui.view">
+			<field name="name">Inter Branch Transfer Report</field>
+			<field name="model">inter.branch.transfer.screen.wzd</field>
+			<field name="arch" type="xml">
+				<form string="Sales Excel Report" version="7.0"
+					create="false" edit="false">
+					<header>
+						<button name="print_inter_branch_ternsfer_excel_report" type="object"
+							string="Print Excel" />
+						<button name="print_inter_branch_transfer_pdf_report" type="object"
+							string="Print PDF" />
+					</header>
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Inter Branch Transfer Report</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<h4>
+								<p>
+									Date From :
+									<field name="start_date" /> 
+									Date to :
+									<field name="end_date" /> 
+									Company :
+									<field name="company" />								</p> 
+							</h4>
+							</h4>
+						</div>
+						 <group>
+							<field name="inter_branch_order_line" nolabel="1">
+							<field name="name"/>
+								<tree create="false" edit="false" delete="false">
+								 <field name="branch" style="width:30%%" />
+								 <field name="inter_branch" style="width:30%%" />
+								 <field name="description" style="width:30%%" />
+								 <field name="doc_no" style="width:30%%" />
+								 <field name="movement_date" style="width:30%%" />
+								 <field name="code" style="width:30%%" />
+								 <field name="product_name" style="width:30%%" />
+								 <field name="brand" style="width:30%%" />
+								 <field name="product_design" style="width:30%%" />
+								 <field name="item_type" style="width:30%%" />
+								 <field name="product_color" style="width:30%%" />
+								 <field name="product_size" style="width:30%%" />
+								 <field name="transfer_qty" style="width:30%%" />
+								 <field name="mrp" style="width:30%%" />
+								 <field name="basic_cost" style="width:30%%" />
+								 <field name="basic_cost_total" style="width:30%%" />
+								 <field name="tax" style="width:30%%" />
+								 <field name="l_cost" style="width:30%%" />
+								 <field name="l_cost_total" style="width:30%%" />
+								 <field name="department" style="width:30%%" />
+								 <field name="category" style="width:30%%" />
+								 <field name="sub_category" style="width:30%%" />
+ 								 <field name="vendor" style="width:30%%" />
+								 <field name="doc_type" style="width:30%%" />
+									
+									 
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<menuitem action="action_item_transfer_report"
+			id="menu_action_item_transfer_report" 
+			parent="ls_pos_reports.menu_ls_inventory_report"
+			sequence="3" 
+			name="Inter Branch Transfer Report" />
+	</data>
+</odoo>

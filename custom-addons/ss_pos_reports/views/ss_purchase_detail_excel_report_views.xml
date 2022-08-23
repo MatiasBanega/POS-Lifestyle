@@ -1,0 +1,67 @@
+<odoo>
+	<data>
+		<record id="view_ss_purchase_detail_wzd_report" model="ir.ui.view">
+			<field name="name">ss.purchase.detail.report</field>
+			<field name="model">ss.purchase.detail.report</field>
+			<field name="arch" type="xml">
+				<form string="SuperStore Purchase Detail Report">
+					<group>
+						<group>
+						<header>
+							<button name="print_ss_purchase_detail_report" string="Print" type="object" class="oe_highlight" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</header>
+							<field name="start_date" required="1"/> 
+							<field name="end_date" required="1"/>
+							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}" />
+							<field name="organization_id" options="{'no_create': True, 'no_create_edit':True}"/>
+							<field name="partner_id" options="{'no_create': True, 'no_create_edit':True}" domain="company_id_domain"/>
+							<field name="company_id_domain" invisible="1"/>					
+						
+							<!-- <field name="product_category" /> -->
+														
+						</group>
+						<!-- <group>
+						</group> -->
+						
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_ss_purchae_detail_report"
+			model="ir.actions.act_window">
+			<field name="name"> Purchase Detail Report Forms</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">ss.purchase.detail.report</field>
+			<field name="view_mode">form</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+			
+		</record>
+		
+		
+		
+		
+		
+		
+		<!-- <record id="action_ven_func_call" model="ir.actions.server">
+        <field name="name">Function Calll</field>
+        <field name="model_id" ref="model_purchase_detail_report"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.vendor_master_call()
+        </field>
+    </record> -->
+		
+		<menuitem action="action_ss_purchae_detail_report"
+			id="menu_action_ss_purchae_detail_report" 
+			parent="menu_ss_purchase_report"
+			sequence="3" 
+			name="Purchase Detail Report with GST" />
+	</data>
+</odoo>

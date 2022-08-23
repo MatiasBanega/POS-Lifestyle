@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO See if this has to be editable in some way, see if it is easy for someone to change this -->
+<!-- TODO Also see what is done to override the (Community Edition) -->
+<template>
+    <div t-name='res_config_edition'>
+        <div class="col-12 o_setting_box" inherit_id="edition" position="replace">
+            <div class="o_setting_right_pane">
+                <div class="user-heading">
+                    <h3>
+                        Jaldi 2.0
+                        (Community Edition)
+                    </h3>
+                </div>
+               
+                </div>
+            </div>
+        </div>
+   
+</template>

@@ -1,0 +1,78 @@
+<odoo>
+  <record id="ss_report_action" model="ir.actions.act_window">
+    <field name="name">SuperStore Report</field>
+    <field name="res_model">superstore.reports</field>
+    <field name="view_mode">form,tree</field> 
+    <field name="target">inline</field>
+    <!-- <field name="view_id" ref="report_tree"/> -->
+    </record>
+    
+    <menuitem 
+    action="ss_report_action"
+            id="menu_ss_main_report"
+            name="SuperStore Reports"
+            sequence="50"
+            groups="base.group_user"
+           />
+           
+     <menuitem
+            id="menu_ss_sale_report"
+            name="Sales"
+            parent="menu_ss_main_report"
+            sequence = "1"
+            action="ss_report_action" />  
+            
+            <menuitem
+            id="menu_ss_purchase_report"
+            name="Purchase"
+            parent="menu_ss_main_report"
+            sequence = "2"
+            action="ss_report_action"/>
+            
+            <menuitem
+            id="menu_ss_inventory_report"
+            name="Inventory"
+            parent="menu_ss_main_report"
+            sequence = "3"
+            action="ss_report_action"/>
+           
+           <menuitem
+           
+            id="menu_ss_pos_report"
+            name="POS"
+            parent="menu_ss_main_report"
+            sequence = "4"
+            action="ss_report_action"/>
+            
+            <menuitem
+            id="menu_ss_root_configuration"
+            name="Configuration"
+            parent="menu_ss_main_report"
+            sequence = "5"
+            action="ss_report_action"/>
+            
+          <record id="ss_report_form" model="ir.ui.view">
+   <field name="name">ss.report.details.form</field>
+   <field name="model">superstore.reports</field>
+   <field name ="arch" type="xml">
+       <form>
+          
+             <group>
+            <!--  <field name="name"/> -->
+             
+             </group>
+            
+             </form>
+       </field>
+    </record>
+    
+    <record id="ss_report_tree" model="ir.ui.view">
+   <field name="name">ss.report.details.tree</field>
+   <field name="model">superstore.reports</field>
+   <field name ="arch" type="xml">
+          <tree>
+            <!--  <field name="name"/> -->
+           </tree>
+       </field>
+    </record>    
+</odoo>

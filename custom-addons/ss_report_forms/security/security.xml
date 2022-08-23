@@ -1,0 +1,17 @@
+ <odoo>
+ <record id="ss_pos_reports.menu_ss_sale_report" model="ir.ui.menu" >
+     		<field name="groups_id" eval="[(6, 0, [ref('ss_pos_reports.ss_group_access_sale_reports')])]"/>
+	   </record>
+	   <record id="ss_pos_reports.menu_ss_purchase_report" model="ir.ui.menu" >
+		     <field name="groups_id" eval="[(6, 0, [ref('ss_pos_reports.ss_group_access_purchase_reports')])]"/>
+	   </record>
+	   <record id="ss_pos_reports.menu_ss_inventory_report" model="ir.ui.menu" >
+		     <field name="groups_id" eval="[(6, 0, [ref('ss_pos_reports.ss_group_access_inventory_reports')])]"/>
+		</record>
+		<record id="ss_pos_reports.menu_ss_pos_report" model="ir.ui.menu" >
+		     <field name="groups_id" eval="[(6, 0, [ref('ss_pos_reports.ss_group_access_pos_reports')])]"/>
+		</record>
+		<record id="ss_pos_reports.menu_ss_root_configuration" model="ir.ui.menu" >
+		     <field name="groups_id" eval="[(6, 0, [ref('ss_pos_reports.ss_group_access_configure_menu')])]"/>
+		</record>
+		</odoo>

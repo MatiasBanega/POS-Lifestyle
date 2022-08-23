@@ -1,0 +1,103 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="inter_branch_form" model="ir.ui.view">
+			<field name="name">inter.branch.report.form.view</field>
+			<field name="model">inter.branch.report.form.view</field>
+			<field name="arch" type="xml">
+				<form string="" edit="false" create="false" delete="false">
+					<sheet>
+						<group>
+							<group>
+								 <field name="branch" />
+								 <field name="inter_branch" />
+								 <field name="description" />
+								 <field name="doc_no" />
+								 <field name="movement_date" />
+								 <field name="code" />
+								 <field name="product_name" />
+								 <field name="brand" />
+								 <field name="product_design" />
+								 <field name="item_type" />
+								 <field name="product_color" />
+								 <field name="product_size" />
+								 <field name="transfer_qty" />
+								 <field name="mrp" />
+								 <field name="basic_cost" />
+								 <field name="basic_cost_total" />
+								 <field name="tax" />
+								 <field name="l_cost" />
+								 <field name="l_cost_total" />
+								 <field name="department" />
+								 <field name="category" />
+								 <field name="sub_category" />
+ 								 <field name="vendor" />
+								 <field name="doc_type" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="inter_branch_tree">
+			<field name="name">inter.branch.report.form.view</field>
+			<field name="model">inter.branch.report.form.view</field>
+			<field name="arch" type="xml">
+				<tree string="Inter Branch Transfer Form" edit="false" create="false" delete="false">
+							     <field name="branch" />
+								 <field name="inter_branch" />
+								 <field name="description" />
+								 <field name="doc_no" />
+								 <field name="movement_date" />
+								 <field name="code" />
+								 <field name="product_name" />
+								 <field name="brand" />
+								 <field name="product_design" />
+								 <field name="item_type" />
+								 <field name="product_color" />
+								 <field name="product_size" />
+								 <field name="transfer_qty" />
+								 <field name="mrp" />
+								 <field name="basic_cost" />
+								 <field name="basic_cost_total" />
+								 <field name="tax" />
+								 <field name="l_cost" />
+								 <field name="l_cost_total" />
+								 <field name="department" />
+								 <field name="category" />
+								 <field name="sub_category" />
+ 								 <field name="vendor" />
+								 <field name="doc_type" />
+									
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_inter_branch_form_view" model="ir.actions.act_window">
+			<field name="name">Form View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">inter.branch.report.form.view</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		<record id="action_inter_branch_view" model="ir.actions.server">
+        <field name="name">Function Call</field>
+        <field name="model_id" ref="model_inter_branch_report_form_view"/> 
+        <field name="state">code</field> 
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record>
+		
+		<menuitem action="action_inter_branch_view" 
+		id="menu_inter_branch_form_view" name="Inter Branch Transfer View"
+			parent="menu_ls_report_forms" sequence="10" />
+	</data>
+</odoo>

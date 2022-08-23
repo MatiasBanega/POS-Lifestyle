@@ -1,0 +1,108 @@
+<odoo>
+	<data>
+		<record id="ss_report_billcount_paperformat"
+			model="report.paperformat">
+			<field name="name">Bill No Count Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">10</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="sstore_bill_count_details_report"
+			model="billno.count.report.wzd" string="Bill No Count PDF Report"
+			report_type="qweb-pdf" name="ss_pos_reports.ss_billcount"
+			file="ss_pos_reports.ss_billcount" menu="False" />
+		<template id="ss_billcount">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.external_layout"> -->
+				<div class="page2" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard2">
+						<b>
+							<h2 align="center"><span style="font-size: 35px">Bill No Count Report</span></h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								 <div>
+									<t t-if="start_date">
+										Date From :
+										<t t-esc="start_date" t-options='{"widget": "date","format": "dd-MM-YYYY"}'/>
+									</t>
+								
+									<t t-if="end_date">
+										Date To :
+										<t t-esc="end_date" t-options='{"widget": "date","format": "dd-MM-YYYY"}'/>
+									</t>
+								</div>
+								<div><t t-if="company_id">
+										Company :
+										<t t-esc="company_id" />
+									</t>
+								</div>
+							</div>
+						</div>
+						<br></br>
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="sstore_bill_report" />
+								<tr style="border: 1px solid black;">
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">Terminal</span></th>
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">Start No</span></th>
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">End No</span></th>
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">Total Bill Count </span></th>
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">Online Count</span></th>
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">Offline Count</span></th>
+									<th style="border: 1px solid black; text-align:center"><span style="font-size: 20px">Cancel Count</span></th>								
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								 <tr>
+									 <td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['terminal']" />
+										</td>
+										<td style="text-align: right;border: 1px solid black;">
+											<span t-esc="doc['startno']" />
+										</td>
+								
+										<td style="text-align: right;border: 1px solid black;">
+											<span t-esc="doc['endno']" />
+										</td>
+										 <td style="text-align: right;border: 1px solid black;">
+											<span t-esc="'%.2f'%(doc['totalbillcount'])" />
+										</td>
+										<td style="text-align: right;border: 1px solid black;">
+											<span t-esc="'%.2f'%(doc['onlinecnt'])" />
+										</td>
+								
+										<td style="text-align: right;border: 1px solid black;">
+											<span t-esc="'%.2f'%(doc['oflinecnt'])" />
+										</td>
+										 <td style="text-align: right;border: 1px solid black;">
+											<span t-esc="'%.2f'%(doc['cancelcount'])" />
+										</td>
+										
+										
+									</tr> 
+								</t>
+							</tbody>				
+						</table>
+					</div>
+				</div>
+				<!-- <div class="footer"> <div class="text-center" style="border-top: 
+					1px solid black;"> <ul class="list-inline"> <li>This is a computer generated 
+					statement on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d 
+					%H:%M')"/>. No signature needed.</li> </ul> </div> </div> -->
+			</t>
+		</template>
+		<record id="ss_pos_reports.sstore_bill_count_details_report"
+			model="ir.actions.report">
+			<field name="paperformat_id"
+				ref="ss_pos_reports.ss_report_billcount_paperformat" />
+		</record>
+	</data>
+</odoo>

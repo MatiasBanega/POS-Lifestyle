@@ -43,3 +43,18 @@ access_view1,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_pos_r
 access_view2,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_sale_reports,1,0,0,0
 access_view3,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_purchase_reports,1,0,0,0
 access_view4,Access view,base.model_ir_ui_view,ls_pos_reports.group_access_inventory_reports,1,0,0,0
+,,,,,,,
+access_cashier_sales_report,access.cashier.sales.report,model_cashier_sales_report,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_cashier_sales_report_screen_wzd,access.cashier.sales.report.screen.wzd,model_cashier_sales_report_screen_wzd,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_cashier_sales_report_screen_line,access.cashier.sales.report.screen.line,model_cashier_sales_report_screen_line,ls_pos_reports.group_access_pos_reports,1,1,1,1
+access_excel_extended_cashier_sales_rep,access.excel.extended.cashier.sales.rep,model_excel_extended_cashier_sales_rep,ls_pos_reports.group_access_pos_reports,1,1,1,1
+,,,,,,,
+access_stock_adjustment_report,access.stock.adjustment.report,model_stock_adjustment_report,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_stock_adjustment_screen_wizard,access.stock.adjustment.screen.wizard,model_stock_adjustment_screen_wizard,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_stock_adjustment_line,access.stock.adjustment.line,model_stock_adjustment_line,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_excel_extended_stock_adjust_report,access.excel.extended.stock.adjust.report,model_excel_extended_stock_adjust_report,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+,,,,,,,
+access_inter_branch_transfer_report,access.inter.branch.transfer.report,model_inter_branch_transfer_report,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_inter_branch_transfer_screen_wzd,access.inter.branch.transfer.screen.wzd,model_inter_branch_transfer_screen_wzd,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_inter_branch_transfer_screen_line,Access.inter.branch.transfer.screen.line,model_inter_branch_transfer_screen_line,ls_pos_reports.group_access_inventory_reports,1,1,1,1
+access_inter_branch_transfer_rep_excel,access.inter.branch.transfer.rep.excel,model_inter_branch_transfer_rep_excel,ls_pos_reports.group_access_inventory_reports,1,1,1,1

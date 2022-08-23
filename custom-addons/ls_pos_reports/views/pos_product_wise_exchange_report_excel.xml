@@ -18,7 +18,7 @@
 							<field name="is_unusedbill" />					
 						</group>
 						<group>
-							<field name="cashier_id" required="0" options="{'no_create': True, 'no_create_edit':True}" domain="company_id_domain"/>					
+							<field name="cashier_id" required="0" domain="company_id_domain" options="{'no_create': True, 'no_create_edit':True}" />					
 						</group>
 						<group>
 							<field name="company_id" required="1" options="{'no_create': True, 'no_create_edit':True}"/>					
@@ -30,7 +30,7 @@
 						
 						
 						<footer>
-							<button name="print_pos_report" string="Show" type="object" class="oe_highlight" context="{'type':'appointments'}"/>
+							<button name="print_pos_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}"/>
 							<button string="Cancel" class="oe_link" special="cancel" />
 						</footer>
 					</group>
@@ -89,6 +89,8 @@
 									<field name="start_date" /> 
 									Invoice To Date :
 									<field name="end_date" /> 
+									Company :
+									<field name="company_id" /> 
 									Cashier : 
 									<field name="cashier_id" /> 
 

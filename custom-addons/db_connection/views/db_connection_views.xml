@@ -55,7 +55,7 @@
 		
 		<menuitem action="action_db_connection" 
 		id="menu_db_connaction_master" name="Database Connection"
-			parent="ls_pos_reports.menu_ls_root_configuration" sequence="1" />
+			 sequence="1" />
 		
 	</data>
 </odoo>

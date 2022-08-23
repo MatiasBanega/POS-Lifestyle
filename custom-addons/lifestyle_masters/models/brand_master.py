@@ -78,7 +78,7 @@ class Brand(models.Model):
                         print('dictionary',dict)
                         lis.append(dict)
                     print('list',lis)
-                    return lis
+                return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
                 print("Error while fetching data from PostgreSQL", error)

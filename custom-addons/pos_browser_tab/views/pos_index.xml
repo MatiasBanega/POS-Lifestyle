@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- This contains the tour assets. They are included during testing. -->
+	<template id="custom_title" name="change title" inherit_id="point_of_sale.index">
+      <xpath expr="//title" position="replace">
+        <title>LifeStyle</title>
+      </xpath>
+    </template>
+
+<template id="window_title" name="change window title" inherit_id="web.layout">
+      <xpath expr="//title" position="replace">
+        <title>POTHYS</title>
+      </xpath>
+    </template>
+    
+</odoo>

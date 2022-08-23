@@ -1,10 +1,10 @@
 {
-    'name': 'Reports',
+    'name': 'Lifestyle Reports',
     'version': '1.1',
     'category': 'Point of Sale Reports',
     'summary': 'User-friendly PoS interface for shops and restaurants',
     'description': "",
-    'depends': ['base','lifestyle_masters'],
+    'depends': ['base','lifestyle_masters','web_domain_field'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -22,7 +22,13 @@
         'views/total_sales_report_excel.xml', 
         'views/total_sales_report_pdf.xml', 
         'views/sales_summary_excel_report_views.xml',
-        'views/sales_summary_pdf_report_views.xml',     
+        'views/sales_summary_pdf_report_views.xml',   
+        'views/cashier_sales_excel_report_views.xml', 
+        'views/cashier_sales_pdf_report_views.xml',  
+        'views/inter_branch_transfer_pdf_report.xml', 
+        'views/inter_branch_transfer_report.xml',  
+        'views/stock_adjustment_excel_report_views.xml', 
+        'views/stock_adjustment_pdf_report_views.xml',   
         
     ],
 

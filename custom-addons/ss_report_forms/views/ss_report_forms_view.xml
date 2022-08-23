@@ -1,0 +1,14 @@
+<odoo>
+	<record id="superstore_report_forms_action"
+		model="ir.actions.act_window">
+		<field name="name">SuperStore Report Forms</field>
+		<field name="res_model">superstore.report.forms</field>
+		<!-- <field name="view_mode">form,tree</field> <field name="target">inline</field> -->
+<!-- <field name="view_id" ref="report_tree"/> -->
+	</record>
+	<menuitem action="superstore_report_forms_action"
+		id="menu_ss_report_forms" name="Report Forms"
+		parent="ss_pos_reports.menu_ss_main_report"
+		 sequence="7" />
+
+</odoo>

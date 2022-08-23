@@ -314,6 +314,7 @@ class teriminal_wise_sales_details_wzd(models.Model):
                 cursor.execute(sql)
                 #print(sql)
                 sale_data = cursor.fetchall()
+                
                 #print('sale_data',sale_data)
                 for row in sale_data:                
                         dict = {'date':row[0],'pos':row[1] ,'cashier':row[2],'sale_amount':row[3] ,'cash':row[4] ,
@@ -330,7 +331,9 @@ class teriminal_wise_sales_details_wzd(models.Model):
                 #print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
-                raise UserError(_("Error while fetching data from PostgreSQL "))
+                if not sale_data:
+                    raise UserError(_('No data available for the input specified search criteria'))
+#                 raise UserError(_("Error while fetching data from PostgreSQL "))
                 #print("Error while fetching data from PostgreSQL", error)
 
             finally:

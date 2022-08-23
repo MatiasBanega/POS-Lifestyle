@@ -1,0 +1,73 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="ss_bill_count_view" model="ir.ui.view">
+			<field name="name">bill.count.view.ss.form</field>
+			<field name="model">bill.count.view.ss</field>
+			<field name="arch" type="xml">
+				<form string="" create="false"  edit="false" delete="false">
+					<sheet>
+						<group>
+							<group>
+								<field name="terminal" />
+									<field name="startno" />
+									<field name="endno" />
+									<field name="totalbillcount" />
+									<field name="onlinecnt" />
+									<field name="oflinecnt" />
+									<field name="cancelcount" />
+									
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="ss_bill_count_view_tree">
+			<field name="name">bill.count.view.ss</field>
+			<field name="model">bill.count.view.ss</field>
+			<field name="arch" type="xml">
+				<tree string="Bill Count" create="false"  edit="false" delete="false">
+						<field name="terminal" />
+									<field name="startno" />
+									<field name="endno" />
+									<field name="totalbillcount" />
+									<field name="onlinecnt" />
+									<field name="oflinecnt" />
+									<field name="cancelcount" />
+									
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_ss_bill_count_view" model="ir.actions.act_window">
+			<field name="name">Cancel Bill View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">bill.count.view.ss</field>
+			<field name="view_mode">tree,form</field>
+			<field name="target">inline</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		
+		
+		<record id="action_ss_bill_count_view" model="ir.actions.server">
+        <field name="name">Function Call</field>
+        <field name="model_id" ref="model_bill_count_view_ss"/> 
+        <field name="state">code</field> 
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record>
+		
+		<menuitem action="action_ss_bill_count_view" 
+		id="menu_ss_bill_count_view" name="Bill No Count Form View"
+			parent="menu_ss_report_forms" sequence="5" />
+	</data>
+</odoo>

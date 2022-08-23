@@ -27,7 +27,7 @@
 		
 		
 		<record id="action_item_wise_cancel_bill_report" model="ir.actions.act_window">
-			<field name="name">Cancelled Bill Report</field>
+			<field name="name">Cancelled Bill Report Itemwise</field>
 			<field name="type">ir.actions.act_window</field>
 			<field name="res_model">itemwise.cancelled.report</field>
 			<field name="view_mode">form</field>
@@ -82,6 +82,9 @@
 									<field name="start_date" class="oe_inline" />
 									DATE TO :
 									<field name="end_date" class="oe_inline" />
+									Company :
+									<field name="company_id" /> 
+								
 								</p> 
 							</h4>
 						</div>

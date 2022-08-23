@@ -17,7 +17,7 @@
 						</group>
 						
 						<footer>
-							<button name="print_dept_report" string="Show" type="object" class="oe_highlight" context="{'type':'appointments'}"/>
+							<button name="print_dept_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}"/>
 							<button string="Cancel" class="oe_link" special="cancel" />
 						</footer>
 					</group>
@@ -77,7 +77,10 @@
 								
 									Date To :
 									<field name="end_date" /> 
-								</p> 
+							
+									Company :
+									<field name="company_id" /> 
+								</p>
 							</h4>
 							</h4>
 						</div>

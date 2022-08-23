@@ -1,0 +1,129 @@
+<odoo>
+	<data>
+		<record id="view_summary_wzd_report" model="ir.ui.view">
+			<field name="name">summary.sales.report</field>
+			<field name="model">summary.sales.report.ss</field>
+			<field name="arch" type="xml">
+				<form string="Summary of Sales Report">
+					<group>
+						<group>
+							<field name="start_date" required="1"/>
+							<field name="end_date" required="1"/>
+							<field name="company_id"  options="{'no_create': True, 'no_create_edit':True}" required="1"/>
+								
+														
+						</group>
+						<!-- <group>
+						</group> -->
+						<footer>
+							<button name="print_summary_sales_report" string="Print" type="object" class="oe_highlight" context="{'type':'appointments'}" />
+							<button string="Cancel" class="oe_link" special="cancel" />
+						</footer>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_summary_wise_sales_report"
+			model="ir.actions.act_window">
+			<field name="name">Summary Sales Report Forms</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">summary.sales.report.ss</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		<!-- xml excel -->
+		<record id="view_summary_excel_form_extended" model="ir.ui.view">
+			<field name="name">excel.extended.sale.form</field>
+			<field name="model">excel.extended.summary.sales.rep.ss</field>
+			<field name="arch" type="xml">
+				<form string="Summary of Sales Report" create="false" edit="false">
+					<group>
+						<field name="name"/>
+						<field name="excel_file" readonly="1" filename="file_name" />
+						<field name="file_name" invisible="1" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="action_summary_form" model="ir.actions.act_window">
+			<field name="name">Report Excel</field>
+			<field name="view_id" ref="view_summary_excel_form_extended" />
+			<field name="view_mode">form</field>
+			<field name="res_model">excel.extended.summary.sales.rep.ss</field>
+			<field name="target">new</field>
+		</record>
+		<record id="view_summary_report" model="ir.ui.view">
+			<field name="name">summary Sales Screen</field>
+			<field name="model">summary.sales.report.screen.wzd.ss</field>
+			<field name="arch" type="xml">
+				<form string="Summary of Sales Excel Report" version="7.0"
+					create="false" edit="false">
+					<header>
+						<button name="print_summary_excel_report" type="object"
+							string="Print Excel" />
+						<button name="print_summary_sales_pdf_report" type="object"
+							string="Print PDF" />
+					</header>
+					<sheet>
+						<div class="oe_bold">
+							<h1 class="oe_text_center">Summary of Sales Report</h1>
+						</div>
+						<div class="oe_row oe_spaced">
+							<h4>
+								<p>
+									DATE From :
+									<field name="start_date" class="start_date" />
+									Date To :
+									<field name="end_date" class="oe_inline" />
+									Company :
+									<field name="company_id" class="oe_inline" />
+									
+								</p>
+							</h4>
+						</div>
+						<group>
+							<field name="summary_sale_line" nolabel="1">
+								<field name="name"/>
+								<tree create="false" edit="false" delete="false">
+								  <field name='date' style="width:20%" /> 
+							     <field name='pos' style="width:20%" /> 
+							     <field name='sale_amount' style="width:20%" />
+							     <field name='cash' style="width:20%" />
+							     <field name='ccard' style="width:20%" />
+							    <field name= 'voucher' style="width:20%" />
+							     <field name='sodexo' style="width:20%" />
+							    <field name= 'gift' style="width:20%" />
+							     <field name='lrvvoc' style="width:20%" />
+							    <field name= 'phonepe' style="width:20%" />
+							     <field name='googlepay' style="width:20%" />
+							     <field name='loycoupon' style="width:20%" />
+							     <field name='parkingtkn' style="width:20%" />
+							    <field name= 'giftpass' style="width:20%" />
+							    <field name= 'paytm' style="width:20%" />
+							    <field name= 'othercpn' style="width:20%" />
+							    <field name= 'ticket' style="width:20%" />
+							     <field name='txpress' style="width:20%" />
+							     <field name='upipayment' style="width:20%" />
+							     <field name='razorpay' style="width:20%" /> 
+							     <field name='cashdisc' style="width:20%" />
+							     <field name='cr_sal' style="width:20%" />
+							     <field name='cr_disc' style="width:20%" />
+							    <field name= 'cashinhand' style="width:20%" />
+							      <field name='ex_sh' style="width:20%" />
+							    <field name='bills' style="width:20%" />	 
+									
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<menuitem action="action_summary_wise_sales_report"
+			id="menu_action_summary_wise_sales_report" 
+			parent="menu_ss_sale_report"
+			sequence="3" 
+			name="Summary of Sales Report" />
+	</data>
+</odoo>

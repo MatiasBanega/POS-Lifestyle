@@ -1,0 +1,109 @@
+<odoo>
+	<data>
+		<record id="ss_report_dept_paperformat"
+			model="report.paperformat">
+			<field name="name"> Dept Wise Sales PDF Report</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="header_line" eval="False" />
+			<field name="margin_top">15</field>
+			<field name="margin_bottom">15</field>
+			<field name="margin_right">5</field>
+			<field name="margin_left">5</field>
+			<field name="dpi">90</field>
+		</record>
+		<report id="ssdept_wise_sales_report_pdf"
+			model="ss.dept.screen.wzd" string=" Department Wise PDF Report"
+			report_type="qweb-pdf" name="ss_pos_reports.ss_report_dept_wise"
+			file="ss_pos_reports.ss_report_dept_wise" menu="False" />
+		<template id="ss_report_dept_wise">
+			<t t-call="web.html_container">
+				<!-- <t t-call="web.external_layout"> -->
+				<div class="page" style="border:1px solid red;">
+					<div class="article mt0 o_report_layout_standard">
+						<b>
+							<h2 align="center"> Dept Wise Sales Report</h2>
+						</b>
+						<div style="margin-top:10px;">
+							<div style="width:50%;float:left;">
+								<t t-if="start_date">
+								Date From:
+										<t t-esc="start_date" t-options='{"widget": "date","format": "dd-MM-YYYY"}'/>
+										</t>
+										<t t-if="end_date">
+										DATE TO :
+										<t t-esc="end_date" t-options='{"widget": "date","format": "dd-MM-YYYY"}'/>
+										
+									</t>
+							<t t-if="company_id">
+										Company :
+										<t t-esc="company_id"/>
+									</t>
+								</div>
+							</div> 
+						<br />
+						<table class="table table-sm">
+							<thead>
+								<span t-esc="report_sales_open_order_wise" />
+								<tr style="border: 1px solid black;"> 
+ 									<th style="border: 1px solid black; text-align:left">Department</th>
+									<th style="border: 1px solid black; text-align:center">Taxable Amt</th>
+									<th style="border: 1px solid black; text-align:center">Tax Amt</th>
+									<th style="border: 1px solid black; text-align:left">Cgst</th>
+									<th style="border: 1px solid black; text-align:center">Sgst</th>
+									<th style="border: 1px solid black; text-align:center">Cessamt</th>
+									<th style="border: 1px solid black; text-align:left">Markdown</th>
+									<th style="border: 1px solid black; text-align:center">Total Amt</th>
+								
+							
+								
+								</tr>
+							</thead>
+							 <tbody style="font-size:100%;height: auto;margin: auto;width: auto;">
+							<t t-foreach="docs" t-as="doc">
+								<tr>  
+										<td style="text-align: left;border: 1px solid black;">
+											<span t-esc="doc['department']" />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['tax']" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['tax_amt']" t-options='{"widget": "float", "precision": 2}'/>
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cgst']" t-options='{"widget": "float", "precision": 2}'/>
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cgst']" t-options='{"widget": "float", "precision": 2}'/>
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['cessamt']" t-options='{"widget": "float", "precision": 2}'/>
+										</td> 
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['mark_down']" t-options='{"widget": "float", "precision": 2}' />
+										</td>
+										<td style="text-align: center;border: 1px solid black;">
+											<span t-esc="doc['total']" t-options='{"widget": "float", "precision": 2}'/>
+										</td> 
+									</tr>
+								</t>
+							</tbody> 
+						</table>
+					</div>
+				 <!-- <div class="footer"> <div class="text-center" style="border-top: 
+					1px solid black;"> <ul class="list-inline"> <li>This is a computer generated 
+					statement on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d 
+					%H:%M')"/>. No signature needed.</li> </ul> </div> </div>  -->
+			</div>
+			</t>
+		</template>
+		<record id="ss_pos_reports.ssdept_wise_sales_report_pdf"
+			model="ir.actions.report" >
+			
+			<field name="paperformat_id"
+				ref="ss_pos_reports.ss_report_dept_paperformat" />
+		</record>
+	</data>
+</odoo>

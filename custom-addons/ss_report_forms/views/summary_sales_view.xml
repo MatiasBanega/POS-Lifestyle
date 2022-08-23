@@ -1,0 +1,113 @@
+<odoo>
+	<data>
+		<!-- DB CONNECTION -->
+		<record id="ss_summary_sales_view_form" model="ir.ui.view">
+			<field name="name">ss.summary.sales.form</field>
+			<field name="model">ss.summary.sales.view</field>
+			<field name="arch" type="xml">
+				<form string="">
+					<sheet>
+						<group>
+							<group>
+							<field name='date' /> 
+							     <field name='pos' /> 
+							     <field name='sale_amount' />
+							     <field name='cash' />
+							     <field name='ccard' />
+							    <field name= 'voucher' />
+							     <field name='sodexo' />
+							    <field name= 'gift' />
+							     <field name='lrvvoc' />
+							    <field name= 'phonepe' />
+							     <field name='googlepay' />
+							     <field name='loycoupon' />
+							     <field name='parkingtkn' />
+							    <field name= 'giftpass' />
+							    <field name= 'paytm' />
+							    <field name= 'othercpn' />
+							    <field name= 'ticket' />
+							     <field name='txpress' />
+							     <field name='upipayment' />
+							     <field name='razorpay' /> 
+							     <field name='cashdisc' />
+							     <field name='cr_sal' />
+							     <field name='cr_disc' />
+							    <field name= 'cashinhand' />
+							      <field name='ex_sh' />
+							    <field name='bills' />
+								
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="ss_summary_sales_view_tree">
+			<field name="name">ss.summary.sales.view</field>
+			<field name="model">ss.summary.sales.view</field>
+			<field name="arch" type="xml">
+				<tree string="Superstore Summary Sales" edit="false" delete="false">
+					  <field name='date' /> 
+							     <field name='pos' optional="show"/> 
+							     <field name='sale_amount' optional="show"/>
+							     <field name='cash' optional="show"/>
+							     <field name='ccard' optional="show"/>
+							    <field name= 'voucher' optional="show"/>
+							     <field name='sodexo' optional="show"/>
+							    <field name= 'gift' optional="show"/>
+							     <field name='lrvvoc' optional="show"/>
+							    <field name= 'phonepe' optional="show"/>
+							     <field name='googlepay' optional="show"/>
+							     <field name='loycoupon' optional="show"/>
+							     <field name='parkingtkn' optional="show"/>
+							    <field name= 'giftpass' optional="show"/>
+							    <field name= 'paytm' optional="show"/>
+							    <field name= 'othercpn' optional="show"/>
+							    <field name= 'ticket' optional="show"/>
+							     <field name='txpress' optional="show"/>
+							     <field name='upipayment' optional="show"/>
+							     <field name='razorpay' optional="show"/> 
+							     <field name='cashdisc' optional="show"/>
+							     <field name='cr_sal' optional="show"/>
+							     <field name='cr_disc' optional="show"/>
+							    <field name= 'cashinhand' optional="show"/>
+							      <field name='ex_sh' optional="show"/>
+							    <field name='bills' optional="show"/>
+								
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_ss_summary_sales_view" model="ir.actions.act_window">
+			<field name="name">summary sales View</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">ss.summary.sales.view</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" />
+			<field name="view_id" eval="False" />
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face"> Create a new Connection </p>
+			</field>
+		</record>
+		
+		
+		<record id="action_ss_summary_sales" model="ir.actions.server">
+        <field name="name">Function Calll</field>
+        <field name="model_id" ref="model_ss_summary_sales_view"/>
+        
+        <field name="state">code</field>
+
+        <field name="code">
+            action = model.get_data()
+        </field>
+    </record>
+		
+		<menuitem action="action_ss_summary_sales" 
+		id="menu_summary_sales_view_ss" name="Summary Sales View"
+			parent="menu_ss_report_forms" sequence="1" />
+		
+	</data>
+</odoo>
+
+

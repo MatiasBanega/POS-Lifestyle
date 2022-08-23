@@ -6,5 +6,9 @@ from . import total_sales_form
 from . import bill_count_form
 from . import cancel_bill_form
 from . import summary_sales_form
+from . import cashier_wise_sales_form
+from . import stock_adjust_form
+from . import inter_branch_transfer_form
+
 
 

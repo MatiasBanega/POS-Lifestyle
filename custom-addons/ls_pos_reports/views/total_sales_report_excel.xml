@@ -21,7 +21,7 @@
 							<field name="online_sales" required="0" />
 						</group>
 						<footer>
-							<button name="print_totalsales_report" string="Show"
+							<button name="print_totalsales_report" string="Print"
 								type="object" class="oe_highlight"
 								context="{'type':'appointments'}" />
 							<button string="Cancel" class="oe_link" special="cancel" />

@@ -61,6 +61,10 @@
 								<tree create="false" edit="false" delete="false">
 								<field name="name"></field>
 								<field name="org_id"></field>
+								<field name="depart"></field>
+								<field name="cate"></field>
+								
+								
         						
 								</tree> 
 							 </field> 

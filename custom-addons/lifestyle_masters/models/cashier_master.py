@@ -26,7 +26,7 @@ class Cashier(models.Model):
     company=fields.Many2one('res.company',string="Company") #, required=True
    
     def get_cashier(self):
-
+        list=[]
         def get_lines(self):
             res = {}
             dict={}
