@@ -16,15 +16,12 @@ class FormView(models.Model):
     cancelcount = fields.Integer(string="Cancel Count")
     
     def get_data(self): 
-        print('function')
         self.env['bill.count.view.ss'].search([]).unlink()
         fetched_data=self.env['ss.billno.count.line'].search([])
         
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                     'terminal' : rec.terminal ,
                     'startno' : rec.startno ,

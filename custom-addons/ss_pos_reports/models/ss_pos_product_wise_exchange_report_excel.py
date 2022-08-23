@@ -24,7 +24,7 @@ class pos_product_wise_sales_details_wzd(models.Model):
        
     start_date = fields.Date('Invoice From Date') 
     end_date = fields.Date('Invoice To Date') 
-#     is_unusedbill = fields.Boolean(string='Show Unused Exchange Bill Only')
+
     cashier_id = fields.Many2one('cashier.master',string='Cashier')
     company_id = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company.id)
     organization_id = fields.Many2one('organization.master', string="Organization")
@@ -52,17 +52,14 @@ class pos_product_wise_sales_details_wzd(models.Model):
             cashier_id = self.cashier_id.name
             company_id = self.company_id.name
             organization_id=self.organization_id.name
-#             is_unusedbill = self.is_unusedbill
+
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                print('db_conn',db_conn.company_id,self.company_id)         
+
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
+
                 cursor = db_connect.cursor()
-                print('yyyyyy')
-#                 self.env['ss.pos.exchange.product.screen.line'].search([]).unlink()                
-                print('SSSSSS')
-                
+
                 sqls='''
                       delete from ss_pos_exchange_product_screen_line
                        '''               
@@ -120,15 +117,15 @@ class pos_product_wise_sales_details_wzd(models.Model):
                     cursor.execute(sql)   
                                                
                 pos_data = cursor.fetchall()
-                print('pos_data',pos_data)
+
                 for row in pos_data:                
                     dict = {'str_ExchangeBill':row[0],'str_Originalbill':row[1] ,'dt_InvoiceDate':row[2],
                             'str_productcode':row[3] ,'str_productname':row[4] ,
                             'return_qty':row[5] ,'NUM_OiginalInvoiceSP':row[6] ,
                             'num_linetotal':row[7], 'str_Cashier':row[8],'str_Terminal':row[9], }
-                    print('dictionary',dict)
+
                     lis.append(dict)
-                print('list',lis)
+
                 return lis
             
             except (Exception, psycopg2.Error) as error:
@@ -145,7 +142,7 @@ class pos_product_wise_sales_details_wzd(models.Model):
         org_price = 0
         line_amnt = 0
         pos_order_line = []
-#         seq = 0
+
         for line in get_poslines(self):
             exc_qty+=line['return_qty']
             org_price+=line['NUM_OiginalInvoiceSP']
@@ -162,7 +159,7 @@ class pos_product_wise_sales_details_wzd(models.Model):
                                 'return_qty' : line['return_qty'],
                                 'original_invoicesp' : line['NUM_OiginalInvoiceSP'],
                                 'line_total' : line['num_linetotal'],
-#                                 'balance_amt' : line['balance_amt'],
+
                                 'cashier' : line['str_Cashier'],
                                 'terminal' : line['str_Terminal'],
                        
@@ -181,9 +178,9 @@ class pos_product_wise_sales_details_wzd(models.Model):
                'end_date' : self.end_date,
                'cashier_id' : self.cashier_id.name,
                'company_id' : self.company_id.name,
-#                'is_unusedbill' : self.is_unusedbill,
+
                'pos_order_line': pos_order_line,
-                #'visible':True,            
+
                 }
         ss_pos_wise_exchange_product_reports_id = self.env['ss.pos.product.screen.wzd'].create(vals)
 
@@ -211,7 +208,7 @@ class pos_screen_wzd(models.Model):
     company_id = fields.Char('Company')
     organization_id = fields.Char('Organization')
     cashier_id = fields.Char('Cashier')
-#     is_unusedbill = fields.Boolean(string='Show Unused Exchange Bill Only')
+
         
 
     
@@ -237,7 +234,7 @@ class pos_screen_wzd(models.Model):
         start_date = self.start_date  or ''
         end_date = self.end_date  or ''
         cashier_id = self.cashier_id  or ''
-#         is_unusedbill = self.is_unusedbill  or ''
+
         company_id = self.company_id or ''
         
         sheet.col(0).width = 700*8
@@ -267,7 +264,7 @@ class pos_screen_wzd(models.Model):
         sheet.write(2, 5, 'Exchangeqty', format6)
         sheet.write(2, 6, 'OriginalInvoicesp', format6)
         sheet.write(2, 7, 'Linetotal', format6)
-#         sheet.write(2, 13, 'Balanceamt', format6)
+
         sheet.write(2, 8, 'Cashier', format6)
         sheet.write(2, 9, 'Terminal', format6)
       
@@ -282,10 +279,8 @@ class pos_screen_wzd(models.Model):
                     ss_pos_exchange_product_screen_line         
                     where pos_id=(select max(pos_id) from ss_pos_exchange_product_screen_line)                        
                   '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+
+
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -310,10 +305,10 @@ class pos_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'ss.excel.extended.pos.rep',
-              #'view_type': 'form',
+
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
+
           
             }
         
@@ -333,7 +328,7 @@ class pos_product_screen_line(models.Model):
     return_qty = fields.Float(string="Exchangeqty")
     original_invoicesp = fields.Char(string="Originalbillsp")
     line_total = fields.Float(string="Linetotal")
-#     balance_amt = fields.Float(string="Balanceamt")
+
     cashier = fields.Char(string="Cashier")
     terminal = fields.Char(string="Terminal")
  

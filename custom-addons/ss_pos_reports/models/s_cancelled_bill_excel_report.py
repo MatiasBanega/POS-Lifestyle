@@ -30,7 +30,6 @@ class ss_itemwise_cancelled_bill_report_wzd(models.Model):
     
     def print_cancel_report(self):
         
-        
         def get_line_cancel(self):
             res = {}
             dict={}
@@ -40,16 +39,9 @@ class ss_itemwise_cancelled_bill_report_wzd(models.Model):
             company_id = self.company_id.name
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-              #  print('db_conn',db_conn.company_id,self.company_id)         
                 db_connect=db_conn.database_connect()
-              #  print('function',db_connect)
                 cursor = db_connect.cursor()
                 
-#                 sqls='''
-#                 delete from ss_bill_cancel_line
-#                 '''
-#                 self.env.cr.execute(sqls)
-#                 print('sqls',sqls)
               
                 sql='''
                         select i.dt_BillDate as dt_Billdate,
@@ -113,36 +105,24 @@ class ss_itemwise_cancelled_bill_report_wzd(models.Model):
                       ''' %(start_date, end_date)
                       
                 cursor.execute(sql)
-                print(sql)
                 cancel_bill_data = cursor.fetchall()
-                print('cancel_bill_data',cancel_bill_data)
                 for row in cancel_bill_data:                
                     dict = {'dt_Billdate':row[0],'str_Billno':row[1] , 'str_Username':row[2],
                             'str_Productcode':row[3] ,'str_Productname':row[4] ,'num_Totalamount':row[5],}
-                    print('dictionary',dict)
                     lis.append(dict)
-                print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-              #  print("Error while fetching data from PostgreSQL", error)
     
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    print('db_connect',db_connect)
-                    print('close',db_connect.close)
                     db_connect.close()
-                    print('db_connect1',db_connect)
-                    print('close1',db_connect.close)
-                    print("PostgreSQL connection is closed")
                 
                  
         t_amt = 0
 
-        
-      
         cancelled_order_line = []
         for line in get_line_cancel(self):
             if line['num_Totalamount']:
@@ -189,12 +169,6 @@ class ss_itemwise_cancelled_bill_report_wzd(models.Model):
                     'target': 'current',
                     'res_id': cancelled_bill_reports_id.id,
             }
-    
-    
-       
-    
-    
-    
     
 class cancel_screen_wizd_excel(models.Model):
     _name = "ss.item.wise.cancel.screen.wzd"

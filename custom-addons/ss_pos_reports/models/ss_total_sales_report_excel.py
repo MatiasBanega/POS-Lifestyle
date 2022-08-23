@@ -29,15 +29,8 @@ class ss_total_sales_details_wzd(models.Model):
     end_date = fields.Date('Date To')
     company_id = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company.id)
     online_sales = fields.Boolean('Online Sales Only')
-     
-   
-
-    
-   
-     
-              
+            
     def print_ss_totalsales_report(self):
-        st1 = timeit.default_timer()
         def get_total_lines(self):
             lis = []
             start_date = self.start_date
@@ -45,15 +38,11 @@ class ss_total_sales_details_wzd(models.Model):
             company_id = self.company_id.name
             online_sales = self.online_sales
             
-            st3 = timeit.default_timer()
-            print('st3-st1', st3-st1)
+            
             try:
                 db_conn = self.env['db.connection'].search([('company_id', '=', self.company_id.name)], limit=1)
-                #print('db_conn', db_conn.company_id, self.company_id)         
                 db_connect = db_conn.database_connect()
-                #print('function', db_connect)
                 cursor = db_connect.cursor() 
-                #cursor = db_connect.cursor(cursor_factory=psycopg2.extras.__dict__)
                 self.env['ss.total.sales.line'].search([]).unlink()
                 sql = '''
                       SELECT  sal.datetrx,sum(sal.grandtotal) AS NUM_total_salesamt, 0 as NUM_discountamt, 
@@ -84,19 +73,7 @@ and ('N'=%s or i.um_onlinesales='Y')
                       ''' % (start_date, end_date,online_sales)
                              
                 cursor.execute(sql)
-#                 print('sql',sql)
-                st4 = timeit.default_timer()
                 sale_data = cursor.fetchall()
-    #             sale_data = [r[0:7] for r in cursor.fetchall()]
-    #             sale_data = cursor.fetchall()[0][6]
-                st5 = timeit.default_timer()
-                print('st4-st5', st5-st4)
-#                 print('sale_data',sale_data)
-                
-    #                 for row in sale_data: 
-    #                     dict = {'datetrx':row[0], 'total_sales_amt':row[1] , 'dis_amt':row[2], 'round_off':row[3] ,
-    #                             'tot_net_amt':row[4] , 'bill_count':row[5] , 'avg_bill':row[6], }
-    #                     lis.append(dict)
                 return sale_data
         
             except (Exception, psycopg2.Error) as error:
@@ -151,18 +128,15 @@ and ('N'=%s or i.um_onlinesales='Y')
                'company_id':self.company_id.name,
                'online_sales':self.online_sales,
                'ss_total_sales_line': ss_total_sales_line,
-                # 'visible':True,            
                 }
-        st6 = timeit.default_timer()
+       
         
         total_reports_id = self.env['ss.total.screen.wzd'].create(vals)
-        st7 = timeit.default_timer()
-        print('st6-st7', st7-st6)
-        st8 = timeit.default_timer()
+       
         res = self.env['ir.model.data'].check_object_reference(
                                             'ss_pos_reports', 'view_ss_total_sales_screen_wzd_report')
-        st9 = timeit.default_timer()
-        print('st8-st9', st9-st8)
+        
+       
         return {
                     'name': 'Total sales Report',
                     'view_type': 'form',
@@ -234,10 +208,7 @@ class ss_total_sales_screen_wzd(models.Model):
                 from ss_total_sales_line         
                 where ss_total_sales_id=(select max(ss_total_sales_id) from ss_total_sales_line)                 
             '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -262,10 +233,8 @@ class ss_total_sales_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'ss.excel.extended.total.rep',
-              # 'view_type': 'form',
               'type': 'ir.actions.act_window',
               'context': False,
-              # 'target': 'new',
           
             }
 

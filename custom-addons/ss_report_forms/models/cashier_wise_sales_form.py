@@ -12,14 +12,11 @@ class SSCashierFormView(models.Model):
     amt = fields.Float(string="Amount")
   
     def get_data(self): 
-        print('function')
         self.env['ss.cashier.wise.sales.view'].search([]).unlink()
         fetched_data=self.env['cashier.sales.report.screen.line.ss'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                        'date' :rec.date,
                                 'name' :rec.name,

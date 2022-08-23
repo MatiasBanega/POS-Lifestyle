@@ -27,14 +27,10 @@ class SSIntrBrchFormView(models.Model):
     doc_type = fields.Char('Document Type')
   
     def get_data(self): 
-        print('function')
         self.env['ss.inter.branch.view'].search([]).unlink()
         fetched_data=self.env['ss.inter.branch.transfer.screen.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
-     
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                       
                                 'branch':rec.branch ,

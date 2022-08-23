@@ -6,8 +6,8 @@ from . import s_cancelled_bill_pdf_report
 from . import s_cancelled_report
 from . import ss_inter_branch_report
 from . import ss_inter_branch_transfer_pdf_report
-# from . import ss_purchase_detail_pdf_report
-from . import ss_purchase_detail_report_wise
+from . import ss_purchase_detail_pdf_report
+# from . import ss_purchase_detail_report_wise
 from . import ss_stock_adjustment_pdf_report
 from . import ss_stock_adjustment_report
 from . import ss_total_sales_pdf_report

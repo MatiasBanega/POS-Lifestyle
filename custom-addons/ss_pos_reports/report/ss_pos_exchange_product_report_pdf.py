@@ -19,7 +19,6 @@ class deptwisereport(models.AbstractModel):
         end_date = data['form']['end_date']
         cashier_id = data['form']['cashier_id']
         organization_id = data['form']['organization_id']
-#         is_unusedbill = data['form']['is_unusedbill']
         company_id = data['form']['company_id']
 
         
@@ -30,7 +29,7 @@ class deptwisereport(models.AbstractModel):
                     ss_pos_exchange_product_screen_line         
                     where pos_id=(select max(pos_id) from ss_pos_exchange_product_screen_line)   
                                
-                  '''# % ((start_date),(start_date))
+                  '''
                 
                 
         self.env.cr.execute(sql) 
@@ -52,19 +51,16 @@ class deptwisereport(models.AbstractModel):
                                 'return_qty' : line['return_qty'],
                                 'original_invoicesp' : line['original_invoicesp'],
                                 'line_total' : line['line_total'],
-#                                 'balance_amt' : line['balance_amt'],
                                 'cashier' : line['cashier'],
                                 'terminal' : line['terminal'],
                                 })
 
-        #print(sum_amt)
         return {
             'doc_ids': data['ids'],
             'doc_model': data['model'], 
             'start_date':start_date,
             'end_date':end_date,
             'cashier_id':cashier_id,
-#             'is_unusedbill':is_unusedbill,
             'company_id':company_id,
             'organization_id':organization_id,
             'docs':docs,

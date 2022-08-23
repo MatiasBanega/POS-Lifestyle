@@ -25,7 +25,7 @@ class deptwisereport(models.AbstractModel):
                     dept_wise_sales_line         
                     where deptsale_id=(select max(deptsale_id) from dept_wise_sales_line)
                                
-                  '''# % ((start_date),(start_date))
+                  '''
                 
                 
         self.env.cr.execute(sql) 
@@ -36,10 +36,6 @@ class deptwisereport(models.AbstractModel):
         total_pdf = []
         seq = 0
         for line in emp_data: 
-#             if line['sold_qty']:
-#                 tot_qty+=line['sold_qty'] 
-#             if line['sold_value']:
-#                 sum_amt+=line['sold_value']
             docs.append({ 
                                 'department' : line['department'],
                                 'tax' : line['tax'],
@@ -51,7 +47,6 @@ class deptwisereport(models.AbstractModel):
                                 'total' : line['total'],  
             })
 
-        #print(sum_amt)
         return {
             'doc_ids': data['ids'],
             'doc_model': data['model'], 

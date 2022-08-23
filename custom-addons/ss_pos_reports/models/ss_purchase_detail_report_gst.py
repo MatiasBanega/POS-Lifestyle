@@ -40,17 +40,12 @@ class ss_purchase_details_report_wzd(models.Model):
     @api.depends('organization_id')
     def _compute_company_id_domain(self):
         if self.company_id:
-            print('ffffffffff')
+
             self.company_id_domain = json.dumps(
                 [('org_id', '=',self.organization_id.org_id)]
             )
-        
-        
-    
+     
     def print_ss_purchase_detail_report(self):
-        print('aaa')
-       
-        print('eeee')
         res = {}
         dict={}
         lis=[]
@@ -59,15 +54,14 @@ class ss_purchase_details_report_wzd(models.Model):
         partner_id = self.partner_id.name
         company_id = self.company_id.name
         organization_id=self.organization_id.name
-        print('rrrrrr')
+
         try:
-            print('ssss')
+
             db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.id)], limit=1)
-            print('db_conn',db_conn.company_id,self.company_id.id)         
+
             db_connect=db_conn.database_connect()
-            print('function',db_connect)
+
             cursor = db_connect.cursor()
-#             self.env['ss.purchase.detail.report.screen.line'].search([]).unlink()
             if partner_id:
                 sql='''
                    SELECT 
@@ -366,7 +360,6 @@ order by GRP_grn_no, grn_date
 
 
                 cursor.execute(sql)
-                #print(sql)
                 purchase_data = cursor.fetchall()
               
     
@@ -666,45 +659,26 @@ order by GRP_grn_no, grn_date
              
             if sql:    
                 cursor.execute(sql)
-                print('sql',sql)
                 purchase_data = cursor.fetchall()
-                print('purchase',purchase_data)
             self.createform3a(purchase_data)
-            print('create')
             return 
         
-#         except (Exception, psycopg2.Error) as error:
-#             raise UserError(_("Error while fetching data from PostgreSQL "))
-#             print("Error while fetching data from PostgreSQL", error)
 
         finally:
             if db_conn:
                 cursor.close()
-#                     print('db_connect',db_connect)
-#                     print('close',db_connect.close)
+#                     
                 db_connect.close()
-#                     print('db_connect1',db_connect)
-#                     print('close1',db_connect.close)
-        
-#         stop = timeit.default_timer()
-#         print("return Run Time = ", stop - start)
-    
+
+
+    @api.model
     def createform3a(self,purchase_data):
-        
-#         self.env['ss.purchase.detail.report.gst.view'].search([]).unlink()
-        form_header = self.env['ss.purchase.detail.report.gst.view'].search([])
-        print('line',form_header)
-        print('unlink')
-        if form_header:
-            print('form_header',form_header)
-            for line in purchase_data: 
-            
-                print('line',line)  
-                self.create     
-                ({
-                     'grn_no' : line[0],
-                                'bill_no' : line[1],
-#                                 'bill_date' : line['bill_date'],
+        form_header = self.env['purchase.report.form'] 
+        self.env['purchase.report.form'].search([]).unlink()
+        for line in purchase_data: 
+            form_header = form_header.create({
+                               'grn_no' : line[0],
+                               'bill_no' : line[1],
                                 'grn_date' : line[2],
                                 'partner_id' : line[3],
                                 'ware_house' : line[4],
@@ -719,10 +693,6 @@ order by GRP_grn_no, grn_date
                                 'pcode' : line[13],
                                 'product_id' : line[14],
                                 'brand' : line[15],
-#                                 'item_type' : line['STR_Itemtype'],
-#                                 'prod_design' : line['STR_ProductDesign'],
-#                                 'prod_color' : line['STR_ProductColor'],
-#                                 'prod_size' : line['STR_ProductSize'],
                                 'qty' : line[16],
                                 'mrp' : line[17],
                                 'gkm' : line[18],
@@ -732,7 +702,6 @@ order by GRP_grn_no, grn_date
                                 'diff_amt' : line[22],
                                 'lcost' : line[23],
                                 'line_subtot' : line[24],
-                                 
                                 'dept' : line[25],
                                 'categ' : line[26],
                                 'manuftr' : line[27],
@@ -745,10 +714,9 @@ order by GRP_grn_no, grn_date
                                 'created' : line[34],
                                 'reversal_no' : line[35],
                                 'reversed_date' : line[36],
-                                                                                
+
         })
-        print('vvvvvvv')
-# v=ss_purchase_details_report_wzd().createform3a()         
-       
+   
+        
       
 

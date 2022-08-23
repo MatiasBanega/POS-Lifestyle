@@ -36,22 +36,12 @@ class FormView(models.Model):
     bills = fields.Float('bills')
     
     
-    def get_data(self): 
-        print('function')
+    def get_data(self):
         self.env['summary.sales.view'].search([]).unlink()
         
         fetched_data=self.env['sales.summary.screen.line'].search([])
-        print('fetched_data',fetched_data)
-#         sqls='''
-#            
-#                     delete from form_view
-#                        '''
-#         self.env.cr.execute(sqls)
-#         print('sqls',sqls)
         
         for rec in fetched_data:
-
-            print('for',rec)
             self.create({   'date' : rec.date,
                                     'pos' : rec.pos,
                                     'cashier' :rec.cashier,
@@ -87,8 +77,6 @@ class FormView(models.Model):
     })
         
 
-#         res = self.env['ir.model.data'].check_object_reference(
-#                                             'form_view', 'form_view')
         return {
                     'name': 'Summary Sales Form',
                     'view_type': 'form',
@@ -97,6 +85,5 @@ class FormView(models.Model):
                     'domain': [],
                     'type': 'ir.actions.act_window',
                     'target': 'current',
-#                      'res_id': vendor_id.id,
             }
     

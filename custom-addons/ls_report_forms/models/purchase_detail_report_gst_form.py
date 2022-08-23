@@ -12,7 +12,6 @@ class FormView(models.Model):
     grn_date = fields.Date(string="GRN Date")
     partner_id = fields.Char(string="Vendor")
     ware_house = fields.Char(string="Warehouse")
-#     tender_type = fields.Char(string="Tender Type")
     sub_total = fields.Float(string="SubTotal")
     tax_amt = fields.Float(string="Tax Amount")
     cess = fields.Float(string="CESS")
@@ -51,14 +50,11 @@ class FormView(models.Model):
     reversed_date = fields.Date(string="Reversed Date")
     
     def get_data(self): 
-        print('function')
         self.env['purchase.detail.report.gst.view'].search([]).unlink()
         fetched_data=self.env['purchase.detail.report.screen.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                         'grn_no' : rec.grn_no ,
                                 'bill_no' : rec.bill_no ,

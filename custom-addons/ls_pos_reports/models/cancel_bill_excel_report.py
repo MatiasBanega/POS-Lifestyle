@@ -40,9 +40,8 @@ class itemwise_cancelled_bill_report_wzd(models.Model):
             company_id = self.company_id.name
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                #print('db_conn',db_conn.company_id,self.company_id)         
+                       
                 db_connect=db_conn.database_connect()
-                #print('function',db_connect)
                 cursor = db_connect.cursor()
                 self.env['bill.cancel.line'].search([]).unlink()
             
@@ -88,29 +87,19 @@ class itemwise_cancelled_bill_report_wzd(models.Model):
                     
                       
                 cursor.execute(sql)
-                #print(sql)
                 cancel_data = cursor.fetchall()
-                #print('cancel_data',cancel_data)
                 for row in cancel_data:                
                     dict = {'dt_bdate':row[0],'str_bno':row[1] , 'STR_uname':row[2],'STR_ptcode':row[3] ,'STR_ptname':row[4] ,'NUM_totamt':row[5],}
-                    #print('dictionary',dict)
+                  
                     lis.append(dict)
-                #print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                #print("Error while fetching data from PostgreSQL", error)
-    
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    #print('db_connect',db_connect)
-                    #print('close',db_connect.close)
                     db_connect.close()
-                    #print('db_connect1',db_connect)
-                    #print('close1',db_connect.close)
-                    #print("PostgreSQL connection is closed")
                 
                  
         tot_amt = 0

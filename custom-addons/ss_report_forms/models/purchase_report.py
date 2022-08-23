@@ -1,10 +1,7 @@
 from odoo import models, fields
 
-
-
-class SSPurchaseFormView(models.Model):
-    _name = 'ss.purchase.detail.report.gst.view'
-    _rec_name = 'grn_no'
+class PurchaseForm(models.Model):
+    _name = 'purchase.report.form'
    
     grn_no = fields.Char(string="GRN No")
     bill_no = fields.Char(string="Bill No")
@@ -45,3 +42,4 @@ class SSPurchaseFormView(models.Model):
     reversed_date = fields.Date(string="Reversed Date")
     
     
+        

@@ -72,38 +72,29 @@ class stock_adjustment_bill_report(models.Model):
             company_id = self.company_id.name
             department = ''
             if self.department:
-                print("ssssssss")
                 department = "and dp.name= '%s'"%(self.department.name)
             product_category = ''
             if self.product_category:
-                print("ccccccc")
                 product_category = "and pc.name= '%s'"%(self.product_category.name)
             product_sub_category =''
             if self.product_sub_category:
-                print("bbbbb")
                 product_sub_category = "and ps.name= '%s'"%(self.product_sub_category.name)
             product_brand = ''
             if self.product_brand:
-                print("PPPPb")
                 product_brand =  "and bd.name= '%s'"%(self.product_brand.name)
             vendors = ''
             if self.vendors:
-                print("vvvvv")
                 vendors = "and cb.name= '%s'"%(self.vendors.name)
-                print ('venodr')
             
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                print('db_conn',db_conn.company_id,self.company_id)         
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
                 cursor = db_connect.cursor()
                 
                 sqls='''
                 delete from stock_adjustment_line
                  '''
                 self.env.cr.execute(sqls)
-                print('sqls',sqls)
              
                 sql= '''
                    SELECT ad.value as STR_Branch,i.description as STR_Description,i.documentno as STR_doc_no, i.movementdate as Dt_s_Date,
@@ -150,14 +141,11 @@ class stock_adjustment_bill_report(models.Model):
              
                  
                 cursor.execute(sql)
-                print(sql)
                 stock_data = cursor.fetchall()
-                print("stock_data", stock_data)
                 
                 
                   
-                for row in stock_data:  
-                    print('yyyyyyyyyyy')              
+                for row in stock_data:              
                     dict = {'STR_Branch':row[0],'STR_Description':row[1],'STR_doc_no':row[2] ,
                         'Dt_s_Date':row[3],'STR_Code':row[4] ,'STR_Product_Name':row[5],'STR_brand':row[6],
                         'STR_itemtype':row[7],
@@ -167,24 +155,16 @@ class stock_adjustment_bill_report(models.Model):
                         'grp_Department':row[18],'STR_Category':row[19],'STR_Sub_Category':row[20],'STR_Vendor':row[21],'STR_Doc_Type':row[22],
                         'STR_SubDoc_Type':row[23],'STR_Inv_Sub_Type':row[24],
                         }
-                    print('dictionary',dict)
                     lis.append(dict)
-                print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                print("Error while fetching data from PostgreSQL", error)
       
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    print('db_connect',db_connect)
-                    print('close',db_connect.close)
                     db_connect.close()
-                    print('db_connect1',db_connect)
-                    print('close1',db_connect.close)
-                    print("PostgreSQL connection is closed")
                 
                         
         
@@ -262,7 +242,6 @@ class stock_adjustment_bill_report(models.Model):
                 'product_sub_category' : self.product_sub_category.name,
                 'product_brand' : self.product_brand.name,
                 'vendors' : self.vendors.name,
-              #  'organization_id': self.organization_id.name,
                 'stock_order_line': stock_order_line,
                            
                 }
@@ -403,9 +382,7 @@ class stock_screen_wizard_excel(models.Model):
             sheet.write(2, 22, 'Document Type', format6)
             sheet.write(2, 23, 'Sub Document Type', format6)  
             sheet.write(2, 24, 'Inv Sub Type', format6)  
-             
-      
-                                          
+                           
             sheet.write_merge(0, 1, 0, 23, 'Stock Adjustment Report',header)               
             sql = '''    
                     select branch,description,doc_number,to_char(s_date,'dd/mm/yyyy'),code,pdt_name,brand,itemtype,pdt_design,pdt_color,pdt_size,
@@ -417,8 +394,6 @@ class stock_screen_wizard_excel(models.Model):
                       
                 '''
         
-        # pdt_size,
-               
             self.env.cr.execute(sql)
             rows2 = self.env.cr.fetchall()
             for row_index, row in enumerate(rows2):
@@ -450,14 +425,7 @@ class stock_screen_wizard_excel(models.Model):
             
    
 stock_screen_wizard_excel()
-       
-  
-  
-  
-  
-  
-  
-  
+
 class stock_adjustment_screen_line(models.Model):
     _name = "stock.adjustment.line"
     _description = "Stock Adjustment "
@@ -489,10 +457,7 @@ class stock_adjustment_screen_line(models.Model):
     doc_type = fields.Char(string="Document Type")
     sub_doc_type = fields.Char(string="Sub Document Type")
     inv_sub_type = fields.Char(string="Inv Sub Type")
-      
-  
-      
-             
+            
 stock_adjustment_screen_line()    
 
 

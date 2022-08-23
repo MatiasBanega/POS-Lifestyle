@@ -24,15 +24,14 @@ class FormView(models.Model):
     terminal = fields.Char(string="Terminal")
     sales_rep = fields.Char(string="Salesrep")
     
-    def get_data(self): 
-        print('function')
+    def get_data(self):
+
         self.env['pos.product.wise.exchange.view'].search([]).unlink()
         fetched_data=self.env['pos.exchange.product.screen.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
-     
+
             for rec in fetched_data:
-                print('for',rec)
+
                 self.create({  
                      'exchange_bill' : rec.exchange_bill ,
                                 'original_bill' : rec.original_bill ,

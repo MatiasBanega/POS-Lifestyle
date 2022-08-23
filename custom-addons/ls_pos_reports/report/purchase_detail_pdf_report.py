@@ -15,7 +15,6 @@ class PurchaseDetailsReportGst(models.AbstractModel):
         start_date = data['form']['start_date']
         end_date = data['form']['end_date']
         company_id = data['form']['company_id']    
-#         org_id = data['form']['org_id']     
 
         
         sql = ''' 
@@ -30,30 +29,14 @@ class PurchaseDetailsReportGst(models.AbstractModel):
              '''
 
         self.env.cr.execute(sql)
-        #print('PDF Report-->',sql)  
         emp_data = self.env.cr.dictfetchall()
         docs = []
         seq = 0
         for line in emp_data:
-            #print('PDF line--->',line)
             seq += 1
             today = fields.Date.today()
             todaydate = fields.Date.from_string(today)
-            #invoicedate=fields.Date.from_string(inv_date)
-            #null =''
             daysdue = ''
-#             if invoicedate :
-#                 daysdue = ((todaydate) - (invoicedate)).days
-#                 
-#             bill_no = line['bill_no']
-#             partner_id = line['alias_name']
-#             partner_id = line['partner_id']
-#             if bill_no is None:
-#                 line['alias_name'] = null
-#             if bill_no is None:
-#                 line['partner_id'] = null
-#             if line['pending_days'] == 0:
-#                 continue
             docs.append({
                         'grn_no' : line['grn_no'],
                         'bill_no' : line['bill_no'],
@@ -61,7 +44,6 @@ class PurchaseDetailsReportGst(models.AbstractModel):
                                 'grn_date' : line['grn_date'],
                                 'partner_id' : line['partner_id'],
                                 'ware_house' : line['ware_house'],
-#                                 'tender_type' : line['tot_cost'],
                                 'sub_total' : line['sub_total'],
                                 'tax_amt' : line['tax_amt'],
                                 'cess' : line['cess'],
@@ -86,7 +68,6 @@ class PurchaseDetailsReportGst(models.AbstractModel):
                                 'diff_amt' : line['diff_amt'],
                                 'lcost' : line['lcost'],
                                 'line_subtot' : line['line_subtot'],
-                                
                                 'dept' : line['dept'],
                                 'categ' : line['categ'],
                                 'manuftr' : line['manuftr'],
@@ -109,7 +90,6 @@ class PurchaseDetailsReportGst(models.AbstractModel):
             'start_date':start_date,
             'end_date':end_date,
             'company_id':company_id,
-#             'org_id':org_id,
             'docs':docs,
             }
         

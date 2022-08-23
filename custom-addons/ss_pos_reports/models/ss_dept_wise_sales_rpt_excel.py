@@ -25,14 +25,7 @@ class ss_department_wise_sales_details_wzd(models.Model):
     start_date = fields.Date('Date From') 
     end_date = fields.Date('Date To')
     company_id = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company.id)
-#     product_id=fields.Many2one('sales.screen.line',string='Product Name')
-     
-   
-
-
-
-            
-     
+    
     def print_ss_dept_report(self):
         
         def get_dept_lines(self):
@@ -42,12 +35,9 @@ class ss_department_wise_sales_details_wzd(models.Model):
             start_date = self.start_date
             end_date = self.end_date
             company_id=self.company_id.name
-#             product_id = self.product_id.name
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-#                 print('db_conn',db_conn.company_id,self.company_id)         
                 db_connect=db_conn.database_connect()
-#                 print('function',db_connect)
                 cursor = db_connect.cursor() 
                 self.env['ss.dept.wise.sales.line'].search([]).unlink()
                 
@@ -102,27 +92,18 @@ class ss_department_wise_sales_details_wzd(models.Model):
 
                 cursor.execute(sql)
                 sale_data = cursor.fetchall()
-                #print('sale_data',sale_data)
                 for row in sale_data:                
                     dict = {'department':row[0],'NUM_TaxableAmt':row[1] , 'NUM_taxamt':row[2],'NUM_cgst':row[3] ,'NUM_sgst':row[4] ,'NUM_cessAmt':row[5] ,'NUM_MarkDown':row[6] ,'NUM_TotalAmt':row[7] ,}
-                    #print('dictionary',dict)
                     lis.append(dict)
-                #print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                #print("Error while fetching data from PostgreSQL", error)
 
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    #print('db_connect',db_connect)
-                    #print('close',db_connect.close)
                     db_connect.close()
-                    #print('db_connect1',db_connect)
-                    #print('close1',db_connect.close)
-                    #print("PostgreSQL connection is closed")
                     
         
         tot_tax = 0
@@ -133,7 +114,7 @@ class ss_department_wise_sales_details_wzd(models.Model):
         tot_mark_down = 0
         tot_total = 0
         ss_dept_wise_sale_line = []
-#         seq = 0
+        
         for line in get_dept_lines(self):
             if line['NUM_TaxableAmt']:
                 tot_tax+=line['NUM_TaxableAmt']
@@ -177,9 +158,8 @@ class ss_department_wise_sales_details_wzd(models.Model):
                'start_date' : self.start_date,
                'end_date' : self.end_date,
                'company_id': self.company_id.name,
-#                'product_id' : self.product_id.name,
+
                 'ss_dept_wise_sale_line': ss_dept_wise_sale_line,
-                #'visible':True,            
                 }
         dept_reports_id = self.env['ss.dept.screen.wzd'].create(vals)
 
@@ -257,10 +237,7 @@ class ss_dept_sale_screen_wzd(models.Model):
                     ss_dept_wise_sales_line         
                     where ss_deptsale_id=(select max(ss_deptsale_id) from ss_dept_wise_sales_line)                        
                   '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+        
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -285,10 +262,10 @@ class ss_dept_sale_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'ss.excel.extended.dept.rep',
-              #'view_type': 'form',
+
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
+
           
             }
         

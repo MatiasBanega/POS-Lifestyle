@@ -13,15 +13,15 @@ class FormView(models.Model):
     pcode = fields.Integer(string="Product Code")
     pname = fields.Char(string="Product Name")
     total_amt = fields.Float(string="Total Amount")
+    
     def get_data(self): 
-        print('function')
         self.env['cancel.bill.view'].search([]).unlink()
         fetched_data=self.env['bill.cancel.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
+
      
             for rec in fetched_data:
-                print('for',rec)
+
                 self.create({  
                        'bill_date' : rec.date ,
                                 'bill_number' : rec.bill_number ,

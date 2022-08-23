@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-#from pygments.lexer import _inherit
+
 
 
 class BilllReport(models.Model):

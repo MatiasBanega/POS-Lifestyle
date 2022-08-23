@@ -393,14 +393,12 @@ class cashier_sales_details_wzd(models.Model):
          ''' %(start_date, end_date,start_date, end_date)
          
                 cursor.execute(sql)
-                print(sql)
                 sale_data = cursor.fetchall()
-                print('sale_data',sale_data)
                 for row in sale_data:                
                     dict = {'grp_datetrx':row[0],'grp_name':row[1] , 'STR_TenderType':row[2],'SUM_amt':row[3],}
-                    print('dictionary',dict)
+                   
                     lis.append(dict)
-                print('list',lis)
+                
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))

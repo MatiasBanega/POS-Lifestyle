@@ -24,7 +24,7 @@ class ssdeptwisereport(models.AbstractModel):
                  select department,tax ,tax_amt,cgst,sgst,cessamt,mark_down,total from
                     ss_dept_wise_sales_line         
                     where ss_deptsale_id=(select max(ss_deptsale_id) from ss_dept_wise_sales_line)  
-                  '''# % ((start_date),(start_date))
+                  '''
                 
                 
         self.env.cr.execute(sql) 
@@ -35,10 +35,6 @@ class ssdeptwisereport(models.AbstractModel):
         total_pdf = []
         seq = 0
         for line in emp_data: 
-#             if line['sold_qty']:
-#                 tot_qty+=line['sold_qty'] 
-#             if line['sold_value']:
-#                 sum_amt+=line['sold_value']
             docs.append({ 
                                 'department' : line['department'],
                                 'tax' : line['tax'],
@@ -50,7 +46,6 @@ class ssdeptwisereport(models.AbstractModel):
                                 'total' : line['total'],  
             })
 
-        #print(sum_amt)
         return {
             'doc_ids': data['ids'],
             'doc_model': data['model'], 

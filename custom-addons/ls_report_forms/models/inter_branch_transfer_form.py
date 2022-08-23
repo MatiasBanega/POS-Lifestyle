@@ -32,14 +32,13 @@ class FormView(models.Model):
     doc_type = fields.Char()
   
     def get_data(self): 
-        print('function')
+
         self.env['inter.branch.report.form.view'].search([]).unlink()
         fetched_data=self.env['inter.branch.transfer.screen.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
-     
+
             for rec in fetched_data:
-                print('for',rec)
+
                 self.create({  
                             'branch' : rec.branch,
                             'inter_branch' : rec.inter_branch,

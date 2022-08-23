@@ -1,0 +1,111 @@
+<odoo>
+	<data>
+		<record id="purchase_detail_form" model="ir.ui.view">
+			<field name="name">purchase.report.form</field>
+			<field name="model">purchase.report.form</field>
+			<field name="arch" type="xml">
+				<form> <!--  string="" edit="false" create="false" delete="false" -->
+					<sheet>
+						<group>
+							<group>
+									<field name="grn_no"/>
+									<field name="bill_no" />
+									<field name="grn_date" />
+									<field name="partner_id" />
+									<field name="ware_house" /> 
+									<field name="sub_total" />
+									<field name="tax_amt" />
+									<field name="cess" />
+									<field name="total_val" />
+									<field name="add_ded" />
+									<field name="tcs_amt" />
+									<field name="net_amt" />
+									<field name="freight_charges" />
+									<field name="pcode" />
+									<field name="product_id" />
+									<field name="brand" />
+									<field name="qty" />
+									<field name="mrp" />
+									<field name="gkm" />
+									<field name="sp_margin_mrp" />
+									<field name="m_down" />
+									<field name="diff_margin" />
+									<field name="diff_amt" />
+									<field name="lcost" />
+									<field name="line_subtot" />
+									<field name="dept" />
+									<field name="categ" />
+									<field name="manuftr" />
+									<field name="tax" />
+									<field name="igst" />
+									<field name="cgst" />
+									<field name="sgst" />
+									<field name="line_taxtot" />
+									<field name="cess_tot" />
+									<field name="created" />
+									<field name="reversal_no" />
+									<field name="reversed_date" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="ss_purchase_report_tree">
+			<field name="name">purchase.report.tree</field>
+			<field name="model">purchase.report.form</field>
+			<field name="arch" type="xml">
+				<tree string="Superstore Purchase Detail Report Form">
+								<field name="grn_no"/>
+								<field name="bill_no" />
+								<field name="grn_date" />
+								<field name="partner_id" />
+								<field name="ware_house" /> 
+								<field name="sub_total" />
+								<field name="tax_amt" />
+								<field name="cess" />
+								<field name="total_val" />
+								<field name="add_ded" />
+								<field name="tcs_amt" />
+								<field name="net_amt" />
+								<field name="freight_charges" />
+								<field name="pcode" />
+								<field name="product_id" />
+								<field name="brand" />
+								<field name="qty" />
+								<field name="mrp" />
+								<field name="gkm" />
+								<field name="sp_margin_mrp" />
+								<field name="m_down" />
+								<field name="diff_margin" />
+								<field name="diff_amt" />
+								<field name="lcost" />
+								<field name="line_subtot" />
+								<field name="dept" />
+								<field name="categ" />
+								<field name="manuftr" />
+								<field name="tax" />
+								<field name="igst" />
+								<field name="cgst" />
+								<field name="sgst" />
+								<field name="line_taxtot" />
+								<field name="cess_tot" />
+								<field name="created" />
+								<field name="reversal_no" />
+								<field name="reversed_date" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_ss_purchase_report_view" model="ir.actions.act_window">
+			<field name="name">Form View</field>
+			<field name="res_model">purchase.report.form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	
+		<menuitem action="action_ss_purchase_report_view" id="menu_purchase_report" name="Purchase Detail Report"
+			parent="menu_ss_report_forms" sequence="8" />
+	</data>
+</odoo>
+

@@ -29,7 +29,7 @@ class posreport(models.AbstractModel):
                     pos_exchange_product_screen_line         
                     where pos_id=(select max(pos_id) from pos_exchange_product_screen_line)   
                                
-                  '''# % ((start_date),(start_date))
+                  '''
                 
                 
         self.env.cr.execute(sql) 
@@ -60,7 +60,6 @@ class posreport(models.AbstractModel):
                                 'terminal' : line['terminal'],
                                 'sales_rep' : line['sales_rep']})
 
-        #print(sum_amt)
         return {
             'doc_ids': data['ids'],
             'doc_model': data['model'], 

@@ -13,15 +13,13 @@ class SS_Cancel_FormView(models.Model):
     pcode_ss = fields.Integer(string="Product Code")
     pname_ss = fields.Char(string="Product Name")
     total_ss_amt = fields.Float(string="Total Amount")
+    
     def get_data(self): 
-        print('function')
         self.env['ss.cancel.bill.view'].search([]).unlink()
         fetched_data=self.env['ss.bill.cancel.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                        'bill_ss_date' : rec.ss_date ,
                                 'bill_ss_number' : rec.ss_bill_number ,

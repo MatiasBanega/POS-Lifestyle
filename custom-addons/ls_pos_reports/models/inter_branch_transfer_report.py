@@ -26,9 +26,9 @@ class inter_branch_transfer_wzd(models.Model):
             company = self.company.name
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company.id)], limit=1)
-                print('db_conn',db_conn.company_id,self.company)         
+
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
+
                 cursor = db_connect.cursor() 
             
                 sql='''
@@ -83,17 +83,12 @@ class inter_branch_transfer_wzd(models.Model):
                         and i.movementdate::date >= '%s' and i.movementdate::date <= '%s'
                         order by i.movementdate              
                       '''%(start_date, end_date)
-                    
-                                 
-    #             if start_date:
-    #                 sql += "where po.date_order::date = '%s' " % (start_date)
-    #             if start_date:
-    #                 sql +=""" group by (o.value,b.name,i.description,i.documentno,i.movementdate,p.value,p.name,t.name,
-    #                                     dp.name,pc.name,ps.name,cb.name,dc.printname)"""             
+                
+            
                 cursor.execute(sql)
-                print(sql)
+
                 sale_data = cursor.fetchall()
-                print('sale_data',sale_data)
+
                 for row in sale_data:                
                     dict = {'branch':row[0],'inter_branch':row[1] , 'description':row[2],'doc_no':row[3] ,
                             'movement_date':row[4],'code':row[5],'product_name':row[6],'brand':row[7],
@@ -103,24 +98,20 @@ class inter_branch_transfer_wzd(models.Model):
                             'l_cost':row[17],'l_cost_total':row[18],'department':row[19],'category':row[20],
                             'sub_category':row[21],'vendor':row[22],'doc_type':row[23]}
                         
-                    print('dictionary',dict)
+
                     lis.append(dict)
-                print('list',lis)
+
                 return lis            
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                print("Error while fetching data from PostgreSQL", error)
 
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    print('db_connect',db_connect)
-                    print('close',db_connect.close)
+
                     db_connect.close()
-                    print('db_connect1',db_connect)
-                    print('close1',db_connect.close)
-                    print("PostgreSQL connection is closed")
+
                     
         inter_branch_order_line = []
         transfer_qty_tot = 0
@@ -184,7 +175,7 @@ class inter_branch_transfer_wzd(models.Model):
                'end_date': self.end_date,
                'company': self.company.name,
                'inter_branch_order_line': inter_branch_order_line,
-                #'visible':True,            
+
                 }
         inter_branch_transfer_report_id = self.env['inter.branch.transfer.screen.wzd'].create(vals)
 
@@ -291,10 +282,7 @@ class sales_screen_wzd(models.Model):
         from inter_branch_transfer_screen_line         
         where inter_branch_id=(select max(inter_branch_id) from inter_branch_transfer_screen_line)                      
                    '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+        
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -319,10 +307,9 @@ class sales_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'inter.branch.transfer.rep.excel',
-              #'view_type': 'form',
+
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
           
             }
         

@@ -45,19 +45,7 @@ class purchase_details_report_wzd(models.Model):
             self.company_id_domain = json.dumps(
                 []
             )
-    
-#     @api.onchange('organization_id')
-#     def onchange_vendor(self):
-#         if self.organization_id:
-#             domain = {'partner_id': [('org_id', '=',self.organization_id.org_id)]}
-#         else:
-#             domain = {'partner_id': []}
-#         if domain:
-#             res = {}
-#             res['domain'] = domain        
-#         return res
-     
-    
+
     
        
     def print_purchase_detail_report(self):
@@ -73,9 +61,7 @@ class purchase_details_report_wzd(models.Model):
             
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.id)], limit=1)
-                print('db_conn',db_conn.company_id,self.company_id.id)         
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
                 cursor = db_connect.cursor()
                 self.env['purchase.detail.report.screen.line'].search([]).unlink()
                 if partner_id:
@@ -388,9 +374,7 @@ class purchase_details_report_wzd(models.Model):
 
 
                     cursor.execute(sql)
-                    print(sql)
                     purchase_data = cursor.fetchall()
-                    print('purchase_data',purchase_data)
                     
 #                 
                 
@@ -704,11 +688,8 @@ class purchase_details_report_wzd(models.Model):
                     
                     
                 cursor.execute(sql)
-                print(sql)
                 purchase_data = cursor.fetchall()
-                print('purchase_data',purchase_data)
                 for row in purchase_data:      
-                    #print('aaaaaaaa')          
                     dict = {'GRP_grn_no':row[0],'STR_billno':row[1] , 'bill_date':row[2] ,'grn_date':row[3] ,
                         'STR_vendor':row[4],
                         'STR_Warehouse':row[5], 'SUM_sub_total':row[6],'SUM_taxamount':row[7],
@@ -726,29 +707,18 @@ class purchase_details_report_wzd(models.Model):
                         'ReversedDate':row[41],
     #                 
                         }
-                    print('dictionary',dict)
                     lis.append(dict)
-                print('list',lis)
                 
                 return lis
-            
-                    
-               
             except (Exception, psycopg2.Error) as error:
                 
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                #print("Error while fetching data from PostgreSQL", error)
     
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    #print('db_connect',db_connect)
-                    #print('close',db_connect.close)
                     db_connect.close()
-                    #print('db_connect1',db_connect)
-                    #print('close1',db_connect.close)
-                    #print("PostgreSQL connection is closed")
             
         tsub = 0  
         ttax = 0
@@ -875,7 +845,6 @@ class purchase_details_report_wzd(models.Model):
         if purchase_detail_line:
             purchase_detail_line.append((0,0,{
                                 'grn_no' : 'Total',
-#                                 'ware_house' : twarhse,
                                 'sub_total' : tsub,
                                 'tax_amt' : ttax,
                                 'cess' : tcess,
@@ -905,14 +874,11 @@ class purchase_details_report_wzd(models.Model):
             
          
         vals = {
-                #'name': 'Beat outstanding Report',
                 'start_date':self.start_date,             
                 'end_date': self.end_date,
                 'partner_id': self.partner_id.name,
                 'company_id': self.company_id.name,
-#                 'organization_id': self.organization_id.name,
                 'purchase_detail_line': purchase_detail_line,
-                #'visible':True,            
                 }
         purchase_wise_reports_id = self.env['purchase.detail.report.screen.wzd'].create(vals)
 
@@ -939,7 +905,6 @@ class purchase_detail_screen_wzd(models.Model):
     end_date = fields.Date(string="Date To")
     partner_id = fields.Char(string="Vendor")
     company_id = fields.Char(string="Company")
-#     organization_id = fields.Char(string="Organization")
     purchase_detail_line = fields.One2many('purchase.detail.report.screen.line','purchase_order_id',string='Open Order Line')
     
     def print_purchase_excel_report(self):
@@ -967,7 +932,6 @@ class purchase_detail_screen_wzd(models.Model):
         end_date = self.end_date  or ''
         partner_id = self.partner_id or ''
         company_id = self.company_id or ''
-#         org_id = self.org_id  or ''
         
 
         sheet.col(0).width = 850*5
@@ -988,7 +952,6 @@ class purchase_detail_screen_wzd(models.Model):
         sheet.write(2, 3, 'GRN Date', format6)
         sheet.write(2, 4, 'Vendor', format6)
         sheet.write(2, 5, 'Warehouse', format6)
-#         sheet.write(2, 6, 'Tender Type', format6)
         sheet.write(2, 6, 'SubTotal', format6)
         sheet.write(2, 7, 'Tax Amount', format6)
         sheet.write(2, 8, 'CESS', format6)
@@ -1029,7 +992,6 @@ class purchase_detail_screen_wzd(models.Model):
         
         
                  
-#         sheet.write(7, 10, 'SO Number', format6)
         sheet.write_merge(0, 1, 0, 10, 'Purchase Detail Report with GST',header)
            
                
@@ -1069,10 +1031,8 @@ class purchase_detail_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'excel.extended.purchase.detail.rep',
-              #'view_type': 'form',
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
           
             }
         
@@ -1089,7 +1049,6 @@ class purchase_detail_screen_line(models.Model):
     grn_date = fields.Date(string="GRN Date")
     partner_id = fields.Char(string="Vendor")
     ware_house = fields.Char(string="Warehouse")
-#     tender_type = fields.Char(string="Tender Type")
     sub_total = fields.Float(string="SubTotal")
     tax_amt = fields.Float(string="Tax Amount")
     cess = fields.Float(string="CESS")

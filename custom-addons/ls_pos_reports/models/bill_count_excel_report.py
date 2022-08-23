@@ -36,9 +36,9 @@ class bill_count_report_wzd(models.Model):
             company_id = self.company_id.name
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                #print('db_conn',db_conn.company_id,self.company_id)         
+                       
                 db_connect=db_conn.database_connect()
-                #print('function',db_connect)
+               
                 cursor = db_connect.cursor()
                 self.env['billno.count.line'].search([]).unlink()
                 sql='''
@@ -151,31 +151,22 @@ class bill_count_report_wzd(models.Model):
                         
                         
                 cursor.execute(sql)
-                #print(sql)
                 billno_data = cursor.fetchall()
                 if not billno_data:
                     raise UserError(_('No data available for the input specified search criteria'))
-                #print('billno_data',billno_data)
                 for row in billno_data:                
                     dict = {'terminal':row[0],'startno':row[1] , 'endno':row[2],'INT_totalbillcount':row[3] ,'INT_onlinecount':row[4] ,'INT_offlinecount':row[5] ,'INT_cancelcount':row[6] ,}
-                    #print('dictionary',dict)
+                   
                     lis.append(dict)
-                #print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                #print("Error while fetching data from PostgreSQL", error)
 
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    #print('db_connect',db_connect)
-                    #print('close',db_connect.close)
                     db_connect.close()
-                    #print('db_connect1',db_connect)
-                    #print('close1',db_connect.close)
-                    #print("PostgreSQL connection is closed")
         bill_cnt = 0
         online_cnt = 0
         offline_cnt = 0
@@ -191,9 +182,6 @@ class bill_count_report_wzd(models.Model):
             offline_cnt+=line['INT_offlinecount']
             cancel_cnt+=line['INT_cancelcount']
          
-#             if line['delivered_qty']:
-#                 dlry_qty+=line['delivered_qty']
-#                          
             billno_count_line.append((0,0,{
                                 'terminal' : line['terminal'],
                                 'startno' : line['startno'],
@@ -216,14 +204,10 @@ class bill_count_report_wzd(models.Model):
                             
          
         vals = {
-                #'name': 'Beat outstanding Report',
                 'start_date':self.start_date ,   
                 'end_date':self.end_date ,             
                 'company_id':self.company_id.name, 
-#                  'customer_type_title':'TYPE: ',             
-#                  'customer_type': self.customer_type,
                 'billno_count_line': billno_count_line,
-                #'visible':True,            
                 }
         bill_count_reports_id = self.env['bill.count.report.wzd'].create(vals)
 
@@ -320,10 +304,8 @@ class billcount_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'excel.extended.billcount.rep',
-              #'view_type': 'form',
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
           
             }
         

@@ -4,7 +4,7 @@
     'category': 'Point of Sale Reports',
     'summary': 'User-friendly PoS interface for shops and restaurants',
     'description': "",
-    'depends': ['base','lifestyle_masters','web_domain_field','ss_report_forms'],
+    'depends': ['base','web_domain_field','lifestyle_masters'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',

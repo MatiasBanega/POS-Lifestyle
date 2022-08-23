@@ -32,9 +32,7 @@ class total_sales_details_wzd(models.Model):
             
             try:
                 db_conn = self.env['db.connection'].search([('company_id', '=', self.company_id.name)], limit=1)
-                #print('db_conn', db_conn.company_id, self.company_id)         
                 db_connect = db_conn.database_connect()
-                #print('function', db_connect)
                 cursor = db_connect.cursor()
                 self.env['total.sales.line'].search([]).unlink()
                 sql = '''
@@ -124,7 +122,6 @@ and ('N'=%s or i.um_onlinesales='Y')
                'company_id':self.company_id.name,
                'online_sales':self.online_sales,
                 'total_sales_line': total_sales_line,
-                # 'visible':True,            
                 }
         total_reports_id = self.env['total.screen.wzd'].create(vals)
 
@@ -201,10 +198,7 @@ class total_sales_screen_wzd(models.Model):
                 from total_sales_line         
                 where deptsale_id=(select max(deptsale_id) from total_sales_line)                 
             '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+        
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -229,10 +223,10 @@ class total_sales_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'excel.extended.total.rep',
-              # 'view_type': 'form',
+
               'type': 'ir.actions.act_window',
               'context': False,
-              # 'target': 'new',
+
           
             }
 

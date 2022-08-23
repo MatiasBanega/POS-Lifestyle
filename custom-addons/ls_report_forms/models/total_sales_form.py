@@ -15,14 +15,11 @@ class FormView(models.Model):
     avg_bill = fields.Float(string="Avg Bill")
   
     def get_data(self): 
-        print('function')
         self.env['total.sales.view'].search([]).unlink()
         fetched_data=self.env['total.sales.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                       'datetrx':rec.datetrx ,
                                 'total_sales_amt':rec.total_sales_amt ,

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-#from pygments.lexer import _inherit
 
 
 class PurchasedetailReportGstWizard(models.Model):
@@ -15,9 +14,6 @@ class PurchasedetailReportGstWizard(models.Model):
                  'start_date':self.start_date if self.start_date else False,
                  'end_date':self.end_date if self.end_date else False,
                  'company_id':self.company_id if self.company_id else False,
-#                  'org_id':self.org_id if self.org_id else False,
-                
-#                 'partner_id':self.partner_id if self.partner_id else False,
             },
         }
 

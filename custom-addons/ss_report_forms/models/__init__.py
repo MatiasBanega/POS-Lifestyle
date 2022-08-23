@@ -9,7 +9,7 @@ from . import ss_cancel_bill_form
 from . import ss_stock_adjust_form
 from . import ss_pos_exchange_form
 from . import bill_count_form_ss
-
+from . import purchase_report
 
 
 

@@ -31,14 +31,11 @@ class SS_Stock_Adjust_FormView(models.Model):
       
   
     def get_data(self): 
-        print('function')
         self.env['ss.stock.adjustment.form.view'].search([]).unlink()
         fetched_data=self.env['super.stock.adjustment.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                        'branch_ss' : rec.ss_branch ,
                                 'description_ss' : rec.ss_description ,

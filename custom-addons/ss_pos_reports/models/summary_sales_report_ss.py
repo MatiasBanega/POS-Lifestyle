@@ -26,12 +26,7 @@ class summary_sales_details_wzd(models.Model):
     start_date = fields.Date('Date From') 
     end_date = fields.Date(string="Date To") 
     company_id = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company.id)
-    
-   
-
-
-   
-              
+             
     def print_summary_sales_report(self):
 
         def get_summary_lines(self):
@@ -44,9 +39,7 @@ class summary_sales_details_wzd(models.Model):
             
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                #print('db_conn',db_conn.company_id,self.company_id)         
                 db_connect=db_conn.database_connect()
-                #print('function',db_connect)
                 cursor = db_connect.cursor() 
                 self.env['summary.sales.report.screen.line.ss'].search([]).unlink()
                    
@@ -249,9 +242,7 @@ class summary_sales_details_wzd(models.Model):
          '''  %(start_date,end_date,start_date,end_date)
                                   
                 cursor.execute(sql)
-                print(sql)
                 sale_data = cursor.fetchall()
-                print('sale_data',sale_data)
                 for row in sale_data:                
                         dict = {'date':row[0],'pos':row[1] , 'sale_amount':row[2] ,'cash':row[3] ,
                                 'ccard':row[4] ,'voucher':row[5] ,'sodexo':row[6] ,'gift':row[7],
@@ -263,13 +254,10 @@ class summary_sales_details_wzd(models.Model):
                                 'razorpay':row[19] , 'cashdisc':row[20] ,
                                 'cr_sal':row[21] ,
                                  'cr_disc':row[22],'cashinhand':row[23] ,'ex_sh':row[24] ,'bills':row[25]}
-                        print('dictionary',dict)
                         lis.append(dict)
-                print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                print("Error while fetching data from PostgreSQL", error)
             finally:
                 if db_conn:
                     cursor.close() 
@@ -356,6 +344,7 @@ class summary_sales_details_wzd(models.Model):
                     cr_disc_sum_amt+=line['cr_disc'] 
                 if line['ex_sh']:
                     ex_sh_sum_amt+=line['ex_sh'] 
+                    
                 summary_sale_line.append((0,0,{
                                     'date' : line['date'],
                                     'pos' : line['pos'], 
@@ -605,7 +594,6 @@ class summary_sales_screen_line(models.Model):
     summary_order_id = fields.Many2one('summary.sales.report.screen.wzd.ss',string='summary_order_id',ondelete='cascade')
     date = fields.Date('Date')
     pos = fields.Char('POS')
-#     cashier = fields.Char('cashier')
     sale_amount = fields.Float('Sales Amount')
     cash = fields.Float('Cash')
     ccard = fields.Float('ccard')
@@ -624,7 +612,6 @@ class summary_sales_screen_line(models.Model):
     txpress = fields.Float('txpress')
     upipayment = fields.Float('upipayment')
     razorpay = fields.Float('razorpay')
-#     advpaid = fields.Char('advpaid')
     cashdisc = fields.Float('cashdisc')
     cr_sal = fields.Float('cr_sal')
     cr_disc = fields.Float('cr_disc')

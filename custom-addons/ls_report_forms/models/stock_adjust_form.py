@@ -38,14 +38,11 @@ class Stock_Adjust_FormView(models.Model):
       
   
     def get_data(self): 
-        print('function')
         self.env['stock.adjustment.form.view'].search([]).unlink()
         fetched_data=self.env['stock.adjustment.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                         'ls_branch' : rec.branch ,
                         'ls_description' : rec.description ,

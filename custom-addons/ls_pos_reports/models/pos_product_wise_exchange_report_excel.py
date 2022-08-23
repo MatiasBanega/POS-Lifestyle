@@ -61,9 +61,9 @@ class pos_product_wise_sales_details_wzd(models.Model):
             is_unusedbill = self.is_unusedbill
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                #print('db_conn',db_conn.company_id,self.company_id)         
+
                 db_connect=db_conn.database_connect()
-                #print('function',db_connect)
+
                 cursor = db_connect.cursor() 
                 self.env['pos.exchange.product.screen.line'].search([]).unlink()
                 if cashier_id:
@@ -105,7 +105,7 @@ class pos_product_wise_sales_details_wzd(models.Model):
                       ''' %(start_date, end_date,cashier_id,cashier_id,is_unusedbill)
                     
                     cursor.execute(sql)
-                    #print(sql)       
+
                 else:
                     sqls='''
                                  select i.documentno as str_ExchangeBill,
@@ -145,9 +145,9 @@ class pos_product_wise_sales_details_wzd(models.Model):
                       ''' %(start_date, end_date,is_unusedbill)
                     
                     cursor.execute(sqls)
-                    #print(sqls)                                  
+                         
                 pos_data = cursor.fetchall()
-                #print('pos_data',pos_data)
+
                 for row in pos_data:                
                     dict = {'str_ExchangeBill':row[0],'str_Originalbill':row[1] , 'dt_InvoiceDate':row[2],
                             'str_productcode':row[3] ,'str_productname':row[4] ,'STR_Brand':row[5],'STR_itemtype':row[6],
@@ -155,31 +155,28 @@ class pos_product_wise_sales_details_wzd(models.Model):
                             'num_ReturnQty':row[10] ,'NUM_OiginalInvoiceSP':row[11] ,
                             'num_linetotal':row[12] ,'balanceamt':row[13] ,
                             'str_Cashier':row[14] ,'str_Terminal':row[15] ,'STR_Salesrep':row[16] ,}
-                    #print('dictionary',dict)
+
                     lis.append(dict)
-                #print('list',lis)
+
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                #print("Error while fetching data from PostgreSQL", error)
+
     
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    #print('db_connect',db_connect)
-                    #print('close',db_connect.close)
+
                     db_connect.close()
-                    #print('db_connect1',db_connect)
-                    #print('close1',db_connect.close)
-                    #print("PostgreSQL connection is closed")
+
             
     
         exc_qty = 0
         org_price = 0
         line_amnt = 0
         pos_order_line = []
-#         seq = 0
+
         for line in get_poslines(self):
             exc_qty+=line['num_ReturnQty']
             org_price+=line['NUM_OiginalInvoiceSP']
@@ -221,7 +218,7 @@ class pos_product_wise_sales_details_wzd(models.Model):
                'company_id' : self.company_id.name,
                'is_unusedbill' : self.is_unusedbill,
                'pos_order_line': pos_order_line,
-                #'visible':True,            
+
                 }
         pos_wise_exchange_product_reports_id = self.env['pos.product.screen.wzd'].create(vals)
 
@@ -323,10 +320,8 @@ class pos_screen_wzd(models.Model):
                     pos_exchange_product_screen_line         
                     where pos_id=(select max(pos_id) from pos_exchange_product_screen_line)                        
                   '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+
+
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -351,10 +346,10 @@ class pos_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'excel.extended.pos.rep',
-              #'view_type': 'form',
+
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
+
           
             }
         

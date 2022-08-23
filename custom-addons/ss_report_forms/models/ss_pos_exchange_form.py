@@ -15,20 +15,15 @@ class FormView(models.Model):
     return_qty = fields.Integer(string="Returnqty")
     original_invoicesp = fields.Char(string="Originalinvoicesp")
     line_total = fields.Float(string="Linetotal")
-#     balance_amt = fields.Float(string="Balanceamt")
     cashier = fields.Char(string="Cashier")
     terminal = fields.Char(string="Terminal")
     sales_rep = fields.Char(string="Salesrep")
     
     def get_data(self): 
-        print('function')
         self.env['ss.pos.product.wise.exchange.view'].search([]).unlink()
         fetched_data=self.env['ss.pos.exchange.product.screen.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
-     
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                     'exchange_bill' : rec.exchange_bill ,
                     'original_bill' : rec.original_bill ,
@@ -39,7 +34,6 @@ class FormView(models.Model):
                     'return_qty' : rec.return_qty ,
                     'original_invoicesp' : rec.original_invoicesp ,
                     'line_total' : rec.line_total ,
-#                                 'balance_amt' : rec.balance_amt ,
                     'cashier' : rec.cashier ,
                     'terminal' : rec.terminal ,
                                                                                 

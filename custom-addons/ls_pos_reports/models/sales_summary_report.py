@@ -38,9 +38,8 @@ class teriminal_wise_sales_details_wzd(models.Model):
             
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                #print('db_conn',db_conn.company_id,self.company_id)         
+                         
                 db_connect=db_conn.database_connect()
-                #print('function',db_connect)
                 cursor = db_connect.cursor() 
                 self.env['sales.summary.screen.line'].search([]).unlink()
             
@@ -312,10 +311,7 @@ class teriminal_wise_sales_details_wzd(models.Model):
                       '''  %(start_date,end_date,start_date,end_date)
                                   
                 cursor.execute(sql)
-                #print(sql)
                 sale_data = cursor.fetchall()
-                
-                #print('sale_data',sale_data)
                 for row in sale_data:                
                         dict = {'date':row[0],'pos':row[1] ,'cashier':row[2],'sale_amount':row[3] ,'cash':row[4] ,
                                 'ccard':row[5] ,'voucher':row[6] ,'sodexo':row[7] ,'gift':row[8],'lrvvoc':row[9] ,
@@ -326,26 +322,18 @@ class teriminal_wise_sales_details_wzd(models.Model):
                                 'razorpay':row[20] ,'advpaid':row[21] ,'cashdisc':row[22] ,
                                 'cr_sal':row[23] ,
                                  'cr_disc':row[24],'cashinhand':row[25] ,'ex_sh':row[26] ,'bills':row[27] ,}
-                        #print('dictionary',dict)
+                        
                         lis.append(dict)
-                #print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 if not sale_data:
                     raise UserError(_('No data available for the input specified search criteria'))
-#                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                #print("Error while fetching data from PostgreSQL", error)
 
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    #print('db_connect',db_connect)
-                    #print('close',db_connect.close)
                     db_connect.close()
-                    #print('db_connect1',db_connect)
-                    #print('close1',db_connect.close)
-                    #print("PostgreSQL connection is closed")
               
         sum_amt = 0
         cash_sum_amt = 0

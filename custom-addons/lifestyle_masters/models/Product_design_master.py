@@ -36,61 +36,37 @@ class product_design(models.Model):
             company=self.company.name
             
             try:
-                db_conn = self.env['db.connection'].search([])
-#                 db_conn = self.env['db.connection'].search([('company_id','=',self.company.id)], limit=1)
-                print('db_conn',db_conn.company_id,self.company)         
+                db_conn = self.env['db.connection'].search([])        
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
                 cursor = db_connect.cursor() 
             
                 sqls='''
      
                   delete from product_design_master
                    '''
-                     
-                                  
-    #             if start_date and end_date:
-    #                 sql += "where pos.date_order between '%s' and '%s'" % (start_date, end_date)
-    #             if product_id:
-    #                 sql +=" and pt.name ='%s'"%(product_id)                  
+                                     
                 self.env.cr.execute(sqls)
-                print('sqls',sqls)
                 
                 sql='''
      
                   select name from um_productdesign
 
                    '''
-                     
                                   
-    #             if start_date and end_date:
-    #                 sql += "where pos.date_order between '%s' and '%s'" % (start_date, end_date)
-    #             if product_id:
-    #                 sql +=" and pt.name ='%s'"%(product_id)                  
                 cursor.execute(sql)
-                print(sql)
                 sale_data = cursor.fetchall()
-                print('sale_data',sale_data)
                 for row in sale_data:                
                     dict = {'name':row[0],}
-                    print('dictionary',dict)
                     lis.append(dict)
-                print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                print("Error while fetching data from PostgreSQL", error)
 
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    print('db_connect',db_connect)
-                    print('close',db_connect.close)
                     db_connect.close()
-                    print('db_connect1',db_connect)
-                    print('close1',db_connect.close)
-                    print("PostgreSQL connection is closed")
                     
     
         sum_amt = 0
@@ -101,30 +77,15 @@ class product_design(models.Model):
                          
             product_design_line.append((0,0,{
                                 'name' : line['name'],
-#                                 'Date Invoiced' : line['Date Invoiced'],
-#                                 'Process Instance' : line['Process Instance'],
-#                                 'Sales Attribute' : line['Sales Attribute'], 
-#                                 'Sold Qty' : line['Sold Qty'],
-#                                 'Sold value' : line['Sold value']
                                 
                                      }))
         if product_design_line:
             product_design_line.append((0,0,{
-#                                     'date' : False,
-#                                     'product_design' :False, 
-#                                     'paymode' : False,
-#                                     'total' : False
                                 }))    
                             
          
         vals = {
-                #'name': 'Beat outstanding Report',
-                #'end_date_title':'AS ON DATE: ',             
-                #'partner_id': self.partner_id.name,
-#                  'customer_type_title':'TYPE: ',             
-#                  'customer_type': self.customer_type,
                  'product_design_line': product_design_line,
-                #'visible':True,            
                 }
         product_design_id = self.env['product.design.wzd'].create(vals)
 

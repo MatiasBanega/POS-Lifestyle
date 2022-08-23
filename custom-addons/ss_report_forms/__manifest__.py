@@ -22,6 +22,7 @@
         'views/ss_stock_adjust_formview.xml',
         'views/ss_pos_exchange_form.xml',
         'views/bill_count_form_ss.xml',
+        'views/purchase_report_view.xml',
         'security/ir.model.access.csv',
      ],
     'installable': True,

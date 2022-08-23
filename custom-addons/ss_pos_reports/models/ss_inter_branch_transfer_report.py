@@ -24,12 +24,7 @@ class ss_inter_branch_transfer_wzd(models.Model):
     start_date = fields.Date() 
     end_date = fields.Date()
     company = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company.id)
-    
-    
-
-
-    
-       
+      
     def print_ss_inter_branch(self):
 
         def get_branch_lines(self):
@@ -40,9 +35,9 @@ class ss_inter_branch_transfer_wzd(models.Model):
             company = self.company.name
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company.name)], limit=1)
-                print('db_conn',db_conn.company_id,self.company)         
+
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
+
                 cursor = db_connect.cursor() 
                 self.env['ss.inter.branch.transfer.screen.line'].search([]).unlink()
                 sql='''
@@ -76,17 +71,9 @@ where i.c_doctype_id in (select c_doctype_id from c_doctype where name in
 and (i.docstatus in ('CO','CL')) and i.movementdate::date >= '%s' and i.movementdate::date <= '%s'
                         order by i.movementdate  
                       '''%(start_date, end_date)
-                    
-                                 
-    #             if start_date:
-    #                 sql += "where po.date_order::date = '%s' " % (start_date)
-    #             if start_date:
-    #                 sql +=""" group by (o.value,b.name,i.description,i.documentno,i.movementdate,p.value,p.name,t.name,
-    #                                     dp.name,pc.name,ps.name,cb.name,dc.printname)"""             
+                             
                 cursor.execute(sql)
-                print(sql)
                 sale_data = cursor.fetchall()
-                print('sale_data',sale_data)
                 for row in sale_data:                
                     dict = {'STR_Branch':row[0],'Inter_Branch':row[1] , 'STR_Description':row[2],'STR_doc_no':row[3] ,
                             'movement_date':row[4],'STR_Code':row[5],'STR_Product_Name':row[6],'NUM_transfer_qty':row[7],
@@ -95,24 +82,16 @@ and (i.docstatus in ('CO','CL')) and i.movementdate::date >= '%s' and i.movement
                             'NUM_LCost_Total':row[13],'STR_Department':row[14] , 'STR_Category':row[15],'STR_Sub_Category':row[16] ,
                             'STR_Vendor':row[17],'STR_Doc_Type':row[18],}
                         
-                    print('dictionary',dict)
                     lis.append(dict)
-                print('list',lis)
                 return lis            
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                print("Error while fetching data from PostgreSQL", error)
 
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    print('db_connect',db_connect)
-                    print('close',db_connect.close)
                     db_connect.close()
-                    print('db_connect1',db_connect)
-                    print('close1',db_connect.close)
-                    print("PostgreSQL connection is closed")
                     
         ss_inter_branch_line = []
         transfer_qty_tot = 0
@@ -172,7 +151,6 @@ and (i.docstatus in ('CO','CL')) and i.movementdate::date >= '%s' and i.movement
                'end_date': self.end_date,
                'company': self.company.name,
                'ss_inter_branch_line': ss_inter_branch_line,
-                #'visible':True,            
                 }
         inter_branch_transfer_report_id = self.env['ss.inter.branch.transfer.screen.wzd'].create(vals)
 
@@ -222,7 +200,6 @@ class ss_inter_branch_screen_wzd(models.Model):
 
         start_date = self.start_date  or ''
         end_date = self.end_date  or ''
-#         partner_id = self.partner_id or ''
             
         sheet.col(0).width = 850*8
         sheet.col(1).width = 850*8
@@ -274,10 +251,7 @@ class ss_inter_branch_screen_wzd(models.Model):
         from ss_inter_branch_transfer_screen_line         
         where ss_inter_branch_id=(select max(ss_inter_branch_id) from ss_inter_branch_transfer_screen_line)                      
                    '''
-#         if True:
-#             sql += "where po.date_order::date = '%s' " %(date)  
-#             sql +=" group by pc.name"
-#         
+        
         self.env.cr.execute(sql)
         rows2 = self.env.cr.fetchall()
         for row_index, row in enumerate(rows2):
@@ -302,11 +276,10 @@ class ss_inter_branch_screen_wzd(models.Model):
               'view_mode': 'form',
               'res_id': export_id.id,
               'res_model': 'ss.inter.branch.transfer.rep.excel',
-              #'view_type': 'form',
+
               'type': 'ir.actions.act_window',
               'context': False,
-              #'target': 'new',
-          
+
             }
         
 ss_inter_branch_screen_wzd()

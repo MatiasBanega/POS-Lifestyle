@@ -33,7 +33,6 @@ class SummarySalesDetailsReport(models.AbstractModel):
             docs.append({
                                     'date':line['date'],
                                     'pos' : line['pos'],
-#                                     'cashier' :line['cashier'],
                                     'sale_amount' :line['sale_amount'],
                                     'cash' : line['cash'],
                                     'ccard' :line['ccard'],
@@ -52,7 +51,6 @@ class SummarySalesDetailsReport(models.AbstractModel):
                                     'txpress' : line['txpress'],
                                     'upipayment' : line['upipayment'],
                                     'razorpay' : line['razorpay'],
-#                                     'advpaid': line['advpaid'],
                                     'cashdisc' : line['cashdisc'] , 
                                     'cr_sal' : line['cr_sal'],
                                     'cr_disc' : line['cr_disc'],

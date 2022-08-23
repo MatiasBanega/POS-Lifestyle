@@ -27,12 +27,7 @@ class cashier_sales_details_wzd(models.Model):
     start_date = fields.Date('Date From') 
     end_date = fields.Date(string="Date To") 
     company_id = fields.Many2one('res.company',string='Company',default=lambda self:self.env.company.id)
-    
-    
-
-
-   
-               
+            
     def print_cashier_sales_report(self):
         start=timeit.default_timer() 
         def get_cashier_lines(self):
@@ -189,25 +184,15 @@ order by k.grp_datetrx,k.grp_name,k.str_tendertype
         '''  %(start_date, end_date,start_date, end_date)
                 
                 stop = timeit.default_timer()
-                print("sql Run Time = ", stop - start)
                 
                 cursor.execute(sql)
-#                 print(sql)
                 sale_data = cursor.fetchall()
                 
                 st = timeit.default_timer()
-                print("execute Run Time = ", st - stop)
-#                 print('sale_data',sale_data)
-#                 for row in sale_data: 
-#                     dict = {'grp_datetrx':row[0],'grp_name':row[1] , 'STR_TenderType':row[2],'SUM_amt':row[3],}
-#                                   
-#                     print('dictionary',dict)
-#                     lis.append(dict)
-#                 print('list',lis)
                 return sale_data
-#             except (Exception, psycopg2.Error) as error:
-#                 raise UserError(_("Error while fetching data from PostgreSQL "))
-#              
+            except (Exception, psycopg2.Error) as error:
+                raise UserError(_("Error while fetching data from PostgreSQL "))
+              
             finally:
                 if db_conn:
                     cursor.close() 

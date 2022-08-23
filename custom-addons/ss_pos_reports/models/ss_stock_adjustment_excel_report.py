@@ -73,31 +73,23 @@ class super_stock_adjustment_bill_report(models.Model):
             organization_id=self.organization_id.name
             ss_department = ''
             if self.ss_department:
-                print("ssssssss")
                 ss_department = "and dp.name= '%s'"%(self.ss_department.name)
             ss_product_category = ''
             if self.ss_product_category:
-                print("ccccccc")
                 ss_product_category = "and pc.name= '%s'"%(self.ss_product_category.name)
             ss_product_sub_category =''
             if self.ss_product_sub_category:
-                print("bbbbb")
                 ss_product_sub_category = "and ps.name= '%s'"%(self.ss_product_sub_category.name)
             ss_product_brand = ''
             if self.ss_product_brand:
-                print("PPPPb")
                 ss_product_brand =  "and b.name= '%s'"%(self.ss_product_brand.name)
             ss_vendors = ''
             if self.ss_vendors:
-                print("vvvvv")
                 ss_vendors = "and cb.name= '%s'"%(self.ss_vendors.name)
-                print ('venodr')
             
             try:
                 db_conn = self.env['db.connection'].search([('company_id','=',self.company_id.name)], limit=1)
-                print('db_conn',db_conn.company_id,self.company_id)         
                 db_connect=db_conn.database_connect()
-                print('function',db_connect)
                 cursor = db_connect.cursor()
                 
                 
@@ -105,7 +97,6 @@ class super_stock_adjustment_bill_report(models.Model):
                 delete from super_stock_adjustment_line
                  '''
                 self.env.cr.execute(sqls)
-                print('sqls',sqls)
              
                 sql= '''
                         SELECT ad.value as STR_Branch,
@@ -152,14 +143,11 @@ class super_stock_adjustment_bill_report(models.Model):
              
                    
                 cursor.execute(sql)
-                print(sql)
                 super_stock_data = cursor.fetchall()
-                print("super_stock_data", super_stock_data)
                 
                 
                   
-                for row in super_stock_data:  
-                    print('yyyyyyyyyyy')              
+                for row in super_stock_data:         
                     dict = {'STR_Branch':row[0],'STR_Description':row[1],'STR_doc_no':row[2] ,
                         'Dt_s_Date':row[3],'STR_Code':row[4] ,'STR_Product_Name':row[5],'NUM_adjustment_qty':row[6],
                         'Mrp':row[7],
@@ -168,24 +156,16 @@ class super_stock_adjustment_bill_report(models.Model):
                         'STR_Sub_Category':row[15], 'STR_Brand':row[16],'STR_Vendor':row[17],
                         'STR_Doc_Type':row[18],'STR_SubDoc_Type':row[19],'STR_Inv_Sub_Type':row[20],
                         }
-                    print('dictionary',dict)
                     lis.append(dict)
-                print('list',lis)
                 return lis
             except (Exception, psycopg2.Error) as error:
                 raise UserError(_("Error while fetching data from PostgreSQL "))
-                print("Error while fetching data from PostgreSQL", error)
-      
+            
             finally:
     # closing database connection.
                 if db_conn:
                     cursor.close()
-                    print('db_connect',db_connect)
-                    print('close',db_connect.close)
                     db_connect.close()
-                    print('db_connect1',db_connect)
-                    print('close1',db_connect.close)
-                    print("PostgreSQL connection is closed")
                 
                         
         
@@ -200,7 +180,6 @@ class super_stock_adjustment_bill_report(models.Model):
         seq = 0
         
         for line in get_line_stock(self):
-            print('ppppp')
             
             if line['NUM_adjustment_qty']:
                 sum_num_qty+=line['NUM_adjustment_qty']
@@ -260,7 +239,6 @@ class super_stock_adjustment_bill_report(models.Model):
                 'ss_product_sub_category' : self.ss_product_sub_category.name,
                 'ss_product_brand' : self.ss_product_brand.name,
                 'ss_vendors' : self.ss_vendors.name,
-              #  'organization_id': self.organization_id.name,
                 'stock_ad_order_line': stock_ad_order_line,
                            
                 }
@@ -409,7 +387,6 @@ class super_stock_screen_wizard_excel(models.Model):
                       
                 '''
         
-        # pdt_size,
                
             self.env.cr.execute(sql)
             rows2 = self.env.cr.fetchall()

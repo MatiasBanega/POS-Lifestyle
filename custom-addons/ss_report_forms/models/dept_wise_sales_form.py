@@ -17,14 +17,11 @@ class SSDEPTFormView(models.Model):
     
     
     def get_data(self): 
-        print('function')
         self.env['ss.dept.wise.sales.view'].search([]).unlink()
         fetched_data=self.env['ss.dept.wise.sales.line'].search([])
         if fetched_data:
-            print('fetched_data',fetched_data)
      
             for rec in fetched_data:
-                print('for',rec)
                 self.create({  
                     'department':rec.department,
                     'tax':rec.tax,
